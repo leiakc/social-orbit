@@ -1,0 +1,180 @@
+html,
+body {
+  margin: 0;
+  padding: 0;
+  font-family: 'Helvetica';
+  color: white;
+  background-color: black;
+  text-align: center;
+}
+
+h3 {
+  text-align: center;
+  margin: 0;
+  padding: 0;
+  font-size: 1.8em;
+  font-family: 'Space Mono', monospace;
+}
+
+canvas {
+  position: block;
+}
+
+.screen0, .screen1, .screen2, .screen3, .screen4, .screenBottom {
+  padding-right: 5%;
+  padding-left: 5%;
+}
+
+.screen0 {
+  display: block;
+}
+
+.screen1 {
+  display: none;
+}
+
+.screen2 {
+  display: none;
+}
+
+.screen3 {
+  display: none;
+}
+
+.screen4 {
+  display: none;
+}
+
+.screenBottom {
+  text-align: center;
+}
+
+/* buttons styling */
+button {
+  font-family: 'Helvetica';
+  border-radius: 60px;
+  border: none;
+  background-color: rgb(220, 220, 220);
+  background-color: white;
+  color: black;
+  padding: 3%;
+  padding-left: 5%;
+  padding-right: 5%;
+  margin-top: 5%;
+}
+
+button:hover {
+  background-color: rgb(197, 197, 197);
+}
+
+.skipButton {
+  visibility: hidden;
+  /*   display: none; */
+}
+
+.buttonDone {
+  display: none;
+  margin-bottom: 5%;
+}
+
+.buttonNext {
+  margin-bottom: 5%;
+}
+
+.buttonSave {
+  display: none;
+}
+
+.buttonSaveImage {
+  visibility: hidden;
+}
+
+.buttonSaveData {
+  visibility: hidden;
+}
+
+/* custom text input */
+.customTextInput {
+  background-color: white;
+  border: none;
+  font-family: 'Helvetica';
+}
+
+input[type="text"],
+select {
+  width: 80%;
+  padding: 2% 2%;
+  margin: 0px 0;
+  display: inline-block;
+  border-radius: 5px;
+  box-sizing: border-box;
+  font-size: 93%;
+  border: 2px solid rgb(230, 230, 230);
+}
+
+input[type="text"]:hover,
+select {
+  border: 2px solid #12A4E6;
+}
+
+/* custom radio buttons for multiple choice questions */
+.customRadio {
+  display: block;
+  position: relative;
+  padding-left: 7%;
+  margin-left: 3%;
+/*   padding-left: 8%;
+  margin-left: 10%; */
+  cursor: pointer;
+  text-align: left;
+}
+
+/* hiding browser's default radio buttons */
+.customRadio input {
+  position: absolute;
+  opacity: 0;
+  cursor: pointer;
+}
+
+/* custom radio buttons */
+.checkmark {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 1.2em;
+  width: 1.2em;
+  background-color: white;
+  border-radius: 50%;
+}
+
+/* with mouse-over, grey background color */
+.customRadio:hover input ~ .checkmark {
+  background-color: #ccc;
+}
+
+/* when checked, blue background */
+.customRadio input:checked ~ .checkmark {
+  background-color: #12A4E6;
+}
+
+/* customize (dot/circle) */
+.customRadio .checkmark:after {
+  top: 15%;
+  left: 15%;
+  width: 0.5em;
+  height: 0.5em;
+  border-radius: 50%;
+  background: white;
+}
+
+/* show (dot/circle) when checked */
+.customRadio input:checked ~ .checkmark:after {
+  display: block;
+}
+
+/* hide (dot/circle) when not checked */
+.checkmark:after {
+  content: "";
+  position: absolute;
+  display: none;
+}

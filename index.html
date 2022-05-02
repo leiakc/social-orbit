@@ -1,0 +1,294 @@
+<!DOCTYPE html><html lang="en"><head>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+<link href="https://fonts.googleapis.com/css2?family=Poppins&amp;family=Space+Mono&amp;display=swap" rel="stylesheet">
+    
+    
+    
+    <!-- setting up html file -->
+    <script src="p5.js"></script>
+    <script src="p5.sound.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="style.css">
+    <script src="sketch.js"></script>
+    <meta charset="utf-8">
+  </head>
+  <body>
+<!-- title -->
+    <h3>Social Orbit</h3>
+    
+    <!-- adding canvas -->
+    <div id="myCanvasHTML"></div>
+
+<!-- screen 0 ------------------------------------------------------------------------------------------------------->
+<!-- intro and beginning question -->
+    <div class="screen0" id="screen00">
+      <p>Welcome to Social Orbit!</p>
+
+      <p>How are you today?</p>
+
+      <form style="margin-left:33%;">
+        <label class="customRadio" for="veryGood">
+          <input type="radio" id="veryGood" name="day_feeling" value="1" onclick="option1DayFeeling()">
+          &nbsp; Very Good
+          <span class="checkmark"></span> </label><br>
+
+        <label class="customRadio" for="good">
+          <input type="radio" id="good" name="day_feeling" value="2" onclick="option2DayFeeling()">
+          &nbsp; Good<span class="checkmark"></span></label><br>
+
+        <label class="customRadio" for="neutral">
+          <input type="radio" id="neutral" name="day_feeling" value="3" onclick="option3DayFeeling()">
+          &nbsp; Neutral<span class="checkmark"></span></label><br>
+
+        <label class="customRadio" for="bad">
+          <input type="radio" id="bad" name="day_feeling" value="4" onclick="option4DayFeeling()">
+          &nbsp; Bad<span class="checkmark"></span></label><br>
+
+        <label class="customRadio" for="veryBad">
+          <input type="radio" id="veryBad" name="day_feeling" value="5" onclick="option5DayFeeling()">
+          &nbsp; Very Bad<span class="checkmark"></span></label><br>
+      </form>
+    </div>
+
+<!-- screen 1 ------------------------------------------------------------------------------------------------------->
+<!-- choice of adding social interaction entry or not -->
+    <div class="screen1" id="screen01">
+      <button class="socialChoice" id="addSocialButton" onclick="addSocial()" style="margin-top:10%;">
+        Add a Social Interaction
+      </button>
+      <br>
+      <br>
+      <button class="socialChoice" id="skipSocialButton" onclick="skipSocial()">
+        Didn’t have Social Interactions today
+      </button>
+      <br>
+      <button class="skipButton" id="skipButton" onclick="skipSocial()">
+        Done entering Social Interactions
+      </button>
+    </div>
+
+<!-- screen 2 ------------------------------------------------------------------------------------------------------->
+<!-- social interactin entry page, user input questions -->
+    <div class="screen2" id="screen02">
+      <p>
+        Who did you interact with?<br>(Ex. Tina, best friend, <br>study group,
+        dad, etc.)
+      </p>
+
+      <form id="myform0">
+        <input class="customTextInput" type="text" id="who" name="who"><br><br>
+      </form>
+
+      <p>What kind of relationship do you have?</p>
+
+      <form id="myform1">
+        <label class="customRadio" for="friends">
+          <input type="radio" id="friends" name="relationship" value="1" onclick="option1Relationship()">
+          &nbsp; Friends<span class="checkmark"></span></label><br>
+
+        <label class="customRadio" for="family">
+          <input type="radio" id="family" name="relationship" value="2" onclick="option2Relationship()">
+          &nbsp; Family<span class="checkmark"></span></label><br>
+
+        <label class="customRadio" for="romantic">
+          <input type="radio" id="romantic" name="relationship" value="3" onclick="option3Relationship()">
+          &nbsp; Romantic / Dating<span class="checkmark"></span></label><br>
+
+        <label class="customRadio" for="work">
+          <input type="radio" id="work" name="relationship" value="4" onclick="option4Relationship()">
+          &nbsp; Work / Professional<span class="checkmark"></span></label><br>
+
+        <label class="customRadio" for="acquaintances">
+          <input type="radio" id="acquaintances" name="relationship" value="5" onclick="option5Relationship()">
+          &nbsp; Acquaintances<span class="checkmark"></span></label>
+        <br>
+
+        <label class="customRadio" for="other">
+          <input type="radio" id="other" name="relationship" value="6" onclick="option6Relationship()">
+          &nbsp; Other<span class="checkmark"></span></label>
+      </form>
+
+      <br>
+
+      <p>How did you communicate?</p>
+
+      <form id="myform2">
+        <label class="customRadio" for="written">
+          <input type="radio" id="written" name="communication" value="1" onclick="option1Communication()">
+          &nbsp; Written (Text)<span class="checkmark"></span></label><br>
+
+        <label class="customRadio" for="spoken">
+          <input type="radio" id="spoken" name="communication" value="2" onclick="option2Communication()">
+          &nbsp; Spoken (Audio, Voice Call)<span class="checkmark"></span></label><br>
+
+        <label class="customRadio" for="video">
+          <input type="radio" id="video" name="communication" value="3" onclick="option3Communication()">
+          &nbsp; Video (Video Call)<span class="checkmark"></span></label><br>
+
+        <label class="customRadio" for="in_person">
+          <input type="radio" id="in_person" name="communication" value="4" onclick="option4Communication()">
+          &nbsp; In-Person<span class="checkmark"></span></label><br>
+      </form>
+
+      <br>
+
+      <p>Around how long was your interaction?</p>
+
+      <form id="myform3">
+        <label class="customRadio" for="3hours">
+          <input type="radio" id="3hours" name="interaction_length" value="1" onclick="option1InteractionLength()">
+          &nbsp; 3 hours +<span class="checkmark"></span></label><br>
+
+        <label class="customRadio" for="1to3hours">
+          <input type="radio" id="1to3hours" name="interaction_length" value="2" onclick="option2InteractionLength()">
+          &nbsp; 1-3 hours<span class="checkmark"></span></label><br>
+
+        <label class="customRadio" for="30min1hour">
+          <input type="radio" id="30min1hour" name="interaction_length" value="3" onclick="option3InteractionLength()">
+          &nbsp; 30 minutes to an hour<span class="checkmark"></span></label><br>
+
+        <label class="customRadio" for="10min30min">
+          <input type="radio" id="10min30min" name="interaction_length" value="4" onclick="option4InteractionLength()">
+          &nbsp; 10 minutes to 30 minutes<span class="checkmark"></span></label><br>
+
+        <label class="customRadio" for="5min10min">
+          <input type="radio" id="5min10min" name="interaction_length" value="5" onclick="option5InteractionLength()">
+          &nbsp; 5 minutes to 10 minutes<span class="checkmark"></span></label><br>
+
+        <label class="customRadio" for="few_min">
+          <input type="radio" id="few_min" name="interaction_length" value="6" onclick="option6InteractionLength()">
+          &nbsp; a few minutes or seconds<span class="checkmark"></span></label><br>
+      </form>
+
+      <p>What time of day was the interaction?</p>
+
+      <form id="myform4">
+        <label class="customRadio" for="morning">
+          <input type="radio" id="morning" name="time_of_day" value="1" onclick="option1TimeOfDay()">
+          &nbsp; Morning<span class="checkmark"></span></label><br>
+
+        <label class="customRadio" for="afternoon">
+          <input type="radio" id="afternoon" name="time_of_day" value="2" onclick="option2TimeOfDay()">
+          &nbsp; Afternoon<span class="checkmark"></span></label><br>
+
+        <label class="customRadio" for="evening">
+          <input type="radio" id="evening" name="time_of_day" value="3" onclick="option3TimeOfDay()">
+          &nbsp; Evening<span class="checkmark"></span></label><br>
+
+        <label class="customRadio" for="night">
+          <input type="radio" id="night" name="time_of_day" value="4" onclick="option4TimeOfDay()">
+          &nbsp; Night<span class="checkmark"></span></label><br>
+
+        <label class="customRadio" for="throughoutDay">
+          <input type="radio" id="throughoutDay" name="time_of_day" value="5" onclick="option5TimeOfDay()">
+          &nbsp; Throughout the Day<span class="checkmark"></span></label><br>
+      </form>
+
+      <p>How did you feel about the interaction?</p>
+
+      <form id="myform5">
+        <label class="customRadio" for="veryGoodInteraction">
+          <input type="radio" id="veryGoodInteraction" name="interaction_feeling" value="1" onclick="option1Interaction()">
+          &nbsp; Very Good<span class="checkmark"></span></label><br>
+
+        <label class="customRadio" for="goodInteraction">
+          <input type="radio" id="goodInteraction" name="interaction_feeling" value="2" onclick="option2Interaction()">
+          &nbsp; Good<span class="checkmark"></span></label><br>
+
+        <label class="customRadio" for="neutralInteraction">
+          <input type="radio" id="neutralInteraction" name="interaction_feeling" value="3" onclick="option3Interaction()">
+          &nbsp; Neutral<span class="checkmark"></span></label><br>
+
+        <label class="customRadio" for="badInteraction">
+          <input type="radio" id="badInteraction" name="interaction_feeling" value="4" onclick="option4Interaction()">
+          &nbsp; Bad<span class="checkmark"></span></label><br>
+
+        <label class="customRadio" for="veryBadInteraction">
+          <input type="radio" id="veryBadInteraction" name="interaction_feeling" value="5" onclick="option5Interaction()">
+          &nbsp; Very Bad<span class="checkmark"></span></label><br>
+      </form>
+    </div>
+
+<!-- screen 3 ------------------------------------------------------------------------------------------------------->
+<!-- ending user input questions -->
+    <div class="screen3" id="screen03">
+      <p>How did you feel about today's social interactions?</p>
+
+      <form>
+        <label class="customRadio" for="veryGoodSIF">
+          <input type="radio" id="veryGoodSIF" name="day_feeling_SI" value="1" onclick="option1SIFeeling()">
+          &nbsp; Very Good<span class="checkmark"></span></label><br>
+
+        <label class="customRadio" for="goodSIF">
+          <input type="radio" id="goodSIF" name="day_feeling_SI" value="2" onclick="option2SIFeeling()">
+          &nbsp; Good<span class="checkmark"></span></label><br>
+
+        <label class="customRadio" for="neutralSIF">
+          <input type="radio" id="neutralSIF" name="day_feeling_SI" value="3" onclick="option3SIFeeling()">
+          &nbsp; Neutral<span class="checkmark"></span></label><br>
+
+        <label class="customRadio" for="badSIF">
+          <input type="radio" id="badSIF" name="day_feeling_SI" value="4" onclick="option4SIFeeling()">
+          &nbsp; Bad<span class="checkmark"></span></label><br>
+
+        <label class="customRadio" for="veryBadSIF">
+          <input type="radio" id="veryBadSIF" name="day_feeling_SI" value="5" onclick="option5SIFeeling()">
+          &nbsp; Very Bad<span class="checkmark"></span></label><br>
+      </form>
+
+      <p>How satisfied are you with today's social interactions?</p>
+
+      <form>
+        <label class="customRadio" for="verySatisfiedDay">
+          <input type="radio" id="verySatisfiedDay" name="day_satisfaction" value="1" onclick="option1DaySatisfaction()">
+          &nbsp; Very Satisfied<span class="checkmark"></span></label><br>
+
+        <label class="customRadio" for="satisfiedDay">
+          <input type="radio" id="satisfiedDay" name="day_satisfaction" value="2" onclick="option2DaySatisfaction()">
+          &nbsp; Satisfied<span class="checkmark"></span></label><br>
+
+        <label class="customRadio" for="neutralDay">
+          <input type="radio" id="neutralDay" name="day_satisfaction" value="3" onclick="option3DaySatisfaction()">
+          &nbsp; Neutral<span class="checkmark"></span></label><br>
+
+        <label class="customRadio" for="dissatisfiedDay">
+          <input type="radio" id="dissatisfiedDay" name="day_satisfaction" value="4" onclick="option4DaySatisfaction()">
+          &nbsp; Dissatisfied<span class="checkmark"></span></label><br>
+
+        <label class="customRadio" for="veryDissatisfiedDay">
+          <input type="radio" id="veryDissatisfiedDay" name="day_satisfaction" value="5" onclick="option5DaySatisfaction()">
+          &nbsp; Very Dissatisfied<span class="checkmark"></span></label><br>
+      </form>
+    </div>
+
+<!-- screen 4 ------------------------------------------------------------------------------------------------------->
+<!-- last page - can export image and data -->
+    <div class="screen4" id="screen04">
+      <p>Here is your Social Orbit for today!</p>
+
+      <button class="buttonSaveImage" id="saveButtonImage" onclick="saveIT()">
+        SAVE IMAGE
+      </button>
+
+      <br>
+
+      <button class="buttonSaveData" id="saveButtonData" onclick="saveData()" style="margin-top:10%;">
+        SAVE DATA
+      </button>
+    </div>
+
+<!-- screen bottom -------------------------------------------------------------------------------------------------->
+<!-- bottom of page buttons: next / done buttons -->
+    <div class="screenBottom" id="screenBottom">
+      <!-- NEXT button goes to the next screen -->
+      <button class="buttonNext" id="nextButton" onclick="nextPressed()">
+        NEXT
+      </button>
+
+      <!-- DONE button goes to the last screen (screen 4) -->
+      <button class="buttonDone" id="doneButton" onclick="nextPressed()">
+        DONE
+      </button>
+    </div>
+  
+</body></html>
