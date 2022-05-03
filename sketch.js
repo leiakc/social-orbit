@@ -1,4 +1,8 @@
-//Social Orbit by Leia Kook-Chun
+//more modifications
+//-centered the bottom buttons (next and done)
+//-reset planet variable values when adding a new social interaction
+//-adjusted stroke size for planet code decorations depending on planet size ((so decorations are relative size)) -- so they aren't too big and overcrowd the planet
+//-adjusted verygood/good sun decorations so they can be seen better -- orange stroke behind the white stroke
 
 //variables-----------------------------------------------------------------------------------------------------------
 let centerWidth; //half the width of the screen / the center of the screen - the x center of the solar system will be placed here
@@ -17,6 +21,7 @@ let satisfactionDay = 0; //satisfaction about the day's social interactions
 let relationshipType = 0; //relationship type for the interaction
 let comType = 0; //communication method for the interaction
 let SIFeeling = 0; //overall feeling about the day's social interactions
+let personName =""; //name of person/people in social interaction 
 
 let overall = []; //array that holds data about the overall day (dayFeeling, satisfactionDay, SIFeeling)
 
@@ -109,52 +114,48 @@ function draw() {
   angle += 0.02;
 
   //on last page, writes "Social Orbit" and "[today's date]" at bottom left of the canvas
-  if(screen==4){
-  fill(255);
-  noStroke();
-  textAlign(RIGHT);
-  textSize(windowHeight / 33);
-  
-  textSize(windowHeight / 43);
-  text(
-        "Social Orbit",
-        (windowWidth / 4) * 3.93,
-        (windowHeight / 4) * 2.27
-      );
+  if (screen == 4) {
+    fill(255);
+    noStroke();
+    textAlign(RIGHT);
+    textSize(windowHeight / 33);
 
-  textSize(windowHeight / 33);
-  //if the month number is less than 10, put a 0 before the month number display date
-  if (m < 10) {
-    //if the day number is less than 10, put a 0 before the day number display date
-    if (d < 10) {
-      text(
-        "0" + d + "/0" + m + "/" + y,
-        (windowWidth / 4) * 3.93,
-        (windowHeight / 4) * 2.42
-      );
+    textSize(windowHeight / 43);
+    text("Social Orbit", (windowWidth / 4) * 3.93, (windowHeight / 4) * 2.27);
+
+    textSize(windowHeight / 33);
+    //if the month number is less than 10, put a 0 before the month number display date
+    if (m < 10) {
+      //if the day number is less than 10, put a 0 before the day number display date
+      if (d < 10) {
+        text(
+          "0" + d + "/0" + m + "/" + y,
+          (windowWidth / 4) * 3.93,
+          (windowHeight / 4) * 2.42
+        );
+      } else {
+        text(
+          d + "/0" + m + "/" + y,
+          (windowWidth / 4) * 3.9,
+          (windowHeight / 4) * 2.42
+        );
+      }
     } else {
-      text(
-        d + "/0" + m + "/" + y,
-        (windowWidth / 4) * 3.9,
-        (windowHeight / 4) * 2.42
-      );
+      //if the day number is less than 10, put a 0 before the day number display date
+      if (d < 10) {
+        text(
+          "0" + d + "/" + m + "/" + y,
+          (windowWidth / 4) * 3.9,
+          (windowHeight / 4) * 2.42
+        );
+      } else {
+        text(
+          d + "/" + m + "/" + y,
+          (windowWidth / 4) * 3.9,
+          (windowHeight / 4) * 2.42
+        );
+      }
     }
-  } else {
-    //if the day number is less than 10, put a 0 before the day number display date
-    if (d < 10) {
-      text(
-        "0" + d + "/" + m + "/" + y,
-        (windowWidth / 4) * 3.9,
-        (windowHeight / 4) * 2.42
-      );
-    } else {
-      text(
-        d + "/" + m + "/" + y,
-        (windowWidth / 4) * 3.9,
-        (windowHeight / 4) * 2.42
-      );
-    }
-  }
   }
 }
 
@@ -348,18 +349,21 @@ function nextPressed() {
     document.getElementById("screen00").style.display = "none";
     document.getElementById("screen01").style.display = "block";
 
-    document.getElementById("nextButton").style.display = "none";
+    document.getElementById("nextButton").style.visibility = "hidden";
   } else if (screen == 2) {
     screen = 1;
     document.getElementById("screen02").style.display = "none";
     document.getElementById("screen01").style.display = "block";
 
-    document.getElementById("nextButton").style.display = "none";
+    document.getElementById("nextButton").style.visibility = "hidden";
 
     whichEntry += 1;
+    
+    personName = document.getElementById("who").value;
 
     //makes a new social interaction entry to create a new planet
     entry[whichEntry] = new Planet(
+      personName,
       interactionFeeling,
       interactionLength,
       timeOfDay,
@@ -371,8 +375,8 @@ function nextPressed() {
     document.getElementById("screen03").style.display = "none";
     document.getElementById("screen04").style.display = "block";
 
-    document.getElementById("nextButton").style.display = "none";
-    document.getElementById("doneButton").style.display = "none";
+    document.getElementById("nextButton").style.visibility = "hidden";
+    document.getElementById("doneButton").style.visibility = "hidden";
 
     document.getElementById("saveButtonImage").style.visibility = "visible";
     document.getElementById("saveButtonData").style.visibility = "visible";
@@ -388,26 +392,33 @@ function nextPressed() {
 }
 
 //buttons for: adding social interaction OR skipping it
+//---adding social interaction
 function addSocial() {
   screen = 2;
   document.getElementById("skipSocialButton").style.display = "none";
-  // document.getElementById("skipSocialButton").style.visibility = "hidden";
-  // document.getElementById("skipButton").style.display = "block";
   document.getElementById("skipButton").style.visibility = "visible";
   document.getElementById("screen01").style.display = "none";
   document.getElementById("screen02").style.display = "block";
 
-  document.getElementById("nextButton").style.display = "block";
+  document.getElementById("nextButton").style.visibility = "visible";
+
+  //resets all the planet input variables values
+  interactionFeeling = 0;
+  interactionLength = 0;
+  timeOfDay = 0;
+  relationshipType = 0;
+  comType = 0;
 }
 
-//not adding a social interaction and going to the last page
+//---not adding a social interaction and going to the last page
 function skipSocial() {
   screen = 3;
   document.getElementById("screen01").style.display = "none";
   document.getElementById("screen03").style.display = "block";
 
   document.getElementById("nextButton").style.display = "none";
-  document.getElementById("doneButton").style.display = "block";
+  // document.getElementById("nextButton").style.visibility = "hidden";
+  document.getElementById("doneButton").style.visibility = "visible";
 }
 
 //saves image of canvas
@@ -438,7 +449,7 @@ class SolarSystem {
     if (day_feeling == 1) {
       this.sunColour = "#FFF6A3";
     } else if (day_feeling == 2) {
-      this.sunColour = "#FFEA36";
+      this.sunColour = "#FFEB44";
     } else if (day_feeling == 3) {
       this.sunColour = "#EBD300";
     } else if (day_feeling == 4) {
@@ -516,32 +527,73 @@ class SolarSystem {
 
     //sun decoration for overall social interaction feeling
     if (this.si_feeling == 1) {
+      
+      stroke("#E49300");
+      strokeWeight(3);
+      circle(centerWidth, thirdHeight, windowWidth / 11);
+      
       stroke(255);
-
-      fill(this.sunColour + 20);
       strokeWeight(1);
       circle(centerWidth, thirdHeight, windowWidth / 11);
-
-      fill(this.sunColour + 40);
+      
+      stroke("#E49300");
+      strokeWeight(3);
+      circle(centerWidth, thirdHeight, windowWidth / 18);
+      
+      stroke(255);
       strokeWeight(1);
       circle(centerWidth, thirdHeight, windowWidth / 18);
-
+      
       noFill();
 
+      stroke("#E49300");
+      strokeWeight(4.5);
+      circle(
+        centerWidth + sunWidth / 4,
+        thirdHeight + sunWidth / 4,
+        windowWidth / 15
+      );
+      
+      stroke(255);
       strokeWeight(2.5);
       circle(
         centerWidth + sunWidth / 4,
         thirdHeight + sunWidth / 4,
         windowWidth / 15
       );
+        
+      stroke("#E49300");
+      strokeWeight(3.5);
+      circle(
+        centerWidth - sunWidth / 4,
+        thirdHeight - sunWidth / 3,
+        windowWidth / 20
+      );
+      
+      stroke(255);
       strokeWeight(1.5);
       circle(
         centerWidth - sunWidth / 4,
         thirdHeight - sunWidth / 3,
         windowWidth / 20
       );
+      
     } else if (this.si_feeling == 2) {
       noFill();
+      stroke("#E49300");
+      strokeWeight(4.5);
+      circle(
+        centerWidth + sunWidth / 4,
+        thirdHeight + sunWidth / 4,
+        windowWidth / 15
+      );
+      strokeWeight(3.5);
+      circle(
+        centerWidth - sunWidth / 4,
+        thirdHeight - sunWidth / 3,
+        windowWidth / 20
+      );
+      
       stroke(255);
       strokeWeight(2.5);
       circle(
@@ -557,7 +609,7 @@ class SolarSystem {
       );
     } else if (this.si_feeling == 3) {
       noStroke();
-      fill(150, 150, 150, 120);
+      fill(150, 150, 150, 150);
       circle(centerWidth + sunWidth / 4, thirdHeight, windowWidth / 27.5);
     } else if (this.si_feeling == 4) {
       stroke(0);
@@ -612,12 +664,14 @@ class Planet {
   //to make planet
 
   constructor(
+    person_name,
     interaction_feeling,
     interaction_length,
     time_of_day,
     relationship_type,
     com_type
   ) {
+      this.who=person_name;
     //interaction feeling determines
     //---colour of the planet
     if (interaction_feeling == 1) {
@@ -638,18 +692,25 @@ class Planet {
     //---size of the planet
     if (interaction_length == 1) {
       this.planetSize = windowWidth / 10.5;
+      this.strokeMultiplier = 1;
     } else if (interaction_length == 2) {
       this.planetSize = windowWidth / 14;
+      this.strokeMultiplier = 1;
     } else if (interaction_length == 3) {
       this.planetSize = windowWidth / 18;
+      this.strokeMultiplier = 0.9;
     } else if (interaction_length == 4) {
       this.planetSize = windowWidth / 23;
+      this.strokeMultiplier = 0.5;
     } else if (interaction_length == 5) {
       this.planetSize = windowWidth / 32;
+      this.strokeMultiplier = 0.5;
     } else if (interaction_length == 6) {
       this.planetSize = windowWidth / 44;
+      this.strokeMultiplier = 0.3;
     } else {
       this.planetSize = windowWidth / 23;
+      this.strokeMultiplier = 0.9;
     }
 
     //interaction time of day determines
@@ -713,7 +774,7 @@ class Planet {
       //draws a ring around the planet if the social interaction happens throughout the day
       noFill();
       stroke(255);
-      strokeWeight(1);
+      strokeWeight(1 * this.strokeMultiplier);
       ellipse(
         centerWidth -
           ((sunWidth + ringSpacer * this.time_of_day) / 2) *
@@ -731,7 +792,7 @@ class Planet {
 
       noFill();
       stroke(255);
-      strokeWeight(1);
+      strokeWeight(1 * this.strokeMultiplier);
       circle(planetX - this.planetSize / 6, planetY, this.planetSize / 2);
       circle(planetX + this.planetSize / 6, planetY, this.planetSize / 2);
     } else if (this.relationship_type == 2) {
@@ -739,14 +800,14 @@ class Planet {
 
       fill(255);
       stroke(255);
-      strokeWeight(3);
+      strokeWeight(3 * this.strokeMultiplier);
       line(
         planetX - this.planetSize / 2.3,
         planetY,
         planetX + this.planetSize / 2.3,
         planetY
       );
-      strokeWeight(2);
+      strokeWeight(2 * this.strokeMultiplier);
       line(
         planetX - this.planetSize / 2.7,
         planetY + this.planetSize / 4,
@@ -759,7 +820,7 @@ class Planet {
         planetX + this.planetSize / 2.7,
         planetY - this.planetSize / 4
       );
-      strokeWeight(1);
+      strokeWeight(1 * this.strokeMultiplier);
       line(
         planetX - this.planetSize / 3.8,
         planetY + this.planetSize / 2.5,
@@ -778,7 +839,7 @@ class Planet {
       noFill();
       stroke(255);
 
-      strokeWeight(2);
+      strokeWeight(2 * this.strokeMultiplier);
       bezier(
         planetX - this.planetSize / 2,
         planetY,
@@ -790,7 +851,7 @@ class Planet {
         planetY
       );
 
-      strokeWeight(1);
+      strokeWeight(1 * this.strokeMultiplier);
       bezier(
         planetX - this.planetSize / 2,
         planetY,
@@ -816,22 +877,22 @@ class Planet {
       //work/professional
 
       stroke(255);
-      strokeWeight(0.5);
+      strokeWeight(0.5 * this.strokeMultiplier);
       // fill(this.planetColour-30);
       circle(planetX, planetY, this.planetSize / 1.25);
 
       // fill(this.planetColour-60);
-      strokeWeight(1);
+      strokeWeight(1 * this.strokeMultiplier);
       circle(planetX, planetY, this.planetSize / 1.8);
       // fill(this.planetColour-90);
-      strokeWeight(1.75);
+      strokeWeight(1.75 * this.strokeMultiplier);
       circle(planetX, planetY, this.planetSize / 4);
     } else if (this.relationship_type == 5) {
       //aquaintances
 
       noFill();
       stroke(255);
-      strokeWeight(1.75);
+      strokeWeight(1.75 * this.strokeMultiplier);
 
       circle(planetX - this.planetSize / 2.75, planetY, this.planetSize / 4);
       circle(planetX, planetY, this.planetSize / 4);
@@ -845,7 +906,7 @@ class Planet {
       //written - text
 
       stroke(255);
-      strokeWeight(1.5);
+      strokeWeight(1.5 * this.strokeMultiplier);
       line(
         planetX + this.planetSize / 3.5,
         planetY - this.planetSize / 4,

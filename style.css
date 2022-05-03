@@ -6,6 +6,7 @@ body {
   color: white;
   background-color: black;
   text-align: center;
+  font-size: 1.0em;
 }
 
 h3 {
@@ -73,7 +74,8 @@ button:hover {
 }
 
 .buttonDone {
-  display: none;
+/*   display: none; */
+  visibility: hidden;
   margin-bottom: 5%;
 }
 
@@ -117,14 +119,17 @@ select {
   border: 2px solid #12A4E6;
 }
 
+.introForm {
+  margin-left:30%;
+}
+
 /* custom radio buttons for multiple choice questions */
 .customRadio {
   display: block;
   position: relative;
-  padding-left: 7%;
+  padding-left: 8%;
   margin-left: 3%;
-/*   padding-left: 8%;
-  margin-left: 10%; */
+/*margin-left: 10%; */
   cursor: pointer;
   text-align: left;
 }

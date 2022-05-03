@@ -1,57 +1,55 @@
 <!DOCTYPE html><html lang="en"><head>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
-<link href="https://fonts.googleapis.com/css2?family=Poppins&amp;family=Space+Mono&amp;display=swap" rel="stylesheet">
-    
-    
-    
+    <title>Social Orbit</title>
     <!-- setting up html file -->
     <script src="p5.js"></script>
-    <script src="p5.sound.min.js"></script>
     <link rel="stylesheet" type="text/css" href="style.css">
     <script src="sketch.js"></script>
     <meta charset="utf-8">
+    <!-- adding google fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins&amp;family=Space+Mono&amp;display=swap" rel="stylesheet">
   </head>
   <body>
-<!-- title -->
+    <!-- title -->
     <h3>Social Orbit</h3>
-    
+
     <!-- adding canvas -->
     <div id="myCanvasHTML"></div>
 
-<!-- screen 0 ------------------------------------------------------------------------------------------------------->
-<!-- intro and beginning question -->
+    <!-- screen 0 ------------------------------------------------------------------------------------------------------->
+    <!-- intro and beginning question -->
     <div class="screen0" id="screen00">
       <p>Welcome to Social Orbit!</p>
 
       <p>How are you today?</p>
 
-      <form style="margin-left:33%;">
-        <label class="customRadio" for="veryGood">
+      <form class="introForm">
+        <label class="customRadio" for="veryGood" style="padding-left: 11%;">
           <input type="radio" id="veryGood" name="day_feeling" value="1" onclick="option1DayFeeling()">
           &nbsp; Very Good
-          <span class="checkmark"></span> </label><br>
+          <span class="checkmark"></span></label><br>
 
-        <label class="customRadio" for="good">
+        <label class="customRadio" for="good" style="padding-left: 11%;">
           <input type="radio" id="good" name="day_feeling" value="2" onclick="option2DayFeeling()">
           &nbsp; Good<span class="checkmark"></span></label><br>
 
-        <label class="customRadio" for="neutral">
+        <label class="customRadio" for="neutral" style="padding-left: 11%;">
           <input type="radio" id="neutral" name="day_feeling" value="3" onclick="option3DayFeeling()">
           &nbsp; Neutral<span class="checkmark"></span></label><br>
 
-        <label class="customRadio" for="bad">
+        <label class="customRadio" for="bad" style="padding-left: 11%;">
           <input type="radio" id="bad" name="day_feeling" value="4" onclick="option4DayFeeling()">
           &nbsp; Bad<span class="checkmark"></span></label><br>
 
-        <label class="customRadio" for="veryBad">
+        <label class="customRadio" for="veryBad" style="padding-left: 11%;">
           <input type="radio" id="veryBad" name="day_feeling" value="5" onclick="option5DayFeeling()">
           &nbsp; Very Bad<span class="checkmark"></span></label><br>
       </form>
     </div>
 
-<!-- screen 1 ------------------------------------------------------------------------------------------------------->
-<!-- choice of adding social interaction entry or not -->
+    <!-- screen 1 ------------------------------------------------------------------------------------------------------->
+    <!-- choice of adding social interaction entry or not -->
     <div class="screen1" id="screen01">
       <button class="socialChoice" id="addSocialButton" onclick="addSocial()" style="margin-top:10%;">
         Add a Social Interaction
@@ -61,18 +59,17 @@
       <button class="socialChoice" id="skipSocialButton" onclick="skipSocial()">
         Didn’t have Social Interactions today
       </button>
-      <br>
       <button class="skipButton" id="skipButton" onclick="skipSocial()">
         Done entering Social Interactions
       </button>
     </div>
 
-<!-- screen 2 ------------------------------------------------------------------------------------------------------->
-<!-- social interactin entry page, user input questions -->
+    <!-- screen 2 ------------------------------------------------------------------------------------------------------->
+    <!-- social interactin entry page, user input questions -->
     <div class="screen2" id="screen02">
       <p>
-        Who did you interact with?<br>(Ex. Tina, best friend, <br>study group,
-        dad, etc.)
+        Who did you interact with?<br>(Ex. Tina, best friend, <br>study
+        group, dad, etc.)
       </p>
 
       <form id="myform0">
@@ -209,8 +206,8 @@
       </form>
     </div>
 
-<!-- screen 3 ------------------------------------------------------------------------------------------------------->
-<!-- ending user input questions -->
+    <!-- screen 3 ------------------------------------------------------------------------------------------------------->
+    <!-- ending user input questions -->
     <div class="screen3" id="screen03">
       <p>How did you feel about today's social interactions?</p>
 
@@ -261,8 +258,8 @@
       </form>
     </div>
 
-<!-- screen 4 ------------------------------------------------------------------------------------------------------->
-<!-- last page - can export image and data -->
+    <!-- screen 4 ------------------------------------------------------------------------------------------------------->
+    <!-- last page - can export image and data -->
     <div class="screen4" id="screen04">
       <p>Here is your Social Orbit for today!</p>
 
@@ -277,18 +274,19 @@
       </button>
     </div>
 
-<!-- screen bottom -------------------------------------------------------------------------------------------------->
-<!-- bottom of page buttons: next / done buttons -->
+    <!-- screen bottom -------------------------------------------------------------------------------------------------->
+    <!-- bottom of page buttons: next / done buttons -->
     <div class="screenBottom" id="screenBottom">
       <!-- NEXT button goes to the next screen -->
       <button class="buttonNext" id="nextButton" onclick="nextPressed()">
         NEXT
       </button>
-
+      <br>
       <!-- DONE button goes to the last screen (screen 4) -->
       <button class="buttonDone" id="doneButton" onclick="nextPressed()">
         DONE
       </button>
     </div>
   
+
 </body></html>
