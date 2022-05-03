@@ -6,8 +6,22 @@ body {
   color: white;
   background-color: black;
   text-align: center;
-  font-size: 5vw;
+  font-size: 4.5vw;
 }
+
+/* Media Query - different device sizes -------------------------------------*/
+@media screen and (min-width: 1000px){
+  html, body {
+  font-size: 3vw;
+  }
+}
+
+@media screen and (min-width: 1300px){
+  html, body {
+  font-size: 2vw;
+  }
+}
+/* -------------------------------------------------------------------------*/
 
 h3 {
   text-align: center;
