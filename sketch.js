@@ -3,6 +3,8 @@
 //-reset planet variable values when adding a new social interaction
 //-adjusted stroke size for planet code decorations depending on planet size ((so decorations are relative size)) -- so they aren't too big and overcrowd the planet
 //-adjusted verygood/good sun decorations so they can be seen better -- orange stroke behind the white stroke
+//-added <br> that can be taken away after the skipsocialbutton so that the buttons are still centered if someone does open it on a desktop
+//-trying to fix the font sizes
 
 //variables-----------------------------------------------------------------------------------------------------------
 let centerWidth; //half the width of the screen / the center of the screen - the x center of the solar system will be placed here
@@ -396,6 +398,7 @@ function nextPressed() {
 function addSocial() {
   screen = 2;
   document.getElementById("skipSocialButton").style.display = "none";
+  document.getElementById("skipSocialButtonBR").style.display = "none";
   document.getElementById("skipButton").style.visibility = "visible";
   document.getElementById("screen01").style.display = "none";
   document.getElementById("screen02").style.display = "block";
