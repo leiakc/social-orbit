@@ -6,7 +6,7 @@ body {
   color: white;
   background-color: black;
   text-align: center;
-  font-size: 4.2vw;
+  font-size: 4.5vw;
 }
 
 /* Media Query - different device sizes -------------------------------------*/
@@ -27,12 +27,21 @@ h3 {
   text-align: center;
   margin: 0;
   padding: 0;
-  font-size: 2em;
+  font-size: 1.8em;
+  font-family: 'Space Mono', monospace;
+}
+
+h2 {
   font-family: 'Space Mono', monospace;
 }
 
 canvas {
   position: block;
+}
+
+.myCanvasLegendHTMLClass{
+/*   visibility:hidden; */
+  display:none;
 }
 
 .screen0, .screen1, .screen2, .screen3, .screen4, .screenBottom {
@@ -67,7 +76,6 @@ canvas {
 /* buttons styling */
 button {
   font-family: 'Helvetica';
-  font-size: 4.2vw;
   border-radius: 60px;
   border: none;
   background-color: rgb(220, 220, 220);

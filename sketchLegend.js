@@ -1,1065 +1,1005 @@
-//legend
+//legend - instance mode
 
-//variables-----------------------------------------------------------------------------------------------------------
-let centerWidth; //half the width of the screen / the center of the screen - the x center of the solar system will be placed here
-let thirdHeight; //third of the height of the screen - the y center of the solar system will be placed here
+//variables-----------------------------------------------------------------------------------
 
-let sunWidth = 0; //width of the sun
+var legend = function (g){
 
-let ringSpacer; //amount of space between each ring (solar system planet ring)
+g.sunWidth = 0; //width of the sun
 
-//variables for temporarily holding the answers from user input
-let dayFeeling = 0; //feeling about the day
-let interactionFeeling = 0; //feeling about the interaction
-let interactionLength = 0; //length of the interaction
-let timeOfDay = 0; //what time of day the interaction happened
-let satisfactionDay = 0; //satisfaction about the day's social interactions
-let relationshipType = 0; //relationship type for the interaction
-let comType = 0; //communication method for the interaction
-let SIFeeling = 0; //overall feeling about the day's social interactions
-let personName =""; //name of person/people in social interaction 
+g.ringSpacerL = 0; //amount of space between each ring (solar system planet ring)
 
-let overall = []; //array that holds data about the overall day (dayFeeling, satisfactionDay, SIFeeling)
-
-let entry = []; //array that holds data about each social interaction entry
-let whichEntry = -1; //determines which part of the array currently on
-
-let angle = 0; //helps w planet rotation around sun
+g.angle = 0; //helps w planet rotation around sun
 
 //vars for stars
-let x1 = []; //array for the x co-ordinate of the stars
-let y1 = []; //array for the y co-ordinate of the stars
-let size1 = []; //array for the size of the stars
-let starNum = 50; //number of stars
+g.x1 = []; //array for the x co-ordinate of the stars
+g.y1 = []; //array for the y co-ordinate of the stars
 
-let pointCount = 9; //how many dots for the in-person communication method data visualization
+g.pointCount = 9; //how many dots for the in-person communication method data visualization
 
-let screen = 0; //for which screen is on
-//0 - how are you today question
-//1 - social interaction entry: add or skip?
-//2 - social interaction entry: questions
-//3 - day's overview questions
-//4 - final presentation, after finishing questions
+g.planetSize = 0;
 
-//used to hold today's date
-let d = 0; //day
-let m = 0; //month
-let y = 0; // year
-
-//setup---------------------------------------------------------------------------------------------------------------
-function setup() {
+//setup-------------------------------------------------------------------------------------
+g.setup = function() {
   //creating the canvas
-  var myCanvasLegend = createCanvas(windowWidth, windowHeight*2.85)
-  myCanvasLegend.parent("myCanvasLegendHTML");
+  // myCanvasLegend = g.createCanvas(g.windowWidth, g.windowHeight*2.85);
+  // myCanvasLegend.parent("myCanvasLegendHTML");
+  g.createCanvas(g.windowWidth, g.windowHeight*2.85);
   
-  textFont("Helvetica");
-  // textAlign(CENTER);
-  textStyle(NORMAL);
+  g.textFont("Helvetica");
+  // g.textAlign(g.CENTER);
+  g.textStyle(g.NORMAL);
   
-  planetSize = windowWidth/12;
+  g.planetSize = g.windowWidth/12;
 
 }
 
-//draw----------------------------------------------------------------------------------------------------------------
-function draw() {
-  background(0);
+//draw--------------------------------------------------------------------------------------
+g.draw = function() {
+  g.background(0);
   
-  sunWidth = windowWidth / 7.5;
+  g.sunWidth = g.windowWidth / 7.5;
   
   ///////////////////////////////////////////////////////////////
   
   //this goes on the bottom so it goes first in the code
-
   
-  noFill();
-    stroke(255)
-    strokeWeight(1);
+  g.noFill();
+  g.stroke(255)
+  g.strokeWeight(1);
 
   //rings
   
-  let ringSpacerL = ((((windowWidth/6)*2-(windowWidth/6)/2) - ((windowWidth/6)*1-(windowWidth/6)/2))*2) ;
+  g.ringSpacerL = ((((g.windowWidth/6)*2-(g.windowWidth/6)/2) - ((g.windowWidth/6)*1-(g.windowWidth/6)/2))*2) ;
   
   //closest to sun
-  noFill();
-  stroke(255);
+  g.noFill();
+  g.stroke(255);
   
-  ellipse((windowWidth/6)*1-(windowWidth/6)/2, (windowHeight/3.5)*8, windowWidth-(ringSpacerL)*2);
+  g.ellipse((g.windowWidth/6)*1-(g.windowWidth/6)/2, (g.windowHeight/3.5)*8, g.windowWidth-(g.ringSpacerL)*2);
   
-  ellipse((windowWidth/6)*1-(windowWidth/6)/2, (windowHeight/3.5)*8, windowWidth-(ringSpacerL));
+  g.ellipse((g.windowWidth/6)*1-(g.windowWidth/6)/2, (g.windowHeight/3.5)*8, g.windowWidth-(g.ringSpacerL));
   
-    
-  ellipse((windowWidth/6)*1-(windowWidth/6)/2, (windowHeight/3.5)*8, windowWidth);
+  g.ellipse((g.windowWidth/6)*1-(g.windowWidth/6)/2, (g.windowHeight/3.5)*8, g.windowWidth);
   
   //furthest from sun
-  ellipse((windowWidth/6)*1-(windowWidth/6)/2, (windowHeight/3.5)*8, windowWidth+(ringSpacerL));
+  g.ellipse((g.windowWidth/6)*1-(g.windowWidth/6)/2, (g.windowHeight/3.5)*8, g.windowWidth+(g.ringSpacerL));
   
-
   //black boxes that hide most of the rings
-  noStroke();
-  fill(0);
-  // rect(0, ((windowHeight/3.5)*6), windowWidth, windowHeight/2.25);
+  g.noStroke();
+  g.fill(0);
+  // g.rect(0, ((g.windowHeight/3.5)*6), g.windowWidth, g.windowHeight/2.25);
   
-  beginShape();
-  vertex(0, 0); //top left 
-  vertex(windowWidth,0); //top right 
-  vertex(windowWidth,((windowHeight/3.5)*6)+windowHeight/1.95); // bottom right
-  vertex(0, ((windowHeight/3.5)*6)+windowHeight/1.95);
-  endShape(CLOSE);
-  // rect(0, ((windowHeight/3.5)*8)+(windowHeight/17), windowWidth, windowHeight/2.25);
-  rect((windowWidth/6)*1, ((windowHeight/3.5)*8)+(windowHeight/17), windowWidth, windowHeight/22);
+  g.beginShape();
+  g.vertex(0, 0); //g.TOP left 
+  g.vertex(g.windowWidth,0); //g.TOP right 
+  g.vertex(g.windowWidth,((g.windowHeight/3.5)*6)+g.windowHeight/1.95); // bottom right
+  g.vertex(0, ((g.windowHeight/3.5)*6)+g.windowHeight/1.95);
+  g.endShape(g.CLOSE);
+  // g.rect(0, ((g.windowHeight/3.5)*8)+(g.windowHeight/17), g.windowWidth, g.windowHeight/2.25);
+  g.rect((g.windowWidth/6)*1, ((g.windowHeight/3.5)*8)+(g.windowHeight/17), g.windowWidth, g.windowHeight/22);
   
   //writing
-   fill(255);
-  textSize(windowHeight / 32);
-  textAlign(CENTER,CENTER);
+   g.fill(255);
+  g.textSize(g.windowHeight / 34);
+  g.textAlign(g.CENTER,g.CENTER);
   
-  text("What time of day was the interaction?",windowWidth/2, (windowHeight/3.5)*8-windowHeight/10); 
+  //What time of day was the interaction?/////////////////////////////////////////////////////////// 
+  g.text("What time of day was the interaction?",g.windowWidth/2, (g.windowHeight/3.5)*8-g.windowHeight/10); 
   
+  ////////////////legend title////////////////////////////////////////////////////////////////////
+  g.noStroke();
   
-  ////////////////legend title//////////////////////////////////
-  noStroke();
+  g.fill(255);
+  g.textStyle(g.BOLD);
+  g.textSize(g.windowHeight / 25);
+  g.textAlign(g.CENTER,g.CENTER);
+  g.textFont('Space Mono');
+  g.text("Legend",g.windowWidth/2, (g.windowHeight/3.5)-g.windowHeight/5); //5.5
+  g.textStyle(g.NORMAL);
   
-  fill(255);
-  textSize(windowHeight / 20);
-  textAlign(CENTER,CENTER);
-  textFont('Space Mono');
-  text("Legend",windowWidth/2, (windowHeight/3.5)-windowHeight/5); //5.5
-  
-  textFont('Helvetica');  
-  //////////////////////////////////////////////////
-  
-
+  g.textFont('Helvetica');  
+  ///////////////////////////////////////////////////////////////////////////////////////////////
   //sun and planets
-    noStroke();
+    g.noStroke();
   for(i=1;i<7;i++){
-    fill("rgb(150,150,150)");
+    g.fill("rgb(150,150,150)");
     if(i!==6){
-  circle((windowWidth/6)*i-(windowWidth/6)/2, (windowHeight/3.5)*8, planetSize);
+  g.circle((g.windowWidth/6)*i-(g.windowWidth/6)/2, (g.windowHeight/3.5)*8, g.planetSize);
     } else {
-      circle((windowWidth/6)*i-(windowWidth/6)/2-(windowWidth/200), (windowHeight/3.5)*8, planetSize);
+      g.circle((g.windowWidth/6)*i-(g.windowWidth/6)/2-(g.windowWidth/200), (g.windowHeight/3.5)*8, g.planetSize);
     }
     
     if(i==1){
-      fill("#EBD300");
-    noStroke();
-    circle((windowWidth/6)*i-(windowWidth/6)/2, (windowHeight/3.5)*8, sunWidth);
+      g.fill("#EBD300");
+    g.noStroke();
+    g.circle((g.windowWidth/6)*i-(g.windowWidth/6)/2, (g.windowHeight/3.5)*8, g.sunWidth);
     }
     
     if(i==6){
       //draws a ring around the planet if the social interaction happens throughout the day
-      noFill();
-      stroke(255);
-      strokeWeight(1);
-      circle((windowWidth/6)*i-(windowWidth/6)/2-(windowWidth/200),
-        (windowHeight/3.5)*8,
-        planetSize + planetSize
+      g.noFill();
+     g.stroke(255);
+      g.strokeWeight(1);
+      g.circle((g.windowWidth/6)*i-(g.windowWidth/6)/2-(g.windowWidth/200),
+        (g.windowHeight/3.5)*8,
+        g.planetSize + g.planetSize
       );
-      noStroke();
+      g.noStroke();
     }
   }
   
-  // textSize(windowHeight / 42);
-  textSize(windowHeight / 47);
-  textAlign(CENTER,TOP);
+  g.textSize(g.windowHeight / 47);
+  g.textAlign(g.CENTER,g.TOP);
   
-  
-  fill(255);
-  noStroke();
-  text("Morning",(windowWidth/6)*2-(windowWidth/6)/2, (windowHeight/3.5)*8+windowHeight/14);
-  text("Afternoon",(windowWidth/6)*3-(windowWidth/6)/2, (windowHeight/3.5)*8+windowHeight/14);
-  text("Evening",(windowWidth/6)*4-(windowWidth/6)/2, (windowHeight/3.5)*8+windowHeight/14);
-  text("Night",(windowWidth/6)*5-(windowWidth/6)/2, (windowHeight/3.5)*8+windowHeight/14);
-  text("Throughout\nthe Day",(windowWidth/6)*6-(windowWidth/6)/2-windowWidth/100, (windowHeight/3.5)*8+windowHeight/14);
-  
-  
-  
+  g.fill(255);
+  g.noStroke();
+  g.text("Morning",(g.windowWidth/6)*2-(g.windowWidth/6)/2, (g.windowHeight/3.5)*8+g.windowHeight/14);
+  g.text("Afternoon",(g.windowWidth/6)*3-(g.windowWidth/6)/2, (g.windowHeight/3.5)*8+g.windowHeight/14);
+  g.text("Evening",(g.windowWidth/6)*4-(g.windowWidth/6)/2, (g.windowHeight/3.5)*8+g.windowHeight/14);
+  g.text("Night",(g.windowWidth/6)*5-(g.windowWidth/6)/2, (g.windowHeight/3.5)*8+g.windowHeight/14);
+  g.text("Throughout\nthe Day",(g.windowWidth/6)*6-(g.windowWidth/6)/2-g.windowWidth/100, (g.windowHeight/3.5)*8+g.windowHeight/14);
   
   /////////////////////////////////////////////////////////////////
              
-  fill(255);
-  textSize(windowHeight / 32);
-  textAlign(CENTER,CENTER);
-  text("How are you today?",windowWidth/2, (windowHeight/3.5)-windowHeight/11-windowHeight/45.4);
-  
+  //How are you today?///////////////////////////////////////////////////////////////////////////
+  g.fill(255);
+  g.textSize(g.windowHeight / 34);
+  g.textAlign(g.CENTER,g.CENTER);
+  g.text("How are you today?",g.windowWidth/2, (g.windowHeight/3.5)-g.windowHeight/11-g.windowHeight/45.4);
   
   //dif suns
   //drawing sun
-  // textSize(windowHeight / 42);
-  textSize(windowHeight / 47);
-  textAlign(CENTER,TOP);
-  fill(255);
-  text("Very Good",(windowWidth/5)*1-(windowWidth/5)/2, (windowHeight/3.5)+windowHeight/13-windowHeight/45.4);
-    fill("#FFF6A3");
-    noStroke();
-    circle((windowWidth/5)*1-(windowWidth/5)/2, (windowHeight/3.5)-windowHeight/45.4, sunWidth);
+  g.textSize(g.windowHeight / 47);
+  g.textAlign(g.CENTER,g.TOP);
+  g.fill(255);
+  g.text("Very Good",(g.windowWidth/5)*1-(g.windowWidth/5)/2, (g.windowHeight/3.5)+g.windowHeight/13-g.windowHeight/45.4);
+    g.fill("#FFF6A3");
+    g.noStroke();
+    g.circle((g.windowWidth/5)*1-(g.windowWidth/5)/2, (g.windowHeight/3.5)-g.windowHeight/45.4, g.sunWidth);
   
-  fill(255);
-  text("Good",(windowWidth/5)*2-(windowWidth/5)/2, (windowHeight/3.5)+windowHeight/13-windowHeight/45.4);
-  fill("#FFEB44");
-    noStroke();
-    circle((windowWidth/5)*2-(windowWidth/5)/2, (windowHeight/3.5)-windowHeight/45.4, sunWidth);
+  g.fill(255);
+  g.text("Good",(g.windowWidth/5)*2-(g.windowWidth/5)/2, (g.windowHeight/3.5)+g.windowHeight/13-g.windowHeight/45.4);
+  g.fill("#FFEB44");
+    g.noStroke();
+    g.circle((g.windowWidth/5)*2-(g.windowWidth/5)/2, (g.windowHeight/3.5)-g.windowHeight/45.4, g.sunWidth);
   
-  fill(255);
-  text("Neutral",(windowWidth/5)*3-(windowWidth/5)/2, (windowHeight/3.5)+windowHeight/13-windowHeight/45.4);
-  fill("#EBD300");
-    noStroke();
-    circle((windowWidth/5)*3-(windowWidth/5)/2, (windowHeight/3.5)-windowHeight/45.4, sunWidth);
+  g.fill(255);
+  g.text("Neutral",(g.windowWidth/5)*3-(g.windowWidth/5)/2, (g.windowHeight/3.5)+g.windowHeight/13-g.windowHeight/45.4);
+  g.fill("#EBD300");
+    g.noStroke();
+    g.circle((g.windowWidth/5)*3-(g.windowWidth/5)/2, (g.windowHeight/3.5)-g.windowHeight/45.4, g.sunWidth);
   
-  fill(255);
-  text("Bad",(windowWidth/5)*4-(windowWidth/5)/2, (windowHeight/3.5)+windowHeight/13-windowHeight/45.4);
-  fill("#BFAC00");
-    noStroke();
-    circle((windowWidth/5)*4-(windowWidth/5)/2, (windowHeight/3.5)-windowHeight/45.4, sunWidth);
+  g.fill(255);
+  g.text("Bad",(g.windowWidth/5)*4-(g.windowWidth/5)/2, (g.windowHeight/3.5)+g.windowHeight/13-g.windowHeight/45.4);
+  g.fill("#BFAC00");
+    g.noStroke();
+    g.circle((g.windowWidth/5)*4-(g.windowWidth/5)/2, (g.windowHeight/3.5)-g.windowHeight/45.4, g.sunWidth);
   
-  fill(255);
-  text("Very Bad",(windowWidth/5)*5-(windowWidth/5)/2, (windowHeight/3.5)+windowHeight/13-windowHeight/45.4);
-  fill("#857701");
-    noStroke();
-    circle((windowWidth/5)*5-(windowWidth/5)/2, (windowHeight/3.5)-windowHeight/45.4, sunWidth);
-  
+  g.fill(255);
+  g.text("Very Bad",(g.windowWidth/5)*5-(g.windowWidth/5)/2, (g.windowHeight/3.5)+g.windowHeight/13-g.windowHeight/45.4);
+  g.fill("#857701");
+    g.noStroke();
+    g.circle((g.windowWidth/5)*5-(g.windowWidth/5)/2, (g.windowHeight/3.5)-g.windowHeight/45.4, g.sunWidth);
 
   //sun decorations
+  //How did you feel about today's social interactions?/////////////////////////////////////////////
+  g.fill(255);
+  g.textSize(g.windowHeight / 34);
+  g.textAlign(g.CENTER,g.CENTER);
+  g.text("How did you feel about \ntoday's social interactions?",g.windowWidth/2, (g.windowHeight/3.5)*2-g.windowHeight/8.25-g.windowHeight/208);
   
-  fill(255);
-  textSize(windowHeight / 32);
-  textAlign(CENTER,CENTER);
-  text("How did you feel about \ntoday's social interactions?",windowWidth/2, (windowHeight/3.5)*2-windowHeight/8.25-windowHeight/208);
+  g.textSize(g.windowHeight / 47);
+  g.textAlign(g.CENTER,g.TOP);
   
-  
-  // textSize(windowHeight / 42);
-  textSize(windowHeight / 47);
-  textAlign(CENTER,TOP);
-  
-  fill(255);
-  text("Very Good",(windowWidth/5)*1-(windowWidth/5)/2, (windowHeight/3.5)*2+windowHeight/13-windowHeight/208);
-  fill("#DCDCDC");
-    noStroke();
-    circle((windowWidth/5)*1-(windowWidth/5)/2, (windowHeight/3.5)*2-windowHeight/208, sunWidth);
-  
+  g.fill(255);
+  g.text("Very Good",(g.windowWidth/5)*1-(g.windowWidth/5)/2, (g.windowHeight/3.5)*2+g.windowHeight/13-g.windowHeight/208);
+  g.fill("#DCDCDC");
+    g.noStroke();
+    g.circle((g.windowWidth/5)*1-(g.windowWidth/5)/2, (g.windowHeight/3.5)*2-g.windowHeight/208, g.sunWidth);
 
-  let x2 = (windowWidth/5)*1-(windowWidth/5)/2;
-  let y2 = (windowHeight/3.5)*2-windowHeight/208;
-  let sWidth = windowWidth/10;
-  // let sunWidth = windowWidth / 7.5;
+  g.x2 = (g.windowWidth/5)*1-(g.windowWidth/5)/2;
+  g.y2 = (g.windowHeight/3.5)*2-g.windowHeight/208;
+  g.sWidth = g.windowWidth/10;
+  // g.sunWidth = g.windowWidth / 7.5;
   // if (this.si_feeling == 1) {
       
-      stroke("#E49300");
-      strokeWeight(3);
-      circle(x2, y2, windowWidth / 11);
+     g.stroke("#E49300");
+      g.strokeWeight(3);
+      g.circle(g.x2, g.y2, g.windowWidth / 11);
       
-      stroke(255);
-      strokeWeight(1);
-      circle(x2, y2, windowWidth / 11);
+     g.stroke(255);
+      g.strokeWeight(1);
+      g.circle(g.x2, g.y2, g.windowWidth / 11);
       
-      stroke("#E49300");
-      strokeWeight(3);
-      circle(x2, y2, windowWidth / 18);
+     g.stroke("#E49300");
+      g.strokeWeight(3);
+      g.circle(g.x2, g.y2, g.windowWidth / 18);
       
-      stroke(255);
-      strokeWeight(1);
-      circle(x2, y2, windowWidth / 18);
+     g.stroke(255);
+      g.strokeWeight(1);
+      g.circle(g.x2, g.y2, g.windowWidth / 18);
       
-      noFill();
+      g.noFill();
 
-      stroke("#E49300");
-      strokeWeight(4.5);
-      circle(
-        x2 + sWidth / 4,
-        y2 + sWidth / 4,
-        windowWidth / 15
+     g.stroke("#E49300");
+      g.strokeWeight(4.5);
+      g.circle(
+       g.x2 + g.sWidth / 4,
+       g.y2 + g.sWidth / 4,
+        g.windowWidth / 15
       );
       
-      stroke(255);
-      strokeWeight(2.5);
-      circle(
-        x2 + sWidth / 4,
-        y2 + sWidth / 4,
-        windowWidth / 15
+     g.stroke(255);
+      g.strokeWeight(2.5);
+      g.circle(
+       g.x2 + g.sWidth / 4,
+       g.y2 + g.sWidth / 4,
+        g.windowWidth / 15
       );
         
-      stroke("#E49300");
-      strokeWeight(3.5);
-      circle(
-        x2 - sWidth / 4,
-        y2 - sWidth / 3,
-        windowWidth / 20
+     g.stroke("#E49300");
+      g.strokeWeight(3.5);
+      g.circle(
+       g.x2 - g.sWidth / 4,
+       g.y2 - g.sWidth / 3,
+        g.windowWidth / 20
       );
       
-      stroke(255);
-      strokeWeight(1.5);
-      circle(
-        x2 - sWidth / 4,
-        y2 - sWidth / 3,
-        windowWidth / 20
+     g.stroke(255);
+      g.strokeWeight(1.5);
+      g.circle(
+       g.x2 - g.sWidth / 4,
+       g.y2 - g.sWidth / 3,
+        g.windowWidth / 20
       );
   
-  
-  fill(255);
-  noStroke();
-  text("Good",(windowWidth/5)*2-(windowWidth/5)/2, (windowHeight/3.5)*2+windowHeight/13-windowHeight/208);
-  fill("#DCDCDC");
-    circle((windowWidth/5)*2-(windowWidth/5)/2, (windowHeight/3.5)*2-windowHeight/208, sunWidth);
+  g.fill(255);
+  g.noStroke();
+  g.text("Good",(g.windowWidth/5)*2-(g.windowWidth/5)/2, (g.windowHeight/3.5)*2+g.windowHeight/13-g.windowHeight/208);
+  g.fill("#DCDCDC");
+    g.circle((g.windowWidth/5)*2-(g.windowWidth/5)/2, (g.windowHeight/3.5)*2-g.windowHeight/208, g.sunWidth);
       
-      noFill();
-      stroke("#E49300");
-      strokeWeight(4.5);
-      circle(
-        (windowWidth/5)*2-(windowWidth/5)/2 + sWidth / 4,
-        y2 + sWidth / 4,
-        windowWidth / 15
+      g.noFill();
+     g.stroke("#E49300");
+      g.strokeWeight(4.5);
+      g.circle(
+        (g.windowWidth/5)*2-(g.windowWidth/5)/2 + g.sWidth / 4,
+       g.y2 + g.sWidth / 4,
+        g.windowWidth / 15
       );
-      strokeWeight(3.5);
-      circle(
-        (windowWidth/5)*2-(windowWidth/5)/2 - sWidth / 4,
-        y2 - sWidth / 3,
-        windowWidth / 20
+      g.strokeWeight(3.5);
+      g.circle(
+        (g.windowWidth/5)*2-(g.windowWidth/5)/2 - g.sWidth / 4,
+       g.y2 - g.sWidth / 3,
+        g.windowWidth / 20
       );
       
-      stroke(255);
-      strokeWeight(2.5);
-      circle(
-        (windowWidth/5)*2-(windowWidth/5)/2 + sWidth / 4,
-        y2 + sWidth / 4,
-        windowWidth / 15
+     g.stroke(255);
+      g.strokeWeight(2.5);
+      g.circle(
+        (g.windowWidth/5)*2-(g.windowWidth/5)/2 + g.sWidth / 4,
+       g.y2 + g.sWidth / 4,
+        g.windowWidth / 15
       );
-      strokeWeight(1.5);
-      circle(
-        (windowWidth/5)*2-(windowWidth/5)/2 - sWidth / 4,
-        y2 - sWidth / 3,
-        windowWidth / 20
+      g.strokeWeight(1.5);
+      g.circle(
+        (g.windowWidth/5)*2-(g.windowWidth/5)/2 - g.sWidth / 4,
+       g.y2 - g.sWidth / 3,
+        g.windowWidth / 20
       );
   
-  
-   fill(255);
-  noStroke();
-  text("Neutral",(windowWidth/5)*3-(windowWidth/5)/2, (windowHeight/3.5)*2+windowHeight/13-windowHeight/208);
-  fill("#DCDCDC");
-    circle((windowWidth/5)*3-(windowWidth/5)/2, (windowHeight/3.5)*2-windowHeight/208, sunWidth);
+   g.fill(255);
+  g.noStroke();
+  g.text("Neutral",(g.windowWidth/5)*3-(g.windowWidth/5)/2, (g.windowHeight/3.5)*2+g.windowHeight/13-g.windowHeight/208);
+  g.fill("#DCDCDC");
+    g.circle((g.windowWidth/5)*3-(g.windowWidth/5)/2, (g.windowHeight/3.5)*2-g.windowHeight/208, g.sunWidth);
 
-      noStroke();
-      fill(150, 150, 150, 150);
-      circle((windowWidth/5)*3-(windowWidth/5)/2 + sWidth / 4, y2, windowWidth / 27.5);
+      g.noStroke();
+      g.fill(150, 150, 150, 150);
+      g.circle((g.windowWidth/5)*3-(g.windowWidth/5)/2 + g.sWidth / 4, g.y2, g.windowWidth / 27.5);
   
-  fill(255);
-  noStroke();
-  text("Bad",(windowWidth/5)*4-(windowWidth/5)/2, (windowHeight/3.5)*2+windowHeight/13-windowHeight/208);
-  fill("#DCDCDC");
-    circle((windowWidth/5)*4-(windowWidth/5)/2, (windowHeight/3.5)*2-windowHeight/208, sunWidth);
+  g.fill(255);
+  g.noStroke();
+  g.text("Bad",(g.windowWidth/5)*4-(g.windowWidth/5)/2, (g.windowHeight/3.5)*2+g.windowHeight/13-g.windowHeight/208);
+  g.fill("#DCDCDC");
+    g.circle((g.windowWidth/5)*4-(g.windowWidth/5)/2, (g.windowHeight/3.5)*2-g.windowHeight/208, g.sunWidth);
   
-  
-
-      stroke(0);
-      strokeWeight(2);
-      line(
-        (windowWidth/5)*4-(windowWidth/5)/2 - windowWidth / 20,
-        y2 - windowWidth / 20,
-        (windowWidth/5)*4-(windowWidth/5)/2 + windowWidth / 20,
-        y2 + windowWidth / 20
+     g.stroke(0);
+      g.strokeWeight(2);
+      g.line(
+        (g.windowWidth/5)*4-(g.windowWidth/5)/2 - g.windowWidth / 20,
+       g.y2 - g.windowWidth / 20,
+        (g.windowWidth/5)*4-(g.windowWidth/5)/2 + g.windowWidth / 20,
+       g.y2 + g.windowWidth / 20
       );
   
-    fill(255);
-  noStroke();
-  text("Very Bad",(windowWidth/5)*5-(windowWidth/5)/2, (windowHeight/3.5)*2+windowHeight/13-windowHeight/208);
-  fill("#DCDCDC");
-    circle((windowWidth/5)*5-(windowWidth/5)/2, (windowHeight/3.5)*2-windowHeight/208, sunWidth);
+    g.fill(255);
+  g.noStroke();
+  g.text("Very Bad",(g.windowWidth/5)*5-(g.windowWidth/5)/2, (g.windowHeight/3.5)*2+g.windowHeight/13-g.windowHeight/208);
+  g.fill("#DCDCDC");
+    g.circle((g.windowWidth/5)*5-(g.windowWidth/5)/2, (g.windowHeight/3.5)*2-g.windowHeight/208, g.sunWidth);
   
- 
-      stroke(0);
-      strokeWeight(2);
-      line(
-        (windowWidth/5)*5-(windowWidth/5)/2 - windowWidth / 20,
-        y2 - windowWidth / 20,
-        (windowWidth/5)*5-(windowWidth/5)/2 + windowWidth / 20,
-        y2 + windowWidth / 20
+     g.stroke(0);
+      g.strokeWeight(2);
+      g.line(
+        (g.windowWidth/5)*5-(g.windowWidth/5)/2 - g.windowWidth / 20,
+       g.y2 - g.windowWidth / 20,
+        (g.windowWidth/5)*5-(g.windowWidth/5)/2 + g.windowWidth / 20,
+       g.y2 + g.windowWidth / 20
       );
 
-      strokeWeight(4);
-      line(
-        (windowWidth/5)*5-(windowWidth/5)/2 + windowWidth / 40 - sWidth / 5,
-        y2 - windowWidth / 40 - sWidth / 5,
-        (windowWidth/5)*5-(windowWidth/5)/2 - windowWidth / 40 - sWidth / 5,
-        y2 + windowWidth / 40 - sWidth / 5
+      g.strokeWeight(4);
+      g.line(
+        (g.windowWidth/5)*5-(g.windowWidth/5)/2 + g.windowWidth / 40 - g.sWidth / 5,
+       g.y2 - g.windowWidth / 40 - g.sWidth / 5,
+        (g.windowWidth/5)*5-(g.windowWidth/5)/2 - g.windowWidth / 40 - g.sWidth / 5,
+       g.y2 + g.windowWidth / 40 - g.sWidth / 5
       );
 
-      strokeWeight(6);
-      line(
-        (windowWidth/5)*5-(windowWidth/5)/2 + windowWidth / 30,
-        y2 - windowWidth / 30,
-        (windowWidth/5)*5-(windowWidth/5)/2 - windowWidth / 30,
-        y2 + windowWidth / 30
+      g.strokeWeight(6);
+      g.line(
+        (g.windowWidth/5)*5-(g.windowWidth/5)/2 + g.windowWidth / 30,
+       g.y2 - g.windowWidth / 30,
+        (g.windowWidth/5)*5-(g.windowWidth/5)/2 - g.windowWidth / 30,
+       g.y2 + g.windowWidth / 30
       );
 
-      strokeWeight(4);
-      line(
-        (windowWidth/5)*5-(windowWidth/5)/2 + windowWidth / 40 + sWidth / 5,
-        y2 - windowWidth / 40 + sWidth / 5,
-        (windowWidth/5)*5-(windowWidth/5)/2 - windowWidth / 40 + sWidth / 5,
-        y2 + windowWidth / 40 + sWidth / 5
+      g.strokeWeight(4);
+      g.line(
+        (g.windowWidth/5)*5-(g.windowWidth/5)/2 + g.windowWidth / 40 + g.sWidth / 5,
+       g.y2 - g.windowWidth / 40 + g.sWidth / 5,
+        (g.windowWidth/5)*5-(g.windowWidth/5)/2 - g.windowWidth / 40 + g.sWidth / 5,
+       g.y2 + g.windowWidth / 40 + g.sWidth / 5
       );
-    
   
   //stars
+  //How satisfied are you with today's social interactions?///////////////////////////////////////////
+  g.fill(255);
+  g.textSize(g.windowHeight / 34);
+  g.textAlign(g.CENTER,g.CENTER);
+  g.text("How satisfied are you with \ntoday's social interactions?",g.windowWidth/2, (g.windowHeight/3.5)*3-g.windowHeight/8.3+g.windowHeight/33);  
   
+  g.textSize(g.windowHeight / 47);
+  g.textAlign(g.CENTER,g.TOP);
   
-  fill(255);
-  textSize(windowHeight / 32);
-  textAlign(CENTER,CENTER);
-  text("How satisfied are you with \ntoday's social interactions?",windowWidth/2, (windowHeight/3.5)*3-windowHeight/8.3+windowHeight/33);  
-  
-  // textSize(windowHeight / 42);
-  textSize(windowHeight / 47);
-  textAlign(CENTER,TOP);
-  
-  fill(255);
-  noStroke();
-  text("Very\nSatisfied",(windowWidth/5)*1-(windowWidth/5)/2, (windowHeight/3.5)*3+windowHeight/13+windowHeight/33);
+  g.fill(255);
+  g.noStroke();
+  g.text("Very\nSatisfied",(g.windowWidth/5)*1-(g.windowWidth/5)/2, (g.windowHeight/3.5)*3+g.windowHeight/13+g.windowHeight/33);
 
-  fill(255, 255, 255, 50);
-  circle((windowWidth/5)*1-(windowWidth/5)/2+windowWidth/20,(
-          windowHeight/3.5)*3+windowHeight/22.15+windowHeight/33, 
-         (windowWidth/50)* 3.5 + 3);
-  fill(255, 255, 255, 90);
-  circle((windowWidth/5)*1-(windowWidth/5)/2+windowWidth/20,(
-          windowHeight/3.5)*3+windowHeight/22.15+windowHeight/33, 
-         (windowWidth/50)* 2.2 + 3);
-  fill(255, 255, 255);
-  circle((windowWidth/5)*1-(windowWidth/5)/2+windowWidth/20,(
-          windowHeight/3.5)*3+windowHeight/22.15+windowHeight/33, 
-         (windowWidth/50)+ 3);
+  g.fill(255, 255, 255, 50);
+  g.circle((g.windowWidth/5)*1-(g.windowWidth/5)/2+g.windowWidth/20,(
+          g.windowHeight/3.5)*3+g.windowHeight/22.15+g.windowHeight/33, 
+         (g.windowWidth/50)* 3.5 + 3);
   
-  fill(255, 255, 255, 50);
-  circle((windowWidth/5)*1-(windowWidth/5)/2, (windowHeight/3.5)*3+windowHeight/33, (windowWidth/75)* 3.5 + 3);
-  fill(255, 255, 255, 90);
-  circle((windowWidth/5)*1-(windowWidth/5)/2, (windowHeight/3.5)*3+windowHeight/33, (windowWidth/75)* 2.2 + 3);
-  fill(255, 255, 255);
-  circle((windowWidth/5)*1-(windowWidth/5)/2, (windowHeight/3.5)*3+windowHeight/33, (windowWidth/75)+ 3);
+  g.fill(255, 255, 255, 90);
+  g.circle((g.windowWidth/5)*1-(g.windowWidth/5)/2+g.windowWidth/20,(
+          g.windowHeight/3.5)*3+g.windowHeight/22.15+g.windowHeight/33, 
+         (g.windowWidth/50)* 2.2 + 3);
   
-  fill(255, 255, 255, 50);
-  circle((windowWidth/5)*1-(windowWidth/5)/2-windowWidth/20, 
-        (windowHeight/3.5)*3-windowHeight/45+windowHeight/33, 
-         (windowWidth/120)* 3.5 + 3);
-  fill(255, 255, 255, 90);
-  circle((windowWidth/5)*1-(windowWidth/5)/2-windowWidth/20, 
-        (windowHeight/3.5)*3-windowHeight/45+windowHeight/33, 
-         (windowWidth/120)* 2.2 + 3);
-  fill(255, 255, 255);
-  circle((windowWidth/5)*1-(windowWidth/5)/2-windowWidth/20, 
-        (windowHeight/3.5)*3-windowHeight/45+windowHeight/33, 
-         (windowWidth/120)+ 3);
+  g.fill(255, 255, 255);
+  g.circle((g.windowWidth/5)*1-(g.windowWidth/5)/2+g.windowWidth/20,(
+          g.windowHeight/3.5)*3+g.windowHeight/22.15+g.windowHeight/33, 
+         (g.windowWidth/50)+ 3);
   
-  fill(255, 255, 255, 50);
-  circle((windowWidth/5)*1-(windowWidth/5)/2-windowWidth/32, 
-         (windowHeight/3.5)*3+windowHeight/45+windowHeight/33, 
-         (windowWidth/220)* 3.5 + 3);
-  fill(255, 255, 255, 90);
-  circle((windowWidth/5)*1-(windowWidth/5)/2-windowWidth/32, 
-         (windowHeight/3.5)*3+windowHeight/45+windowHeight/33, 
-         (windowWidth/220)* 2.2 + 3);
-  fill(255, 255, 255);
-  circle((windowWidth/5)*1-(windowWidth/5)/2-windowWidth/32, 
-         (windowHeight/3.5)*3+windowHeight/45+windowHeight/33, 
-         (windowWidth/220)+ 3);
+  g.fill(255, 255, 255, 50);
+  g.circle((g.windowWidth/5)*1-(g.windowWidth/5)/2, (g.windowHeight/3.5)*3+g.windowHeight/33, (g.windowWidth/75)* 3.5 + 3);
   
-  fill(255, 255, 255, 50);
-  circle((windowWidth/5)*1-(windowWidth/5)/2+windowWidth/70, 
-         (windowHeight/3.5)*3-windowHeight/25+windowHeight/33, 
-         (windowWidth/90)* 3.5 + 3);
-  fill(255, 255, 255, 90);
-  circle((windowWidth/5)*1-(windowWidth/5)/2+windowWidth/70, 
-         (windowHeight/3.5)*3-windowHeight/25+windowHeight/33, 
-         (windowWidth/90)* 2.2 + 3);
-  fill(255, 255, 255);
-  circle((windowWidth/5)*1-(windowWidth/5)/2+windowWidth/70, 
-         (windowHeight/3.5)*3-windowHeight/25+windowHeight/33, 
-         (windowWidth/90)+ 3);
+  g.fill(255, 255, 255, 90);
+  g.circle((g.windowWidth/5)*1-(g.windowWidth/5)/2, (g.windowHeight/3.5)*3+g.windowHeight/33, (g.windowWidth/75)* 2.2 + 3);
   
-  fill(255, 255, 255, 50);
-  circle((windowWidth/5)*1-(windowWidth/5)/2+windowWidth/20, 
-         (windowHeight/3.5)*3-windowHeight/50+windowHeight/33, 
-         (windowWidth/90)* 3.5 + 3);
-  fill(255, 255, 255, 90);
-  circle((windowWidth/5)*1-(windowWidth/5)/2+windowWidth/20, 
-         (windowHeight/3.5)*3-windowHeight/50+windowHeight/33, 
-         (windowWidth/90)* 2.2 + 3);
-  fill(255, 255, 255);
-  circle((windowWidth/5)*1-(windowWidth/5)/2+windowWidth/20, 
-         (windowHeight/3.5)*3-windowHeight/50+windowHeight/33, 
-         (windowWidth/90)+ 3);
+  g.fill(255, 255, 255);
+  g.circle((g.windowWidth/5)*1-(g.windowWidth/5)/2, (g.windowHeight/3.5)*3+g.windowHeight/33, (g.windowWidth/75)+ 3);
   
-  fill(255, 255, 255, 50);
-  circle((windowWidth/5)*1-(windowWidth/5)/2-windowWidth/18, 
-         (windowHeight/3.5)*3+windowHeight/24+windowHeight/33, 
-         (windowWidth/80)* 3.5 + 3);
-  fill(255, 255, 255, 90);
-  circle((windowWidth/5)*1-(windowWidth/5)/2-windowWidth/18, 
-         (windowHeight/3.5)*3+windowHeight/24+windowHeight/33, 
-         (windowWidth/80)* 2.2 + 3);
-  fill(255, 255, 255);
-  circle((windowWidth/5)*1-(windowWidth/5)/2-windowWidth/18, 
-         (windowHeight/3.5)*3+windowHeight/24+windowHeight/33, 
-         (windowWidth/80)+ 3);
+  g.fill(255, 255, 255, 50);
+  g.circle((g.windowWidth/5)*1-(g.windowWidth/5)/2-g.windowWidth/20, 
+        (g.windowHeight/3.5)*3-g.windowHeight/45+g.windowHeight/33, 
+         (g.windowWidth/120)* 3.5 + 3);
   
+  g.fill(255, 255, 255, 90);
+  g.circle((g.windowWidth/5)*1-(g.windowWidth/5)/2-g.windowWidth/20, 
+        (g.windowHeight/3.5)*3-g.windowHeight/45+g.windowHeight/33, 
+         (g.windowWidth/120)* 2.2 + 3);
   
-  fill(255);
-  noStroke();
-  text("Satisfied",(windowWidth/5)*2-(windowWidth/5)/2, (windowHeight/3.5)*3+windowHeight/13+windowHeight/33);
+  g.fill(255, 255, 255);
+  g.circle((g.windowWidth/5)*1-(g.windowWidth/5)/2-g.windowWidth/20, 
+        (g.windowHeight/3.5)*3-g.windowHeight/45+g.windowHeight/33, 
+         (g.windowWidth/120)+ 3);
   
+  g.fill(255, 255, 255, 50);
+  g.circle((g.windowWidth/5)*1-(g.windowWidth/5)/2-g.windowWidth/32, 
+         (g.windowHeight/3.5)*3+g.windowHeight/45+g.windowHeight/33, 
+         (g.windowWidth/220)* 3.5 + 3);
+  
+  g.fill(255, 255, 255, 90);
+  g.circle((g.windowWidth/5)*1-(g.windowWidth/5)/2-g.windowWidth/32, 
+         (g.windowHeight/3.5)*3+g.windowHeight/45+g.windowHeight/33, 
+         (g.windowWidth/220)* 2.2 + 3);
+  
+  g.fill(255, 255, 255);
+  g.circle((g.windowWidth/5)*1-(g.windowWidth/5)/2-g.windowWidth/32, 
+         (g.windowHeight/3.5)*3+g.windowHeight/45+g.windowHeight/33, 
+         (g.windowWidth/220)+ 3);
+  
+  g.fill(255, 255, 255, 50);
+  g.circle((g.windowWidth/5)*1-(g.windowWidth/5)/2+g.windowWidth/70, 
+         (g.windowHeight/3.5)*3-g.windowHeight/25+g.windowHeight/33, 
+         (g.windowWidth/90)* 3.5 + 3);
+  
+  g.fill(255, 255, 255, 90);
+  g.circle((g.windowWidth/5)*1-(g.windowWidth/5)/2+g.windowWidth/70, 
+         (g.windowHeight/3.5)*3-g.windowHeight/25+g.windowHeight/33, 
+         (g.windowWidth/90)* 2.2 + 3);
+  
+  g.fill(255, 255, 255);
+  g.circle((g.windowWidth/5)*1-(g.windowWidth/5)/2+g.windowWidth/70, 
+         (g.windowHeight/3.5)*3-g.windowHeight/25+g.windowHeight/33, 
+         (g.windowWidth/90)+ 3);
+  
+  g.fill(255, 255, 255, 50);
+  g.circle((g.windowWidth/5)*1-(g.windowWidth/5)/2+g.windowWidth/20, 
+         (g.windowHeight/3.5)*3-g.windowHeight/50+g.windowHeight/33, 
+         (g.windowWidth/90)* 3.5 + 3);
+  
+  g.fill(255, 255, 255, 90);
+  g.circle((g.windowWidth/5)*1-(g.windowWidth/5)/2+g.windowWidth/20, 
+         (g.windowHeight/3.5)*3-g.windowHeight/50+g.windowHeight/33, 
+         (g.windowWidth/90)* 2.2 + 3);
+  
+  g.fill(255, 255, 255);
+  g.circle((g.windowWidth/5)*1-(g.windowWidth/5)/2+g.windowWidth/20, 
+         (g.windowHeight/3.5)*3-g.windowHeight/50+g.windowHeight/33, 
+         (g.windowWidth/90)+ 3);
+  
+  g.fill(255, 255, 255, 50);
+  g.circle((g.windowWidth/5)*1-(g.windowWidth/5)/2-g.windowWidth/18, 
+         (g.windowHeight/3.5)*3+g.windowHeight/24+g.windowHeight/33, 
+         (g.windowWidth/80)* 3.5 + 3);
+  
+  g.fill(255, 255, 255, 90);
+  g.circle((g.windowWidth/5)*1-(g.windowWidth/5)/2-g.windowWidth/18, 
+         (g.windowHeight/3.5)*3+g.windowHeight/24+g.windowHeight/33, 
+         (g.windowWidth/80)* 2.2 + 3);
+  
+  g.fill(255, 255, 255);
+  g.circle((g.windowWidth/5)*1-(g.windowWidth/5)/2-g.windowWidth/18, 
+         (g.windowHeight/3.5)*3+g.windowHeight/24+g.windowHeight/33, 
+         (g.windowWidth/80)+ 3);
+    
+  g.fill(255);
+  g.noStroke();
+  g.text("Satisfied",(g.windowWidth/5)*2-(g.windowWidth/5)/2, (g.windowHeight/3.5)*3+g.windowHeight/13+g.windowHeight/33); 
 
-  circle((windowWidth/5)*2-(windowWidth/5)/2+windowWidth/20,(
-          windowHeight/3.5)*3+windowHeight/22.15+windowHeight/33, 
-         (windowWidth/50)+ 3);
+  g.circle((g.windowWidth/5)*2-(g.windowWidth/5)/2+g.windowWidth/20,(
+          g.windowHeight/3.5)*3+g.windowHeight/22.15+g.windowHeight/33, 
+         (g.windowWidth/50)+ 3);
 
-  circle((windowWidth/5)*2-(windowWidth/5)/2, (windowHeight/3.5)*3, (windowWidth/75)+ 3);
+  g.circle((g.windowWidth/5)*2-(g.windowWidth/5)/2, (g.windowHeight/3.5)*3, (g.windowWidth/75)+ 3);  
+
+  g.circle((g.windowWidth/5)*2-(g.windowWidth/5)/2-g.windowWidth/20, 
+        (g.windowHeight/3.5)*3-g.windowHeight/45+g.windowHeight/33, 
+         (g.windowWidth/120)+ 3);
+
+  g.circle((g.windowWidth/5)*2-(g.windowWidth/5)/2-g.windowWidth/32, 
+         (g.windowHeight/3.5)*3+g.windowHeight/45+g.windowHeight/33, 
+         (g.windowWidth/220)+ 3);
   
+  g.circle((g.windowWidth/5)*2-(g.windowWidth/5)/2+g.windowWidth/70, 
+         (g.windowHeight/3.5)*3-g.windowHeight/25+g.windowHeight/33, 
+         (g.windowWidth/90)+ 3);
 
-  circle((windowWidth/5)*2-(windowWidth/5)/2-windowWidth/20, 
-        (windowHeight/3.5)*3-windowHeight/45+windowHeight/33, 
-         (windowWidth/120)+ 3);
+  g.circle((g.windowWidth/5)*2-(g.windowWidth/5)/2+g.windowWidth/20, 
+         (g.windowHeight/3.5)*3-g.windowHeight/50+g.windowHeight/33, 
+         (g.windowWidth/90)+ 3);
 
-
-  circle((windowWidth/5)*2-(windowWidth/5)/2-windowWidth/32, 
-         (windowHeight/3.5)*3+windowHeight/45+windowHeight/33, 
-         (windowWidth/220)+ 3);
+  g.circle((g.windowWidth/5)*2-(g.windowWidth/5)/2-g.windowWidth/18, 
+         (g.windowHeight/3.5)*3+g.windowHeight/24+g.windowHeight/33, 
+         (g.windowWidth/80)+ 3);
   
-
-  circle((windowWidth/5)*2-(windowWidth/5)/2+windowWidth/70, 
-         (windowHeight/3.5)*3-windowHeight/25+windowHeight/33, 
-         (windowWidth/90)+ 3);
+  g.fill(255);
+  g.noStroke();
+  g.text("Neutral",(g.windowWidth/5)*3-(g.windowWidth/5)/2, (g.windowHeight/3.5)*3+g.windowHeight/13+g.windowHeight/33);
   
-
-  circle((windowWidth/5)*2-(windowWidth/5)/2+windowWidth/20, 
-         (windowHeight/3.5)*3-windowHeight/50+windowHeight/33, 
-         (windowWidth/90)+ 3);
-
-  circle((windowWidth/5)*2-(windowWidth/5)/2-windowWidth/18, 
-         (windowHeight/3.5)*3+windowHeight/24+windowHeight/33, 
-         (windowWidth/80)+ 3);
+  g.fill(255);
+       g.stroke(255);
+        g.strokeWeight(3.5);
   
+  g.point((g.windowWidth/5)*3-(g.windowWidth/5)/2+g.windowWidth/20,(
+          g.windowHeight/3.5)*3+g.windowHeight/22.15+g.windowHeight/33);
+
+  g.point((g.windowWidth/5)*3-(g.windowWidth/5)/2, (g.windowHeight/3.5)*3+g.windowHeight/33);
   
-  fill(255);
-  noStroke();
-  text("Neutral",(windowWidth/5)*3-(windowWidth/5)/2, (windowHeight/3.5)*3+windowHeight/13+windowHeight/33);
+  g.point((g.windowWidth/5)*3-(g.windowWidth/5)/2-g.windowWidth/20, 
+        (g.windowHeight/3.5)*3-g.windowHeight/45+g.windowHeight/33);
+
+  g.point((g.windowWidth/5)*3-(g.windowWidth/5)/2-g.windowWidth/32, 
+         (g.windowHeight/3.5)*3+g.windowHeight/45+g.windowHeight/33);
   
-  fill(255);
-        stroke(255);
-        strokeWeight(3.5);
+  g.point((g.windowWidth/5)*3-(g.windowWidth/5)/2+g.windowWidth/70, 
+         (g.windowHeight/3.5)*3-g.windowHeight/25+g.windowHeight/33);
   
-  point((windowWidth/5)*3-(windowWidth/5)/2+windowWidth/20,(
-          windowHeight/3.5)*3+windowHeight/22.15+windowHeight/33);
+  g.point((g.windowWidth/5)*3-(g.windowWidth/5)/2+g.windowWidth/20, 
+         (g.windowHeight/3.5)*3-g.windowHeight/50+g.windowHeight/33);
 
-  point((windowWidth/5)*3-(windowWidth/5)/2, (windowHeight/3.5)*3+windowHeight/33);
+  g.point((g.windowWidth/5)*3-(g.windowWidth/5)/2-g.windowWidth/18, 
+         (g.windowHeight/3.5)*3+g.windowHeight/24+g.windowHeight/33);
   
-
-  point((windowWidth/5)*3-(windowWidth/5)/2-windowWidth/20, 
-        (windowHeight/3.5)*3-windowHeight/45+windowHeight/33);
-
-
-  point((windowWidth/5)*3-(windowWidth/5)/2-windowWidth/32, 
-         (windowHeight/3.5)*3+windowHeight/45+windowHeight/33);
+  g.fill(255);
+  g.noStroke();
+  g.text("Dissatisfied",(g.windowWidth/5)*4-(g.windowWidth/5)/2, (g.windowHeight/3.5)*3+g.windowHeight/13+g.windowHeight/33);
   
+   g.square((g.windowWidth/5)*4-(g.windowWidth/5)/2+g.windowWidth/20,(
+          g.windowHeight/3.5)*3+g.windowHeight/22.15+g.windowHeight/33, 
+         (g.windowWidth/50)+ 3);
 
-  point((windowWidth/5)*3-(windowWidth/5)/2+windowWidth/70, 
-         (windowHeight/3.5)*3-windowHeight/25+windowHeight/33);
-  
-
-  point((windowWidth/5)*3-(windowWidth/5)/2+windowWidth/20, 
-         (windowHeight/3.5)*3-windowHeight/50+windowHeight/33);
-
-  point((windowWidth/5)*3-(windowWidth/5)/2-windowWidth/18, 
-         (windowHeight/3.5)*3+windowHeight/24+windowHeight/33);
-  
-  
-  fill(255);
-  noStroke();
-  text("Dissatisfied",(windowWidth/5)*4-(windowWidth/5)/2, (windowHeight/3.5)*3+windowHeight/13+windowHeight/33);
-  
-   square((windowWidth/5)*4-(windowWidth/5)/2+windowWidth/20,(
-          windowHeight/3.5)*3+windowHeight/22.15+windowHeight/33, 
-         (windowWidth/50)+ 3);
-
-  square((windowWidth/5)*4-(windowWidth/5)/2, (windowHeight/3.5)*3+windowHeight/33, (windowWidth/75)+ 3);
-  
-
-  square((windowWidth/5)*4-(windowWidth/5)/2-windowWidth/20, 
-        (windowHeight/3.5)*3-windowHeight/45+windowHeight/33, 
-         (windowWidth/120)+ 3);
-
-
-  square((windowWidth/5)*4-(windowWidth/5)/2-windowWidth/32, 
-         (windowHeight/3.5)*3+windowHeight/45+windowHeight/33, 
-         (windowWidth/220)+ 3);
+  g.square((g.windowWidth/5)*4-(g.windowWidth/5)/2, (g.windowHeight/3.5)*3+g.windowHeight/33, (g.windowWidth/75)+ 3);
   
 
-  square((windowWidth/5)*4-(windowWidth/5)/2+windowWidth/70, 
-         (windowHeight/3.5)*3-windowHeight/25+windowHeight/33, 
-         (windowWidth/90)+ 3);
+  g.square((g.windowWidth/5)*4-(g.windowWidth/5)/2-g.windowWidth/20, 
+        (g.windowHeight/3.5)*3-g.windowHeight/45+g.windowHeight/33, 
+         (g.windowWidth/120)+ 3);
+
+
+  g.square((g.windowWidth/5)*4-(g.windowWidth/5)/2-g.windowWidth/32, 
+         (g.windowHeight/3.5)*3+g.windowHeight/45+g.windowHeight/33, 
+         (g.windowWidth/220)+ 3);
   
 
-  square((windowWidth/5)*4-(windowWidth/5)/2+windowWidth/20, 
-         (windowHeight/3.5)*3-windowHeight/50+windowHeight/33, 
-         (windowWidth/90)+ 3);
+  g.square((g.windowWidth/5)*4-(g.windowWidth/5)/2+g.windowWidth/70, 
+         (g.windowHeight/3.5)*3-g.windowHeight/25+g.windowHeight/33, 
+         (g.windowWidth/90)+ 3);
+  
 
-  square((windowWidth/5)*4-(windowWidth/5)/2-windowWidth/18, 
-         (windowHeight/3.5)*3+windowHeight/24+windowHeight/33, 
-         (windowWidth/80)+ 3);
+  g.square((g.windowWidth/5)*4-(g.windowWidth/5)/2+g.windowWidth/20, 
+         (g.windowHeight/3.5)*3-g.windowHeight/50+g.windowHeight/33, 
+         (g.windowWidth/90)+ 3);
+
+  g.square((g.windowWidth/5)*4-(g.windowWidth/5)/2-g.windowWidth/18, 
+         (g.windowHeight/3.5)*3+g.windowHeight/24+g.windowHeight/33, 
+         (g.windowWidth/80)+ 3);
   
+  g.fill(255);
+  g.noStroke();
+  g.text("Very\nDissatisfied",(g.windowWidth/5)*5-(g.windowWidth/5)/2, (g.windowHeight/3.5)*3+g.windowHeight/13+g.windowHeight/33);
   
-  fill(255);
-  noStroke();
-  text("Very\nDissatisfied",(windowWidth/5)*5-(windowWidth/5)/2, (windowHeight/3.5)*3+windowHeight/13+windowHeight/33);
+   g.fill(255, 255, 255, 50);
+  g.square((g.windowWidth/5)*5-(g.windowWidth/5)/2+g.windowWidth/20,(
+          g.windowHeight/3.5)*3+g.windowHeight/22.15+g.windowHeight/33, 
+         (g.windowWidth/50)* 3.5 + 3);
   
-   fill(255, 255, 255, 50);
-  square((windowWidth/5)*5-(windowWidth/5)/2+windowWidth/20,(
-          windowHeight/3.5)*3+windowHeight/22.15+windowHeight/33, 
-         (windowWidth/50)* 3.5 + 3);
-  fill(255, 255, 255, 90);
-  square((windowWidth/5)*5-(windowWidth/5)/2+windowWidth/20,(
-          windowHeight/3.5)*3+windowHeight/22.15+windowHeight/33, 
-         (windowWidth/50)* 2.2 + 3);
-  fill(255, 255, 255);
-  square((windowWidth/5)*5-(windowWidth/5)/2+windowWidth/20,(
-          windowHeight/3.5)*3+windowHeight/22.15+windowHeight/33, 
-         (windowWidth/50)+ 3);
+  g.fill(255, 255, 255, 90);
+  g.square((g.windowWidth/5)*5-(g.windowWidth/5)/2+g.windowWidth/20,(
+          g.windowHeight/3.5)*3+g.windowHeight/22.15+g.windowHeight/33, 
+         (g.windowWidth/50)* 2.2 + 3);
   
-  fill(255, 255, 255, 50);
-  square((windowWidth/5)*5-(windowWidth/5)/2, (windowHeight/3.5)*3+windowHeight/33, (windowWidth/75)* 3.5 + 3);
-  fill(255, 255, 255, 90);
-  square((windowWidth/5)*5-(windowWidth/5)/2, (windowHeight/3.5)*3+windowHeight/33, (windowWidth/75)* 2.2 + 3);
-  fill(255, 255, 255);
-  square((windowWidth/5)*5-(windowWidth/5)/2, (windowHeight/3.5)*3+windowHeight/33, (windowWidth/75)+ 3);
+  g.fill(255, 255, 255);
+  g.square((g.windowWidth/5)*5-(g.windowWidth/5)/2+g.windowWidth/20,(
+          g.windowHeight/3.5)*3+g.windowHeight/22.15+g.windowHeight/33, 
+         (g.windowWidth/50)+ 3);
   
-  fill(255, 255, 255, 50);
-  square((windowWidth/5)*5-(windowWidth/5)/2-windowWidth/20, 
-        (windowHeight/3.5)*3-windowHeight/45+windowHeight/33, 
-         (windowWidth/120)* 3.5 + 3);
-  fill(255, 255, 255, 90);
-  square((windowWidth/5)*5-(windowWidth/5)/2-windowWidth/20, 
-        (windowHeight/3.5)*3-windowHeight/45+windowHeight/33, 
-         (windowWidth/120)* 2.2 + 3);
-  fill(255, 255, 255);
-  square((windowWidth/5)*5-(windowWidth/5)/2-windowWidth/20, 
-        (windowHeight/3.5)*3-windowHeight/45+windowHeight/33, 
-         (windowWidth/120)+ 3);
+  g.fill(255, 255, 255, 50);
+  g.square((g.windowWidth/5)*5-(g.windowWidth/5)/2, (g.windowHeight/3.5)*3+g.windowHeight/33, (g.windowWidth/75)* 3.5 + 3);
   
-  fill(255, 255, 255, 50);
-  square((windowWidth/5)*5-(windowWidth/5)/2-windowWidth/32, 
-         (windowHeight/3.5)*3+windowHeight/45+windowHeight/33, 
-         (windowWidth/220)* 3.5 + 3);
-  fill(255, 255, 255, 90);
-  square((windowWidth/5)*5-(windowWidth/5)/2-windowWidth/32, 
-         (windowHeight/3.5)*3+windowHeight/45+windowHeight/33, 
-         (windowWidth/220)* 2.2 + 3);
-  fill(255, 255, 255);
-  square((windowWidth/5)*5-(windowWidth/5)/2-windowWidth/32, 
-         (windowHeight/3.5)*3+windowHeight/45+windowHeight/33, 
-         (windowWidth/220)+ 3);
+  g.fill(255, 255, 255, 90);
+  g.square((g.windowWidth/5)*5-(g.windowWidth/5)/2, (g.windowHeight/3.5)*3+g.windowHeight/33, (g.windowWidth/75)* 2.2 + 3);
   
-  fill(255, 255, 255, 50);
-  square((windowWidth/5)*5-(windowWidth/5)/2+windowWidth/70, 
-         (windowHeight/3.5)*3-windowHeight/25+windowHeight/33, 
-         (windowWidth/90)* 3.5 + 3);
-  fill(255, 255, 255, 90);
-  square((windowWidth/5)*5-(windowWidth/5)/2+windowWidth/70, 
-         (windowHeight/3.5)*3-windowHeight/25+windowHeight/33, 
-         (windowWidth/90)* 2.2 + 3);
-  fill(255, 255, 255);
-  square((windowWidth/5)*5-(windowWidth/5)/2+windowWidth/70, 
-         (windowHeight/3.5)*3-windowHeight/25+windowHeight/33, 
-         (windowWidth/90)+ 3);
+  g.fill(255, 255, 255);
+  g.square((g.windowWidth/5)*5-(g.windowWidth/5)/2, (g.windowHeight/3.5)*3+g.windowHeight/33, (g.windowWidth/75)+ 3);
   
-  fill(255, 255, 255, 50);
-  square((windowWidth/5)*5-(windowWidth/5)/2+windowWidth/20, 
-         (windowHeight/3.5)*3-windowHeight/50+windowHeight/33, 
-         (windowWidth/90)* 3.5 + 3);
-  fill(255, 255, 255, 90);
-  square((windowWidth/5)*5-(windowWidth/5)/2+windowWidth/20, 
-         (windowHeight/3.5)*3-windowHeight/50+windowHeight/33, 
-         (windowWidth/90)* 2.2 + 3);
-  fill(255, 255, 255);
-  square((windowWidth/5)*5-(windowWidth/5)/2+windowWidth/20, 
-         (windowHeight/3.5)*3-windowHeight/50+windowHeight/33, 
-         (windowWidth/90)+ 3);
+  g.fill(255, 255, 255, 50);
+  g.square((g.windowWidth/5)*5-(g.windowWidth/5)/2-g.windowWidth/20, 
+        (g.windowHeight/3.5)*3-g.windowHeight/45+g.windowHeight/33, 
+         (g.windowWidth/120)* 3.5 + 3);
   
-  fill(255, 255, 255, 50);
-  square((windowWidth/5)*5-(windowWidth/5)/2-windowWidth/18, 
-         (windowHeight/3.5)*3+windowHeight/24+windowHeight/33, 
-         (windowWidth/80)* 3.5 + 3);
-  fill(255, 255, 255, 90);
-  square((windowWidth/5)*5-(windowWidth/5)/2-windowWidth/18, 
-         (windowHeight/3.5)*3+windowHeight/24+windowHeight/33, 
-         (windowWidth/80)* 2.2 + 3);
-  fill(255, 255, 255);
-  square((windowWidth/5)*5-(windowWidth/5)/2-windowWidth/18, 
-         (windowHeight/3.5)*3+windowHeight/24+windowHeight/33, 
-         (windowWidth/80)+ 3);
+  g.fill(255, 255, 255, 90);
+  g.square((g.windowWidth/5)*5-(g.windowWidth/5)/2-g.windowWidth/20, 
+        (g.windowHeight/3.5)*3-g.windowHeight/45+g.windowHeight/33, 
+         (g.windowWidth/120)* 2.2 + 3);
+  
+  g.fill(255, 255, 255);
+  g.square((g.windowWidth/5)*5-(g.windowWidth/5)/2-g.windowWidth/20, 
+        (g.windowHeight/3.5)*3-g.windowHeight/45+g.windowHeight/33, 
+         (g.windowWidth/120)+ 3);
+  
+  g.fill(255, 255, 255, 50);
+  g.square((g.windowWidth/5)*5-(g.windowWidth/5)/2-g.windowWidth/32, 
+         (g.windowHeight/3.5)*3+g.windowHeight/45+g.windowHeight/33, 
+         (g.windowWidth/220)* 3.5 + 3);
+  
+  g.fill(255, 255, 255, 90);
+  g.square((g.windowWidth/5)*5-(g.windowWidth/5)/2-g.windowWidth/32, 
+         (g.windowHeight/3.5)*3+g.windowHeight/45+g.windowHeight/33, 
+         (g.windowWidth/220)* 2.2 + 3);
+  
+  g.fill(255, 255, 255);
+  g.square((g.windowWidth/5)*5-(g.windowWidth/5)/2-g.windowWidth/32, 
+         (g.windowHeight/3.5)*3+g.windowHeight/45+g.windowHeight/33, 
+         (g.windowWidth/220)+ 3);
+  
+  g.fill(255, 255, 255, 50);
+  g.square((g.windowWidth/5)*5-(g.windowWidth/5)/2+g.windowWidth/70, 
+         (g.windowHeight/3.5)*3-g.windowHeight/25+g.windowHeight/33, 
+         (g.windowWidth/90)* 3.5 + 3);
+  
+  g.fill(255, 255, 255, 90);
+  g.square((g.windowWidth/5)*5-(g.windowWidth/5)/2+g.windowWidth/70, 
+         (g.windowHeight/3.5)*3-g.windowHeight/25+g.windowHeight/33, 
+         (g.windowWidth/90)* 2.2 + 3);
+  
+  g.fill(255, 255, 255);
+  g.square((g.windowWidth/5)*5-(g.windowWidth/5)/2+g.windowWidth/70, 
+         (g.windowHeight/3.5)*3-g.windowHeight/25+g.windowHeight/33, 
+         (g.windowWidth/90)+ 3);
+  
+  g.fill(255, 255, 255, 50);
+  g.square((g.windowWidth/5)*5-(g.windowWidth/5)/2+g.windowWidth/20, 
+         (g.windowHeight/3.5)*3-g.windowHeight/50+g.windowHeight/33, 
+         (g.windowWidth/90)* 3.5 + 3);
+  
+  g.fill(255, 255, 255, 90);
+  g.square((g.windowWidth/5)*5-(g.windowWidth/5)/2+g.windowWidth/20, 
+         (g.windowHeight/3.5)*3-g.windowHeight/50+g.windowHeight/33, 
+         (g.windowWidth/90)* 2.2 + 3);
+  
+  g.fill(255, 255, 255);
+  g.square((g.windowWidth/5)*5-(g.windowWidth/5)/2+g.windowWidth/20, 
+         (g.windowHeight/3.5)*3-g.windowHeight/50+g.windowHeight/33, 
+         (g.windowWidth/90)+ 3);
+  
+  g.fill(255, 255, 255, 50);
+  g.square((g.windowWidth/5)*5-(g.windowWidth/5)/2-g.windowWidth/18, 
+         (g.windowHeight/3.5)*3+g.windowHeight/24+g.windowHeight/33, 
+         (g.windowWidth/80)* 3.5 + 3);
+  
+  g.fill(255, 255, 255, 90);
+  g.square((g.windowWidth/5)*5-(g.windowWidth/5)/2-g.windowWidth/18, 
+         (g.windowHeight/3.5)*3+g.windowHeight/24+g.windowHeight/33, 
+         (g.windowWidth/80)* 2.2 + 3);
+  
+  g.fill(255, 255, 255);
+  g.square((g.windowWidth/5)*5-(g.windowWidth/5)/2-g.windowWidth/18, 
+         (g.windowHeight/3.5)*3+g.windowHeight/24+g.windowHeight/33, 
+         (g.windowWidth/80)+ 3);
   
   //planet stuff
   //relationship 
- 
-    fill(255);
-  textSize(windowHeight / 32);
-  textAlign(CENTER,CENTER);
-  text("What kind of relationship do you have?",windowWidth/2, (windowHeight/3.5)*4-windowHeight/12+windowHeight/22.15);  
+  //What kind of relationship do you have?///////////////////////////////////////////////////////////
+  g.fill(255);
+  g.textSize(g.windowHeight / 34);
+  g.textAlign(g.CENTER,g.CENTER);
+  g.text("What kind of relationship do you have?",g.windowWidth/2, (g.windowHeight/3.5)*4-g.windowHeight/12+g.windowHeight/22.15);  
   
-  // textSize(windowHeight / 42);
-  textSize(windowHeight / 47);
-  textAlign(CENTER,TOP);
-  
-  
-  
-  fill(255);
-  noStroke();
-  text("Friends",(windowWidth/6)*1-(windowWidth/6)/2, (windowHeight/3.5)*4+windowHeight/17+windowHeight/22.15);
-  noStroke();
-  fill("rgb(150,150,150)");
+  g.textSize(g.windowHeight / 47);
+  g.textAlign(g.CENTER,g.TOP);
+
+  g.fill(255);
+  g.noStroke();
+  g.text("Friends",(g.windowWidth/6)*1-(g.windowWidth/6)/2, (g.windowHeight/3.5)*4+g.windowHeight/17+g.windowHeight/22.15);
+  g.noStroke();
+  g.fill("rgb(150,150,150)");
   
   for(i=1;i<7;i++){
-  circle((windowWidth/6)*i-(windowWidth/6)/2, (windowHeight/3.5)*4+windowHeight/22.15, planetSize);
+  g.circle((g.windowWidth/6)*i-(g.windowWidth/6)/2, (g.windowHeight/3.5)*4+g.windowHeight/22.15, g.planetSize);
   }
     
-  noFill();
-      stroke(255);
-      strokeWeight(1);
-      circle(((windowWidth/6)*1-(windowWidth/6)/2) - planetSize / 6, (windowHeight/3.5)*4+windowHeight/22.15, planetSize / 2);
-      circle(((windowWidth/6)*1-(windowWidth/6)/2) + planetSize / 6, (windowHeight/3.5)*4+windowHeight/22.15, planetSize / 2);
+  g.noFill();
+     g.stroke(255);
+      g.strokeWeight(1);
+      g.circle(((g.windowWidth/6)*1-(g.windowWidth/6)/2) - g.planetSize / 6, (g.windowHeight/3.5)*4+g.windowHeight/22.15, g.planetSize / 2);
+      g.circle(((g.windowWidth/6)*1-(g.windowWidth/6)/2) + g.planetSize / 6, (g.windowHeight/3.5)*4+g.windowHeight/22.15, g.planetSize / 2);
   
-  fill(255);
-  noStroke();
-  text("Family",(windowWidth/6)*2-(windowWidth/6)/2, (windowHeight/3.5)*4+windowHeight/17+windowHeight/22.15);
+  g.fill(255);
+  g.noStroke();
+  g.text("Family",(g.windowWidth/6)*2-(g.windowWidth/6)/2, (g.windowHeight/3.5)*4+g.windowHeight/17+g.windowHeight/22.15);
   
-  fill(255);
-      stroke(255);
-      strokeWeight(3);
-      line((((windowWidth/6)*2-(windowWidth/6)/2)) - planetSize / 2.3,
-        (windowHeight/3.5)*4+windowHeight/22.15,
-        (((windowWidth/6)*2-(windowWidth/6)/2)) + planetSize / 2.3,
-        (windowHeight/3.5)*4+windowHeight/22.15);
+  g.fill(255);
+     g.stroke(255);
+      g.strokeWeight(3);
+      g.line((((g.windowWidth/6)*2-(g.windowWidth/6)/2)) - g.planetSize / 2.3,
+        (g.windowHeight/3.5)*4+g.windowHeight/22.15,
+        (((g.windowWidth/6)*2-(g.windowWidth/6)/2)) + g.planetSize / 2.3,
+        (g.windowHeight/3.5)*4+g.windowHeight/22.15);
   
-  strokeWeight(2 );
-      line(
-        ((windowWidth/6)*2-(windowWidth/6)/2) - planetSize / 2.7,
-        (windowHeight/3.5)*4 + planetSize / 4+windowHeight/22.15,
-        ((windowWidth/6)*2-(windowWidth/6)/2) + planetSize / 2.7,
-        (windowHeight/3.5)*4 + planetSize / 4+windowHeight/22.15
+  g.strokeWeight(2 );
+      g.line(
+        ((g.windowWidth/6)*2-(g.windowWidth/6)/2) - g.planetSize / 2.7,
+        (g.windowHeight/3.5)*4 + g.planetSize / 4+g.windowHeight/22.15,
+        ((g.windowWidth/6)*2-(g.windowWidth/6)/2) + g.planetSize / 2.7,
+        (g.windowHeight/3.5)*4 + g.planetSize / 4+g.windowHeight/22.15
       );
-      line(
-        ((windowWidth/6)*2-(windowWidth/6)/2) - planetSize / 2.7,
-        (windowHeight/3.5)*4 - planetSize / 4+windowHeight/22.15,
-        ((windowWidth/6)*2-(windowWidth/6)/2) + planetSize / 2.7,
-        (windowHeight/3.5)*4 - planetSize / 4+windowHeight/22.15
+      g.line(
+        ((g.windowWidth/6)*2-(g.windowWidth/6)/2) - g.planetSize / 2.7,
+        (g.windowHeight/3.5)*4 - g.planetSize / 4+g.windowHeight/22.15,
+        ((g.windowWidth/6)*2-(g.windowWidth/6)/2) + g.planetSize / 2.7,
+        (g.windowHeight/3.5)*4 - g.planetSize / 4+g.windowHeight/22.15
       );
-      strokeWeight(1 );
-      line(
-        ((windowWidth/6)*2-(windowWidth/6)/2) - planetSize / 3.8,
-        (windowHeight/3.5)*4 + planetSize / 2.5+windowHeight/22.15,
-        ((windowWidth/6)*2-(windowWidth/6)/2) + planetSize / 3.8,
-        (windowHeight/3.5)*4 + planetSize / 2.5+windowHeight/22.15
+      g.strokeWeight(1 );
+      g.line(
+        ((g.windowWidth/6)*2-(g.windowWidth/6)/2) - g.planetSize / 3.8,
+        (g.windowHeight/3.5)*4 + g.planetSize / 2.5+g.windowHeight/22.15,
+        ((g.windowWidth/6)*2-(g.windowWidth/6)/2) + g.planetSize / 3.8,
+        (g.windowHeight/3.5)*4 + g.planetSize / 2.5+g.windowHeight/22.15
       );
-      line(
-        ((windowWidth/6)*2-(windowWidth/6)/2) - planetSize / 3.8,
-        (windowHeight/3.5)*4 - planetSize / 2.5+windowHeight/22.15,
-        ((windowWidth/6)*2-(windowWidth/6)/2) + planetSize / 3.8,
-        (windowHeight/3.5)*4 - planetSize / 2.5+windowHeight/22.15
+      g.line(
+        ((g.windowWidth/6)*2-(g.windowWidth/6)/2) - g.planetSize / 3.8,
+        (g.windowHeight/3.5)*4 - g.planetSize / 2.5+g.windowHeight/22.15,
+        ((g.windowWidth/6)*2-(g.windowWidth/6)/2) + g.planetSize / 3.8,
+        (g.windowHeight/3.5)*4 - g.planetSize / 2.5+g.windowHeight/22.15
       );
   
-  fill(255);
-  noStroke();
-  text("Romantic /\nDating",(windowWidth/6)*3-(windowWidth/6)/2, (windowHeight/3.5)*4+windowHeight/17+windowHeight/22.15);
+  g.fill(255);
+  g.noStroke();
+  g.text("Romantic /\nDating",(g.windowWidth/6)*3-(g.windowWidth/6)/2, (g.windowHeight/3.5)*4+g.windowHeight/17+g.windowHeight/22.15);
   
-  noFill();
-      stroke(255);
+  g.noFill();
+     g.stroke(255);
 
-      strokeWeight(2);
-      bezier(
-        (windowWidth/6)*3-(windowWidth/6)/2 - planetSize / 2,
-        (windowHeight/3.5)*4+windowHeight/22.15,
-        (windowWidth/6)*3-(windowWidth/6)/2 - planetSize / 8,
-        (windowHeight/3.5)*4 - planetSize / 0.75+windowHeight/22.15,
-        (windowWidth/6)*3-(windowWidth/6)/2 + planetSize / 8,
-        (windowHeight/3.5)*4 + planetSize / 0.75+windowHeight/22.15,
-        (windowWidth/6)*3-(windowWidth/6)/2 + planetSize / 2,
-        (windowHeight/3.5)*4+windowHeight/22.15
-      );
-
-      strokeWeight(1);
-      bezier(
-        (windowWidth/6)*3-(windowWidth/6)/2 - planetSize / 2,
-        (windowHeight/3.5)*4+windowHeight/22.15,
-        (windowWidth/6)*3-(windowWidth/6)/2 - planetSize / 4,
-        (windowHeight/3.5)*4 - planetSize / 1+windowHeight/22.15,
-        (windowWidth/6)*3-(windowWidth/6)/2 + planetSize / 4,
-        (windowHeight/3.5)*4 + planetSize / 1+windowHeight/22.15,
-        (windowWidth/6)*3-(windowWidth/6)/2 + planetSize / 2,
-        (windowHeight/3.5)*4+windowHeight/22.15
+      g.strokeWeight(2);
+      g.bezier(
+        (g.windowWidth/6)*3-(g.windowWidth/6)/2 - g.planetSize / 2,
+        (g.windowHeight/3.5)*4+g.windowHeight/22.15,
+        (g.windowWidth/6)*3-(g.windowWidth/6)/2 - g.planetSize / 8,
+        (g.windowHeight/3.5)*4 - g.planetSize / 0.75+g.windowHeight/22.15,
+        (g.windowWidth/6)*3-(g.windowWidth/6)/2 + g.planetSize / 8,
+        (g.windowHeight/3.5)*4 + g.planetSize / 0.75+g.windowHeight/22.15,
+        (g.windowWidth/6)*3-(g.windowWidth/6)/2 + g.planetSize / 2,
+        (g.windowHeight/3.5)*4+g.windowHeight/22.15
       );
 
-      bezier(
-        (windowWidth/6)*3-(windowWidth/6)/2 - planetSize / 2,
-        (windowHeight/3.5)*4+windowHeight/22.15,
-        (windowWidth/6)*3-(windowWidth/6)/2 - planetSize / 4,
-        (windowHeight/3.5)*4 - planetSize / 2+windowHeight/22.15,
-        (windowWidth/6)*3-(windowWidth/6)/2 + planetSize / 4,
-        (windowHeight/3.5)*4 + planetSize / 2+windowHeight/22.15,
-        (windowWidth/6)*3-(windowWidth/6)/2 + planetSize / 2,
-        (windowHeight/3.5)*4+windowHeight/22.15
+      g.strokeWeight(1);
+      g.bezier(
+        (g.windowWidth/6)*3-(g.windowWidth/6)/2 - g.planetSize / 2,
+        (g.windowHeight/3.5)*4+g.windowHeight/22.15,
+        (g.windowWidth/6)*3-(g.windowWidth/6)/2 - g.planetSize / 4,
+        (g.windowHeight/3.5)*4 - g.planetSize / 1+g.windowHeight/22.15,
+        (g.windowWidth/6)*3-(g.windowWidth/6)/2 + g.planetSize / 4,
+        (g.windowHeight/3.5)*4 + g.planetSize / 1+g.windowHeight/22.15,
+        (g.windowWidth/6)*3-(g.windowWidth/6)/2 + g.planetSize / 2,
+        (g.windowHeight/3.5)*4+g.windowHeight/22.15
+      );
+
+      g.bezier(
+        (g.windowWidth/6)*3-(g.windowWidth/6)/2 - g.planetSize / 2,
+        (g.windowHeight/3.5)*4+g.windowHeight/22.15,
+        (g.windowWidth/6)*3-(g.windowWidth/6)/2 - g.planetSize / 4,
+        (g.windowHeight/3.5)*4 - g.planetSize / 2+g.windowHeight/22.15,
+        (g.windowWidth/6)*3-(g.windowWidth/6)/2 + g.planetSize / 4,
+        (g.windowHeight/3.5)*4 + g.planetSize / 2+g.windowHeight/22.15,
+        (g.windowWidth/6)*3-(g.windowWidth/6)/2 + g.planetSize / 2,
+        (g.windowHeight/3.5)*4+g.windowHeight/22.15
       );
   
-  fill(255);
-  noStroke();
-  text("Work",(windowWidth/6)*4-(windowWidth/6)/2, (windowHeight/3.5)*4+windowHeight/17+windowHeight/22.15);
+  g.fill(255);
+  g.noStroke();
+  g.text("Work",(g.windowWidth/6)*4-(g.windowWidth/6)/2, (g.windowHeight/3.5)*4+g.windowHeight/17+g.windowHeight/22.15);
   
-  stroke(255);
-  noFill();
-      strokeWeight(0.5);
-      // fill(this.planetColour-30);
-      circle((windowWidth/6)*4-(windowWidth/6)/2, (windowHeight/3.5)*4+windowHeight/22.15, planetSize / 1.25);
+ g.stroke(255);
+  g.noFill();
+      g.strokeWeight(0.5);
+      // g.fill(this.planetColour-30);
+      g.circle((g.windowWidth/6)*4-(g.windowWidth/6)/2, (g.windowHeight/3.5)*4+g.windowHeight/22.15, g.planetSize / 1.25);
 
-      // fill(this.planetColour-60);
-      strokeWeight(1);
-      circle((windowWidth/6)*4-(windowWidth/6)/2, (windowHeight/3.5)*4+windowHeight/22.15, planetSize / 1.8);
-      // fill(this.planetColour-90);
-      strokeWeight(1.75);
-      circle((windowWidth/6)*4-(windowWidth/6)/2, (windowHeight/3.5)*4+windowHeight/22.15, planetSize / 4);
+      // g.fill(this.planetColour-60);
+      g.strokeWeight(1);
+      g.circle((g.windowWidth/6)*4-(g.windowWidth/6)/2, (g.windowHeight/3.5)*4+g.windowHeight/22.15, g.planetSize / 1.8);
+      // g.fill(this.planetColour-90);
+      g.strokeWeight(1.75);
+      g.circle((g.windowWidth/6)*4-(g.windowWidth/6)/2, (g.windowHeight/3.5)*4+g.windowHeight/22.15, g.planetSize / 4);
   
-  fill(255);
-  noStroke();
-  text("Acquaint-\nances",(windowWidth/6)*5-(windowWidth/6)/2, (windowHeight/3.5)*4+windowHeight/17+windowHeight/22.15);
+  g.fill(255);
+  g.noStroke();
+  g.text("Acquaint-\nances",(g.windowWidth/6)*5-(g.windowWidth/6)/2, (g.windowHeight/3.5)*4+g.windowHeight/17+g.windowHeight/22.15);
   
-  noFill();
-      stroke(255);
-      strokeWeight(1.75);
+  g.noFill();
+     g.stroke(255);
+      g.strokeWeight(1.75);
 
-      circle((windowWidth/6)*5-(windowWidth/6)/2 - planetSize / 2.75, (windowHeight/3.5)*4+windowHeight/22.15, planetSize / 4);
-      circle((windowWidth/6)*5-(windowWidth/6)/2, (windowHeight/3.5)*4+windowHeight/22.15, planetSize / 4);
-      circle((windowWidth/6)*5-(windowWidth/6)/2 + planetSize / 2.75, (windowHeight/3.5)*4+windowHeight/22.15, planetSize / 4);
-      circle((windowWidth/6)*5-(windowWidth/6)/2, (windowHeight/3.5)*4 + planetSize / 2.75+windowHeight/22.15, planetSize / 4);
-      circle((windowWidth/6)*5-(windowWidth/6)/2, (windowHeight/3.5)*4 - planetSize / 2.75+windowHeight/22.15, planetSize / 4);
+      g.circle((g.windowWidth/6)*5-(g.windowWidth/6)/2 - g.planetSize / 2.75, (g.windowHeight/3.5)*4+g.windowHeight/22.15, g.planetSize / 4);
+      g.circle((g.windowWidth/6)*5-(g.windowWidth/6)/2, (g.windowHeight/3.5)*4+g.windowHeight/22.15, g.planetSize / 4);
+      g.circle((g.windowWidth/6)*5-(g.windowWidth/6)/2 + g.planetSize / 2.75, (g.windowHeight/3.5)*4+g.windowHeight/22.15, g.planetSize / 4);
+      g.circle((g.windowWidth/6)*5-(g.windowWidth/6)/2, (g.windowHeight/3.5)*4 + g.planetSize / 2.75+g.windowHeight/22.15, g.planetSize / 4);
+      g.circle((g.windowWidth/6)*5-(g.windowWidth/6)/2, (g.windowHeight/3.5)*4 - g.planetSize / 2.75+g.windowHeight/22.15, g.planetSize / 4);
   
-  fill(255);
-  noStroke();
-  text("Other",(windowWidth/6)*6-(windowWidth/6)/2, (windowHeight/3.5)*4+windowHeight/17+windowHeight/22.15);
-  
-  
+  g.fill(255);
+  g.noStroke();
+  g.text("Other",(g.windowWidth/6)*6-(g.windowWidth/6)/2, (g.windowHeight/3.5)*4+g.windowHeight/17+g.windowHeight/22.15);
   
   //communication method
-      fill(255);
-  textSize(windowHeight / 32);
-  textAlign(CENTER,CENTER);
-  text("How did you communicate?",windowWidth/2, (windowHeight/3.5)*5-windowHeight/11+windowHeight/21.9);  
+  //How did you communicate?//////////////////////////////////////////////////////////////////
+      g.fill(255);
+  g.textSize(g.windowHeight / 34);
+  g.textAlign(g.CENTER,g.CENTER);
+  g.text("How did you communicate?",g.windowWidth/2, (g.windowHeight/3.5)*5-g.windowHeight/11+g.windowHeight/21.9);  
   
-  noStroke();
-  fill("rgb(150,150,150)");
+  g.noStroke();
+  g.fill("rgb(150,150,150)");
   for(i=1;i<5;i++){
-  circle((windowWidth/4)*i-(windowWidth/4)/2, (windowHeight/3.5)*5+windowHeight/21.9, planetSize);
+  g.circle((g.windowWidth/4)*i-(g.windowWidth/4)/2, (g.windowHeight/3.5)*5+g.windowHeight/21.9, g.planetSize);
   }
   
-  // textSize(windowHeight / 42);
-  textSize(windowHeight / 47);
-  textAlign(CENTER,TOP);
+  g.textSize(g.windowHeight / 47);
+  g.textAlign(g.CENTER,g.TOP);
   
-  //have not adjusted text up CUZ not sure if will keep the stuff on the second line 
-  fill(255);
-  noStroke();
-  text("Written",(windowWidth/4)*1-(windowWidth/4)/2, (windowHeight/3.5)*5+windowHeight/17+windowHeight/21.9);
+  //have not adjusted text up CUZ not sure if will keep the stuff on the second g.line 
+  g.fill(255);
+  g.noStroke();
+  g.text("Written",(g.windowWidth/4)*1-(g.windowWidth/4)/2, (g.windowHeight/3.5)*5+g.windowHeight/17+g.windowHeight/21.9);
   
-  stroke(255);
-      strokeWeight(1.5);
-      line(
-        (windowWidth/4)*1-(windowWidth/4)/2 + planetSize / 3.5,
-        (windowHeight/3.5)*5 - planetSize / 4+windowHeight/21.9,
-        (windowWidth/4)*1-(windowWidth/4)/2 + planetSize / 1.4,
-        (windowHeight/3.5)*5 - planetSize / 1.6+windowHeight/21.9
+ g.stroke(255);
+      g.strokeWeight(1.5);
+      g.line(
+        (g.windowWidth/4)*1-(g.windowWidth/4)/2 + g.planetSize / 3.5,
+        (g.windowHeight/3.5)*5 - g.planetSize / 4+g.windowHeight/21.9,
+        (g.windowWidth/4)*1-(g.windowWidth/4)/2 + g.planetSize / 1.4,
+        (g.windowHeight/3.5)*5 - g.planetSize / 1.6+g.windowHeight/21.9
       );
 
-      line(
-        (windowWidth/4)*1-(windowWidth/4)/2 + planetSize / 3.5,
-        (windowHeight/3.5)*5 - planetSize / 4 + planetSize / 4+windowHeight/21.9,
-        (windowWidth/4)*1-(windowWidth/4)/2 + planetSize / 1.4,
-        (windowHeight/3.5)*5 - planetSize / 1.6 + planetSize / 4+windowHeight/21.9
+      g.line(
+        (g.windowWidth/4)*1-(g.windowWidth/4)/2 + g.planetSize / 3.5,
+        (g.windowHeight/3.5)*5 - g.planetSize / 4 + g.planetSize / 4+g.windowHeight/21.9,
+        (g.windowWidth/4)*1-(g.windowWidth/4)/2 + g.planetSize / 1.4,
+        (g.windowHeight/3.5)*5 - g.planetSize / 1.6 + g.planetSize / 4+g.windowHeight/21.9
       );
 
-      line(
-        (windowWidth/4)*1-(windowWidth/4)/2 + planetSize / 3.5,
-        (windowHeight/3.5)*5 - planetSize / 4 + (planetSize / 4) * 2+windowHeight/21.9,
-        (windowWidth/4)*1-(windowWidth/4)/2 + planetSize / 1.4,
-        (windowHeight/3.5)*5 - planetSize / 1.6 + (planetSize / 4) * 2+windowHeight/21.9
+      g.line(
+        (g.windowWidth/4)*1-(g.windowWidth/4)/2 + g.planetSize / 3.5,
+        (g.windowHeight/3.5)*5 - g.planetSize / 4 + (g.planetSize / 4) * 2+g.windowHeight/21.9,
+        (g.windowWidth/4)*1-(g.windowWidth/4)/2 + g.planetSize / 1.4,
+        (g.windowHeight/3.5)*5 - g.planetSize / 1.6 + (g.planetSize / 4) * 2+g.windowHeight/21.9
       );
   
-  fill(255);
-  noStroke();
-  text("Spoken",(windowWidth/4)*2-(windowWidth/4)/2, (windowHeight/3.5)*5+windowHeight/17+windowHeight/21.9);
+  g.fill(255);
+  g.noStroke();
+  g.text("Spoken",(g.windowWidth/4)*2-(g.windowWidth/4)/2, (g.windowHeight/3.5)*5+g.windowHeight/17+g.windowHeight/21.9);
   
-  fill(255);
-      noStroke();
-      triangle(
-        (windowWidth/4)*2-(windowWidth/4)/2 + planetSize / 1 - planetSize / 3,
-        (windowHeight/3.5)*5 - planetSize / 1.2 + planetSize / 3+windowHeight/21.9,
-        (windowWidth/4)*2-(windowWidth/4)/2 + planetSize / 2 - planetSize / 3,
-        (windowHeight/3.5)*5 - planetSize / 2 + planetSize / 3+windowHeight/21.9,
-        (windowWidth/4)*2-(windowWidth/4)/2 + planetSize / 2 - planetSize / 3,
-        (windowHeight/3.5)*5 - planetSize / 0.9 + planetSize / 3+windowHeight/21.9
+  g.fill(255);
+      g.noStroke();
+      g.triangle(
+        (g.windowWidth/4)*2-(g.windowWidth/4)/2 + g.planetSize / 1 - g.planetSize / 3,
+        (g.windowHeight/3.5)*5 - g.planetSize / 1.2 + g.planetSize / 3+g.windowHeight/21.9,
+        (g.windowWidth/4)*2-(g.windowWidth/4)/2 + g.planetSize / 2 - g.planetSize / 3,
+        (g.windowHeight/3.5)*5 - g.planetSize / 2 + g.planetSize / 3+g.windowHeight/21.9,
+        (g.windowWidth/4)*2-(g.windowWidth/4)/2 + g.planetSize / 2 - g.planetSize / 3,
+        (g.windowHeight/3.5)*5 - g.planetSize / 0.9 + g.planetSize / 3+g.windowHeight/21.9
       );
   
-  fill(255);
-  noStroke();
-  text("Video",(windowWidth/4)*3-(windowWidth/4)/2, (windowHeight/3.5)*5+windowHeight/17+windowHeight/21.9);
+  g.fill(255);
+  g.noStroke();
+  g.text("Video",(g.windowWidth/4)*3-(g.windowWidth/4)/2, (g.windowHeight/3.5)*5+g.windowHeight/17+g.windowHeight/21.9);
   
-  noStroke();
+  g.noStroke();
 
-      fill(255);
+      g.fill(255);
 
-      ellipse(
-        (windowWidth/4)*3-(windowWidth/4)/2 + planetSize / 1 - planetSize / 2,
-        (windowHeight/3.5)*5+windowHeight/21.9,
-        planetSize / 4
+      g.ellipse(
+        (g.windowWidth/4)*3-(g.windowWidth/4)/2 + g.planetSize / 1 - g.planetSize / 2,
+        (g.windowHeight/3.5)*5+g.windowHeight/21.9,
+        g.planetSize / 4
       );
 
-      bezier(
-        (windowWidth/4)*3-(windowWidth/4)/2 - planetSize / 1 + planetSize / 4,
-        (windowHeight/3.5)*5+windowHeight/21.9,
-        (windowWidth/4)*3-(windowWidth/4)/2 - planetSize / 6 + planetSize / 4,
-        (windowHeight/3.5)*5 - planetSize / 1.3+windowHeight/21.9,
-        (windowWidth/4)*3-(windowWidth/4)/2 - planetSize / 6 + planetSize / 4,
-        (windowHeight/3.5)*5 + planetSize / 1.3+windowHeight/21.9,
-        (windowWidth/4)*3-(windowWidth/4)/2 - planetSize / 1 + planetSize / 4,
-        (windowHeight/3.5)*5+windowHeight/21.9
+      g.bezier(
+        (g.windowWidth/4)*3-(g.windowWidth/4)/2 - g.planetSize / 1 + g.planetSize / 4,
+        (g.windowHeight/3.5)*5+g.windowHeight/21.9,
+        (g.windowWidth/4)*3-(g.windowWidth/4)/2 - g.planetSize / 6 + g.planetSize / 4,
+        (g.windowHeight/3.5)*5 - g.planetSize / 1.3+g.windowHeight/21.9,
+        (g.windowWidth/4)*3-(g.windowWidth/4)/2 - g.planetSize / 6 + g.planetSize / 4,
+        (g.windowHeight/3.5)*5 + g.planetSize / 1.3+g.windowHeight/21.9,
+        (g.windowWidth/4)*3-(g.windowWidth/4)/2 - g.planetSize / 1 + g.planetSize / 4,
+        (g.windowHeight/3.5)*5+g.windowHeight/21.9
       );
   
-  fill(255);
-  noStroke();
+  g.fill(255);
+  g.noStroke();
   
-  text("In-Person",(windowWidth/4)*4-(windowWidth/4)/2, (windowHeight/3.5)*5+windowHeight/17+windowHeight/21.9);
+  g.text("In-Person",(g.windowWidth/4)*4-(g.windowWidth/4)/2, (g.windowHeight/3.5)*5+g.windowHeight/17+g.windowHeight/21.9);
   
-  fill(255);
-      noStroke();
-      for (let i = 0; i < radians(360 + 0); i += radians(360 / pointCount)) {
-        let diameter = planetSize * 1.8 - planetSize / 3;
-        let x = (diameter / 2) * Math.cos(i) + (windowWidth/4)*4-(windowWidth/4)/2;
-        let y = (diameter / 2) * Math.sin(i) + (windowHeight/3.5)*5+windowHeight/21.9;
+  g.fill(255);
+      g.noStroke();
+//       for (g.i = 0; i < g.radians(360 + 0); i += g.radians(360 / g.pointCount)) {
+//         g.diameter = g.planetSize * 1.8 - g.planetSize / 3;
+//         g.x = (g.diameter / 2) * Math.cos(i) + (g.windowWidth/4)*4-(g.windowWidth/4)/2;
+//         g.y = (g.diameter / 2) * Math.sin(i) + (g.windowHeight/3.5)*5+g.windowHeight/21.9;
 
-        ellipse(x, y, planetSize / 4.5);
-        angle = 0;
-      }
+//         g.ellipse(g.x, g.y, g.planetSize / 4.5);
+//         g.angle = 0;
+//       }
+
+  //Around how long was your interaction?///////////////////////////////////////////////////////////
+      g.fill(255);
+  g.textSize(g.windowHeight / 34);
+  g.textAlign(g.CENTER,g.CENTER);
+  g.text("Around how long was your interaction?",g.windowWidth/2, (g.windowHeight/3.5)*6-g.windowHeight/12.5+g.windowHeight/80);  
   
+  g.textSize(g.windowHeight / 47);
+  g.textAlign(g.CENTER,g.TOP);
   
-      fill(255);
-  textSize(windowHeight / 32);
-  textAlign(CENTER,CENTER);
-  text("Around how long was your interaction?",windowWidth/2, (windowHeight/3.5)*6-windowHeight/12.5+windowHeight/80);  
+  g.fill(255);
+  g.noStroke();
+  g.text("3 h+",(g.windowWidth/6)*1-(g.windowWidth/6)/2, (g.windowHeight/3.5)*6+g.windowHeight/17+g.windowHeight/80);
+  g.fill("rgb(150,150,150)");
+  g.circle((g.windowWidth/6)*1-(g.windowWidth/6)/2, (g.windowHeight/3.5)*6+g.windowHeight/80, g.windowWidth / 10.5);
   
-  // textSize(windowHeight / 42);
-  textSize(windowHeight / 47);
-  textAlign(CENTER,TOP);
+  g.fill(255);
+  g.noStroke();
+  g.text("1 - 3 h",(g.windowWidth/6)*2-(g.windowWidth/6)/2, (g.windowHeight/3.5)*6+g.windowHeight/17+g.windowHeight/80);
+  g.fill("rgb(150,150,150)");
+  g.circle((g.windowWidth/6)*2-(g.windowWidth/6)/2, (g.windowHeight/3.5)*6+g.windowHeight/80, g.windowWidth / 14);
   
-  fill(255);
-  noStroke();
-  text("3 h+",(windowWidth/6)*1-(windowWidth/6)/2, (windowHeight/3.5)*6+windowHeight/17+windowHeight/80);
-  fill("rgb(150,150,150)");
-  circle((windowWidth/6)*1-(windowWidth/6)/2, (windowHeight/3.5)*6+windowHeight/80, windowWidth / 10.5);
+  g.fill(255);
+  g.noStroke();
+  g.text("30 min\n- 1 h",(g.windowWidth/6)*3-(g.windowWidth/6)/2, (g.windowHeight/3.5)*6+g.windowHeight/17+g.windowHeight/80);
+  g.fill("rgb(150,150,150)");
+  g.circle((g.windowWidth/6)*3-(g.windowWidth/6)/2, (g.windowHeight/3.5)*6+g.windowHeight/80, g.windowWidth / 18);
   
-  fill(255);
-  noStroke();
-  text("1 - 3 h",(windowWidth/6)*2-(windowWidth/6)/2, (windowHeight/3.5)*6+windowHeight/17+windowHeight/80);
-  fill("rgb(150,150,150)");
-  circle((windowWidth/6)*2-(windowWidth/6)/2, (windowHeight/3.5)*6+windowHeight/80, windowWidth / 14);
+  g.fill(255);
+  g.noStroke();
+  g.text("10 min\n- 30 min",(g.windowWidth/6)*4-(g.windowWidth/6)/2, (g.windowHeight/3.5)*6+g.windowHeight/17+g.windowHeight/80);
+  g.fill("rgb(150,150,150)");
+  g.circle((g.windowWidth/6)*4-(g.windowWidth/6)/2, (g.windowHeight/3.5)*6+g.windowHeight/80, g.windowWidth / 23);
   
-  fill(255);
-  noStroke();
-  text("30 min\n- 1 h",(windowWidth/6)*3-(windowWidth/6)/2, (windowHeight/3.5)*6+windowHeight/17+windowHeight/80);
-  fill("rgb(150,150,150)");
-  circle((windowWidth/6)*3-(windowWidth/6)/2, (windowHeight/3.5)*6+windowHeight/80, windowWidth / 18);
+  g.fill(255);
+  g.noStroke();
+  g.text("5 min\n- 10 min",(g.windowWidth/6)*5-(g.windowWidth/6)/2, (g.windowHeight/3.5)*6+g.windowHeight/17+g.windowHeight/80);
+  g.fill("rgb(150,150,150)");
+  g.circle((g.windowWidth/6)*5-(g.windowWidth/6)/2, (g.windowHeight/3.5)*6+g.windowHeight/80, g.windowWidth / 32);
   
-  fill(255);
-  noStroke();
-  text("10 min\n- 30 min",(windowWidth/6)*4-(windowWidth/6)/2, (windowHeight/3.5)*6+windowHeight/17+windowHeight/80);
-  fill("rgb(150,150,150)");
-  circle((windowWidth/6)*4-(windowWidth/6)/2, (windowHeight/3.5)*6+windowHeight/80, windowWidth / 23);
+  g.fill(255);
+  g.noStroke();
+  g.text("few min\nor sec",(g.windowWidth/6)*6-(g.windowWidth/6)/2, (g.windowHeight/3.5)*6+g.windowHeight/17+g.windowHeight/80);
+  g.fill("rgb(150,150,150)");
+  g.circle((g.windowWidth/6)*6-(g.windowWidth/6)/2, (g.windowHeight/3.5)*6+g.windowHeight/80, g.windowWidth / 44);
   
-  fill(255);
-  noStroke();
-  text("5 min\n- 10 min",(windowWidth/6)*5-(windowWidth/6)/2, (windowHeight/3.5)*6+windowHeight/17+windowHeight/80);
-  fill("rgb(150,150,150)");
-  circle((windowWidth/6)*5-(windowWidth/6)/2, (windowHeight/3.5)*6+windowHeight/80, windowWidth / 32);
+  //How did you feel about the interaction?//////////////////////////////////////////////////////////
+  g.fill(255);
+  g.textSize(g.windowHeight / 34);
+  g.textAlign(g.CENTER,g.CENTER);
+  g.text("How did you feel about the interaction?",g.windowWidth/2, (g.windowHeight/3.5)*7-g.windowHeight/12+g.windowHeight/120);  
   
-  fill(255);
-  noStroke();
-  text("few min\nor sec",(windowWidth/6)*6-(windowWidth/6)/2, (windowHeight/3.5)*6+windowHeight/17+windowHeight/80);
-  fill("rgb(150,150,150)");
-  circle((windowWidth/6)*6-(windowWidth/6)/2, (windowHeight/3.5)*6+windowHeight/80, windowWidth / 44);
-  
-  
-  
-  
-  
-    fill(255);
-  textSize(windowHeight / 32);
-  textAlign(CENTER,CENTER);
-  text("How did you feel about the interaction?",windowWidth/2, (windowHeight/3.5)*7-windowHeight/12+windowHeight/120);  
-  
-  noStroke();
+  g.noStroke();
 
   for(i=1;i<6;i++){
     
-    
   if (i == 1) {
-      fill("#AFE6FF");
+      g.fill("#AFE6FF");
     } else if (i == 2) {
-      fill("#12A4E6");
+      g.fill("#12A4E6");
     } else if (i == 3) {
-      fill("rgb(150,150,150)");
+      g.fill("rgb(150,150,150)");
     } else if (i == 4) {
-      fill("#FF8181");
+      g.fill("#FF8181");
     } else if (i == 5) {
-      fill("#990202");
+      g.fill("#990202");
     }
-    
-  circle((windowWidth/5)*i-(windowWidth/5)/2, (windowHeight/3.5)*7+windowHeight/120, planetSize);
+  g.circle((g.windowWidth/5)*i-(g.windowWidth/5)/2, (g.windowHeight/3.5)*7+g.windowHeight/120, g.planetSize);
   }
   
-  // textSize(windowHeight / 42);
-  textSize(windowHeight / 47);
-  textAlign(CENTER,TOP);
+  g.textSize(g.windowHeight / 47);
+  g.textAlign(g.CENTER,g.TOP);
   
-  fill(255);
-  text("Very Good",(windowWidth/5)*1-(windowWidth/5)/2, (windowHeight/3.5)*7+windowHeight/13+windowHeight/120);
+  g.fill(255);
+  g.text("Very Good",(g.windowWidth/5)*1-(g.windowWidth/5)/2,
+       (g.windowHeight/3.5)*7+g.windowHeight/13+g.windowHeight/120);
   
-  fill(255);
-  text("Good",(windowWidth/5)*2-(windowWidth/5)/2, (windowHeight/3.5)*7+windowHeight/13+windowHeight/120);
+  g.fill(255);
+  g.text("Good",(g.windowWidth/5)*2-(g.windowWidth/5)/2,
+       (g.windowHeight/3.5)*7+g.windowHeight/13+g.windowHeight/120);
 
-  
-  fill(255);
-  text("Neutral",(windowWidth/5)*3-(windowWidth/5)/2, (windowHeight/3.5)*7+windowHeight/13+windowHeight/120);
+  g.fill(255);
+  g.text("Neutral",(g.windowWidth/5)*3-(g.windowWidth/5)/2,
+       (g.windowHeight/3.5)*7+g.windowHeight/13+g.windowHeight/120);
 
-  
-  fill(255);
-  text("Bad",(windowWidth/5)*4-(windowWidth/5)/2, (windowHeight/3.5)*7+windowHeight/13+windowHeight/120);
+  g.fill(255);
+  g.text("Bad",(g.windowWidth/5)*4-(g.windowWidth/5)/2, (g.windowHeight/3.5)*7+g.windowHeight/13+g.windowHeight/120);
 
-  fill(255);
-  text("Very Bad",(windowWidth/5)*5-(windowWidth/5)/2, (windowHeight/3.5)*7+windowHeight/13+windowHeight/120);
-
+  g.fill(255);
+  g.text("Very Bad",(g.windowWidth/5)*5-(g.windowWidth/5)/2,
+       (g.windowHeight/3.5)*7+g.windowHeight/13+g.windowHeight/120);
   
-  
-   
-  
-//   fill(255);
-//   noStroke();
-//   text("hello",(windowWidth/5)*1-(windowWidth/5)/2, (windowHeight/3.5)*4+windowHeight/17);
-  
-//   fill(255);
-//   noStroke();
-//   text("hello",(windowWidth/5)*2-(windowWidth/5)/2, (windowHeight/3.5)*4+windowHeight/17);
-  
-//   fill(255);
-//   noStroke();
-//   text("hello",(windowWidth/5)*3-(windowWidth/5)/2, (windowHeight/3.5)*4+windowHeight/17);
-  
-//   fill(255);
-//   noStroke();
-//   text("hello",(windowWidth/5)*4-(windowWidth/5)/2, (windowHeight/3.5)*4+windowHeight/17);
-  
-//   fill(255);
-//   noStroke();
-//   text("hello",(windowWidth/5)*5-(windowWidth/5)/2, (windowHeight/3.5)*4+windowHeight/17);
-  
-
+  ////for seeing the top of the legend canvas
+  //   g.stroke(255);
+  // g.strokeWeight(10);
+  // g.fill(255);
+  // g.line(0,0,g.windowWidth,0);
 }
+}
+
+var myCanvasLegend = new p5 (legend, 'myCanvasLegendHTML');

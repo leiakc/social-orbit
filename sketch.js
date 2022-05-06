@@ -1,10 +1,5 @@
-//more modifications
-//-centered the bottom buttons (next and done)
-//-reset planet variable values when adding a new social interaction
-//-adjusted stroke size for planet code decorations depending on planet size ((so decorations are relative size)) -- so they aren't too big and overcrowd the planet
-//-adjusted verygood/good sun decorations so they can be seen better -- orange stroke behind the white stroke
-//-added <br> that can be taken away after the skipsocialbutton so that the buttons are still centered if someone does open it on a desktop
-//-trying to fix the font sizes
+//hopefully this works
+//legend intergration
 
 //variables-----------------------------------------------------------------------------------------------------------
 let centerWidth; //half the width of the screen / the center of the screen - the x center of the solar system will be placed here
@@ -379,9 +374,19 @@ function nextPressed() {
 
     document.getElementById("nextButton").style.visibility = "hidden";
     document.getElementById("doneButton").style.visibility = "hidden";
+    
+    document.getElementById("screenBottom").style.display = "none";
 
     document.getElementById("saveButtonImage").style.visibility = "visible";
     document.getElementById("saveButtonData").style.visibility = "visible";
+    
+    // document.getElementById("myCanvasLegendHTML").style.visibility = "visible";
+    // document.getElementById("TEXTmyCanvasLegendHTML").style.visibility = "visible";
+    document.getElementById("myCanvasLegendHTML").style.display = "block";
+    // document.getElementById("TEXTmyCanvasLegendHTML").style.display = "block";
+    
+    document.documentElement.scrollTop = 0;
+    
   }
 
   //resets the input field for the forms
