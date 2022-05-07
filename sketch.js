@@ -47,6 +47,8 @@ let d = 0; //day
 let m = 0; //month
 let y = 0; // year
 
+let staticHeight;
+
 //setup---------------------------------------------------------------------------------------------------------------
 function setup() {
   //creating the canvas
@@ -56,6 +58,7 @@ function setup() {
   //vars to help w relative proportions
   centerWidth = windowWidth / 2;
   thirdHeight = windowHeight / 3.1;
+  staticHeight = windowHeight;
 
   //creating the solar system
   overall.push(new SolarSystem(0, 0));
@@ -128,13 +131,13 @@ function draw() {
         text(
           "0" + d + "/0" + m + "/" + y,
           (windowWidth / 4) * 3.93,
-          (windowHeight / 4) * 2.37 
+          (staticHeight / 4) * 2.37 
         ); //2.42
       } else {
         text(
           d + "/0" + m + "/" + y,
           (windowWidth / 4) * 3.9,
-          (windowHeight / 4) * 2.37
+          (staticHeight / 4) * 2.37
         );
       }
     } else {
@@ -143,13 +146,13 @@ function draw() {
         text(
           "0" + d + "/" + m + "/" + y,
           (windowWidth / 4) * 3.9,
-          (windowHeight / 4) * 2.37
+          (staticHeight / 4) * 2.37
         );
       } else {
         text(
           d + "/" + m + "/" + y,
           (windowWidth / 4) * 3.9,
-          (windowHeight / 4) * 2.37
+          (staticHeight / 4) * 2.37
         );
       }
     }
