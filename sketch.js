@@ -47,8 +47,6 @@ let d = 0; //day
 let m = 0; //month
 let y = 0; // year
 
-let staticHeight;
-
 //setup---------------------------------------------------------------------------------------------------------------
 function setup() {
   //creating the canvas
@@ -58,7 +56,6 @@ function setup() {
   //vars to help w relative proportions
   centerWidth = windowWidth / 2;
   thirdHeight = windowHeight / 3.1;
-  staticHeight = windowHeight;
 
   //creating the solar system
   overall.push(new SolarSystem(0, 0));
@@ -121,9 +118,13 @@ function draw() {
     textSize(windowHeight / 33);
 
     textSize(windowHeight / 43);
+    if(windowHeight > 0){
     text("Social Orbit", (windowWidth / 4) * 3.93, (windowHeight / 4) * 2.27);
+    } else {
+      text("Social Orbit", (windowWidth / 4) * 3.93, -(windowHeight / 4) * 2.27);
+    }
 
-    textSize(windowHeight / 36);
+    textSize(windowHeight / 33);
     if(windowHeight > 0) {
     //if the month number is less than 10, put a 0 before the month number display date
     if (m < 10) {
@@ -132,13 +133,13 @@ function draw() {
         text(
           "0" + d + "/0" + m + "/" + y,
           (windowWidth / 4) * 3.93,
-          (staticHeight / 4) * 2.37 
-        ); //2.42
+          (windowHeight / 4) * 2.42
+        ); 
       } else {
         text(
           d + "/0" + m + "/" + y,
           (windowWidth / 4) * 3.9,
-          (staticHeight / 4) * 2.37
+          (windowHeight / 4) * 2.42
         );
       }
     } else {
@@ -147,13 +148,13 @@ function draw() {
         text(
           "0" + d + "/" + m + "/" + y,
           (windowWidth / 4) * 3.9,
-          (staticHeight / 4) * 2.37
+          (windowHeight / 4) * 2.42
         );
       } else {
         text(
           d + "/" + m + "/" + y,
           (windowWidth / 4) * 3.9,
-          (staticHeight / 4) * 2.37
+          (windowHeight / 4) * 2.42
         );
       }
     }
@@ -164,13 +165,13 @@ function draw() {
         text(
           "0" + d + "/0" + m + "/" + y,
           (windowWidth / 4) * 3.93,
-          -(staticHeight / 4) * 2.37 
+          -(windowHeight / 4) * 2.37 
         ); //2.42
       } else {
         text(
           d + "/0" + m + "/" + y,
           (windowWidth / 4) * 3.9,
-          -(staticHeight / 4) * 2.37
+          -(windowHeight / 4) * 2.37
         );
       }
     } else {
@@ -179,13 +180,13 @@ function draw() {
         text(
           "0" + d + "/" + m + "/" + y,
           (windowWidth / 4) * 3.9,
-          -(staticHeight / 4) * 2.37
+          -(windowHeight / 4) * 2.37
         );
       } else {
         text(
           d + "/" + m + "/" + y,
           (windowWidth / 4) * 3.9,
-          -(staticHeight / 4) * 2.37
+          -(windowHeight / 4) * 2.37
         );
       }
     }
