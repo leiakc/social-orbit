@@ -124,6 +124,7 @@ function draw() {
     text("Social Orbit", (windowWidth / 4) * 3.93, (windowHeight / 4) * 2.27);
 
     textSize(windowHeight / 36);
+    if(windowHeight > 0) {
     //if the month number is less than 10, put a 0 before the month number display date
     if (m < 10) {
       //if the day number is less than 10, put a 0 before the day number display date
@@ -156,6 +157,39 @@ function draw() {
         );
       }
     }
+  } else {
+    if (m < 10) {
+      //if the day number is less than 10, put a 0 before the day number display date
+      if (d < 10) {
+        text(
+          "0" + d + "/0" + m + "/" + y,
+          (windowWidth / 4) * 3.93,
+          -(staticHeight / 4) * 2.37 
+        ); //2.42
+      } else {
+        text(
+          d + "/0" + m + "/" + y,
+          (windowWidth / 4) * 3.9,
+          -(staticHeight / 4) * 2.37
+        );
+      }
+    } else {
+      //if the day number is less than 10, put a 0 before the day number display date
+      if (d < 10) {
+        text(
+          "0" + d + "/" + m + "/" + y,
+          (windowWidth / 4) * 3.9,
+          -(staticHeight / 4) * 2.37
+        );
+      } else {
+        text(
+          d + "/" + m + "/" + y,
+          (windowWidth / 4) * 3.9,
+          -(staticHeight / 4) * 2.37
+        );
+      }
+    }
+  }
   }
 }
 
