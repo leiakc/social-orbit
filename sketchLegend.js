@@ -80,7 +80,7 @@ g.setup = function() {
   
   //writing
    g.fill(255);
-  g.textSize(g.windowHeight / 34);
+  g.textSize(g.windowHeight / 36);
   g.textAlign(g.CENTER,g.CENTER);
   
   //What time of day was the interaction?/////////////////////////////////////////////////////////// 
@@ -128,7 +128,7 @@ g.setup = function() {
     }
   }
   
-  g.textSize(g.windowHeight / 47);
+  g.textSize(g.windowHeight / 50);
   g.textAlign(g.CENTER,g.TOP);
   
   g.fill(255);
@@ -143,13 +143,13 @@ g.setup = function() {
              
   //How are you today?///////////////////////////////////////////////////////////////////////////
   g.fill(255);
-  g.textSize(g.windowHeight / 34);
+  g.textSize(g.windowHeight / 36);
   g.textAlign(g.CENTER,g.CENTER);
   g.text("How are you today?",g.windowWidth/2, (g.windowHeight/3.5)-g.windowHeight/11-g.windowHeight/45.4);
   
   //dif suns
   //drawing sun
-  g.textSize(g.windowHeight / 47);
+  g.textSize(g.windowHeight / 50);
   g.textAlign(g.CENTER,g.TOP);
   g.fill(255);
   g.text("Very Good",(g.windowWidth/5)*1-(g.windowWidth/5)/2, (g.windowHeight/3.5)+g.windowHeight/13-g.windowHeight/45.4);
@@ -184,11 +184,11 @@ g.setup = function() {
   //sun decorations
   //How did you feel about today's social interactions?/////////////////////////////////////////////
   g.fill(255);
-  g.textSize(g.windowHeight / 34);
+  g.textSize(g.windowHeight / 36);
   g.textAlign(g.CENTER,g.CENTER);
   g.text("How did you feel about \ntoday's social interactions?",g.windowWidth/2, (g.windowHeight/3.5)*2-g.windowHeight/8.25-g.windowHeight/208);
   
-  g.textSize(g.windowHeight / 47);
+  g.textSize(g.windowHeight / 50);
   g.textAlign(g.CENTER,g.TOP);
   
   g.fill(255);
@@ -355,11 +355,11 @@ g.setup = function() {
   //stars
   //How satisfied are you with today's social interactions?///////////////////////////////////////////
   g.fill(255);
-  g.textSize(g.windowHeight / 34);
+  g.textSize(g.windowHeight / 36);
   g.textAlign(g.CENTER,g.CENTER);
   g.text("How satisfied are you with \ntoday's social interactions?",g.windowWidth/2, (g.windowHeight/3.5)*3-g.windowHeight/8.3+g.windowHeight/33);  
   
-  g.textSize(g.windowHeight / 47);
+  g.textSize(g.windowHeight / 50);
   g.textAlign(g.CENTER,g.TOP);
   
   g.fill(255);
@@ -664,11 +664,11 @@ g.setup = function() {
   //relationship 
   //What kind of relationship do you have?///////////////////////////////////////////////////////////
   g.fill(255);
-  g.textSize(g.windowHeight / 34);
+  g.textSize(g.windowHeight / 36);
   g.textAlign(g.CENTER,g.CENTER);
   g.text("What kind of relationship do you have?",g.windowWidth/2, (g.windowHeight/3.5)*4-g.windowHeight/12+g.windowHeight/22.15);  
   
-  g.textSize(g.windowHeight / 47);
+  g.textSize(g.windowHeight / 50);
   g.textAlign(g.CENTER,g.TOP);
 
   g.fill(255);
@@ -806,7 +806,7 @@ g.setup = function() {
   //communication method
   //How did you communicate?//////////////////////////////////////////////////////////////////
       g.fill(255);
-  g.textSize(g.windowHeight / 34);
+  g.textSize(g.windowHeight / 36);
   g.textAlign(g.CENTER,g.CENTER);
   g.text("How did you communicate?",g.windowWidth/2, (g.windowHeight/3.5)*5-g.windowHeight/11+g.windowHeight/21.9);  
   
@@ -816,7 +816,7 @@ g.setup = function() {
   g.circle((g.windowWidth/4)*i-(g.windowWidth/4)/2, (g.windowHeight/3.5)*5+g.windowHeight/21.9, g.planetSize);
   }
   
-  g.textSize(g.windowHeight / 47);
+  g.textSize(g.windowHeight / 50);
   g.textAlign(g.CENTER,g.TOP);
   
   //have not adjusted text up CUZ not sure if will keep the stuff on the second g.line 
@@ -905,11 +905,11 @@ g.setup = function() {
 
   //Around how long was your interaction?///////////////////////////////////////////////////////////
       g.fill(255);
-  g.textSize(g.windowHeight / 34);
+  g.textSize(g.windowHeight / 36);
   g.textAlign(g.CENTER,g.CENTER);
   g.text("Around how long was your interaction?",g.windowWidth/2, (g.windowHeight/3.5)*6-g.windowHeight/12.5+g.windowHeight/80);  
   
-  g.textSize(g.windowHeight / 47);
+  g.textSize(g.windowHeight / 50);
   g.textAlign(g.CENTER,g.TOP);
   
   g.fill(255);
@@ -950,7 +950,7 @@ g.setup = function() {
   
   //How did you feel about the interaction?//////////////////////////////////////////////////////////
   g.fill(255);
-  g.textSize(g.windowHeight / 34);
+  g.textSize(g.windowHeight / 36);
   g.textAlign(g.CENTER,g.CENTER);
   g.text("How did you feel about the interaction?",g.windowWidth/2, (g.windowHeight/3.5)*7-g.windowHeight/12+g.windowHeight/120);  
   
@@ -972,7 +972,7 @@ g.setup = function() {
   g.circle((g.windowWidth/5)*i-(g.windowWidth/5)/2, (g.windowHeight/3.5)*7+g.windowHeight/120, g.planetSize);
   }
   
-  g.textSize(g.windowHeight / 47);
+  g.textSize(g.windowHeight / 50);
   g.textAlign(g.CENTER,g.TOP);
   
   g.fill(255);

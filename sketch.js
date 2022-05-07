@@ -120,7 +120,7 @@ function draw() {
     textSize(windowHeight / 43);
     text("Social Orbit", (windowWidth / 4) * 3.93, (windowHeight / 4) * 2.27);
 
-    textSize(windowHeight / 33);
+    textSize(windowHeight / 38);
     //if the month number is less than 10, put a 0 before the month number display date
     if (m < 10) {
       //if the day number is less than 10, put a 0 before the day number display date
