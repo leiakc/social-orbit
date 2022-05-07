@@ -165,13 +165,13 @@ function draw() {
         text(
           "0" + d + "/0" + m + "/" + y,
           (windowWidth / 4) * 3.93,
-          -(windowHeight / 4) * 2.37 
+          -(windowHeight / 4) * 2.42 
         ); //2.42
       } else {
         text(
           d + "/0" + m + "/" + y,
           (windowWidth / 4) * 3.9,
-          -(windowHeight / 4) * 2.37
+          -(windowHeight / 4) * 2.42
         );
       }
     } else {
@@ -180,13 +180,13 @@ function draw() {
         text(
           "0" + d + "/" + m + "/" + y,
           (windowWidth / 4) * 3.9,
-          -(windowHeight / 4) * 2.37
+          -(windowHeight / 4) * 2.42
         );
       } else {
         text(
           d + "/" + m + "/" + y,
           (windowWidth / 4) * 3.9,
-          -(windowHeight / 4) * 2.37
+          -(windowHeight / 4) * 2.42
         );
       }
     }
