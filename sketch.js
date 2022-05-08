@@ -49,6 +49,9 @@ let y = 0; // year
 
 let strokeModifier = 0;
 
+let legendModifierW = 0;
+let legendModifierH = 0;
+
 //setup---------------------------------------------------------------------------------------------------------------
 function setup() {
   //creating the canvas
@@ -62,6 +65,9 @@ function setup() {
   if (windowWidth < 1000){
     strokeModifier = 2.5;
   } 
+
+  legendModifierW = windowWidth / displayWidth;
+  legendModifierH = windowHeight / displayHeight;
 
   //creating the solar system
   overall.push(new SolarSystem(0, 0));
