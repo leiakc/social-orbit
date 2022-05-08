@@ -60,7 +60,7 @@ function setup() {
   thirdHeight = windowHeight / 3.1;
 
   if (windowWidth < 1000){
-    strokeModifier = 1;
+    strokeModifier = 2;
   } 
 
   //creating the solar system
