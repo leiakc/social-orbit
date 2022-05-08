@@ -21,15 +21,15 @@ g.planetSize = 0;
 //setup-------------------------------------------------------------------------------------
 g.setup = function() {
   //creating the canvas
-  // myCanvasLegend = g.createCanvas(resizeWidth, g.displayHeight*legendModifierH*2.85);
+  // myCanvasLegend = g.createCanvas(g.displayWidth*legendModifierH, g.displayHeight*legendModifierH*2.85);
   // myCanvasLegend.parent("myCanvasLegendHTML");
-  g.createCanvas(resizeWidth, g.displayHeight*legendModifierH*2.85);
+  g.createCanvas(g.displayWidth*legendModifierH, g.displayHeight*legendModifierH*2.85);
   
   g.textFont("Helvetica");
   // g.textAlign(g.CENTER);
   g.textStyle(g.NORMAL);
   
-  g.planetSize = resizeWidth/12;
+  g.planetSize = g.displayWidth*legendModifierH/12;
 
 // }
 
@@ -37,7 +37,7 @@ g.setup = function() {
 // g.draw = function() {
   g.background(0);
   
-  g.sunWidth = resizeWidth / 7.5;
+  g.sunWidth = g.displayWidth*legendModifierH / 7.5;
   
   ///////////////////////////////////////////////////////////////
   
@@ -49,34 +49,34 @@ g.setup = function() {
 
   //rings
   
-  g.ringSpacerL = ((((resizeWidth/6)*2-(resizeWidth/6)/2) - ((resizeWidth/6)*1-(resizeWidth/6)/2))*2) ;
+  g.ringSpacerL = ((((g.displayWidth*legendModifierH/6)*2-(g.displayWidth*legendModifierH/6)/2) - ((g.displayWidth*legendModifierH/6)*1-(g.displayWidth*legendModifierH/6)/2))*2) ;
   
   //closest to sun
   g.noFill();
   g.stroke(255);
   
-  g.ellipse((resizeWidth/6)*1-(resizeWidth/6)/2, (resizeHeight)*8, resizeWidth-(g.ringSpacerL)*2);
+  g.ellipse((g.displayWidth*legendModifierH/6)*1-(g.displayWidth*legendModifierH/6)/2, (g.displayHeight*legendModifierH/3.5)*8, g.displayWidth*legendModifierH-(g.ringSpacerL)*2);
   
-  g.ellipse((resizeWidth/6)*1-(resizeWidth/6)/2, (resizeHeight)*8, resizeWidth-(g.ringSpacerL));
+  g.ellipse((g.displayWidth*legendModifierH/6)*1-(g.displayWidth*legendModifierH/6)/2, (g.displayHeight*legendModifierH/3.5)*8, g.displayWidth*legendModifierH-(g.ringSpacerL));
   
-  g.ellipse((resizeWidth/6)*1-(resizeWidth/6)/2, (resizeHeight)*8, resizeWidth);
+  g.ellipse((g.displayWidth*legendModifierH/6)*1-(g.displayWidth*legendModifierH/6)/2, (g.displayHeight*legendModifierH/3.5)*8, g.displayWidth*legendModifierH);
   
   //furthest from sun
-  g.ellipse((resizeWidth/6)*1-(resizeWidth/6)/2, (resizeHeight)*8, resizeWidth+(g.ringSpacerL));
+  g.ellipse((g.displayWidth*legendModifierH/6)*1-(g.displayWidth*legendModifierH/6)/2, (g.displayHeight*legendModifierH/3.5)*8, g.displayWidth*legendModifierH+(g.ringSpacerL));
   
   //black boxes that hide most of the rings
   g.noStroke();
   g.fill(0);
-  // g.rect(0, ((resizeHeight)*6), resizeWidth, g.displayHeight*legendModifierH/2.25);
+  // g.rect(0, ((g.displayHeight*legendModifierH/3.5)*6), g.displayWidth*legendModifierH, g.displayHeight*legendModifierH/2.25);
   
   g.beginShape();
   g.vertex(0, 0); //g.TOP left 
-  g.vertex(resizeWidth,0); //g.TOP right 
-  g.vertex(resizeWidth,((resizeHeight)*6)+g.displayHeight*legendModifierH/1.95); // bottom right
-  g.vertex(0, ((resizeHeight)*6)+g.displayHeight*legendModifierH/1.95);
+  g.vertex(g.displayWidth*legendModifierH,0); //g.TOP right 
+  g.vertex(g.displayWidth*legendModifierH,((g.displayHeight*legendModifierH/3.5)*6)+g.displayHeight*legendModifierH/1.95); // bottom right
+  g.vertex(0, ((g.displayHeight*legendModifierH/3.5)*6)+g.displayHeight*legendModifierH/1.95);
   g.endShape(g.CLOSE);
-  // g.rect(0, ((resizeHeight)*8)+(g.displayHeight*legendModifierH/17), resizeWidth, g.displayHeight*legendModifierH/2.25);
-  g.rect((resizeWidth/6)*1, ((resizeHeight)*8)+(g.displayHeight*legendModifierH/17), resizeWidth, g.displayHeight*legendModifierH/22);
+  // g.rect(0, ((g.displayHeight*legendModifierH/3.5)*8)+(g.displayHeight*legendModifierH/17), g.displayWidth*legendModifierH, g.displayHeight*legendModifierH/2.25);
+  g.rect((g.displayWidth*legendModifierH/6)*1, ((g.displayHeight*legendModifierH/3.5)*8)+(g.displayHeight*legendModifierH/17), g.displayWidth*legendModifierH, g.displayHeight*legendModifierH/22);
   
   //writing
    g.fill(255);
@@ -84,7 +84,7 @@ g.setup = function() {
   g.textAlign(g.CENTER,g.CENTER);
   
   //What time of day was the interaction?/////////////////////////////////////////////////////////// 
-  g.text("What time of day was the interaction?",resizeWidth/2, (resizeHeight)*8-g.displayHeight*legendModifierH/10); 
+  g.text("What time of day was the interaction?",g.displayWidth*legendModifierH/2, (g.displayHeight*legendModifierH/3.5)*8-g.displayHeight*legendModifierH/10); 
   
   ////////////////legend title////////////////////////////////////////////////////////////////////
   g.noStroke();
@@ -94,7 +94,7 @@ g.setup = function() {
   g.textSize(g.displayHeight*legendModifierH / 25);
   g.textAlign(g.CENTER,g.CENTER);
   g.textFont('Space Mono');
-  g.text("Legend",resizeWidth/2, (resizeHeight)-g.displayHeight*legendModifierH/5); //5.5
+  g.text("Legend",g.displayWidth*legendModifierH/2, (g.displayHeight*legendModifierH/3.5)-g.displayHeight*legendModifierH/5); //5.5
   g.textStyle(g.NORMAL);
   
   g.textFont('Helvetica');  
@@ -104,15 +104,15 @@ g.setup = function() {
   for(i=1;i<7;i++){
     g.fill("rgb(150,150,150)");
     if(i!==6){
-  g.circle((resizeWidth/6)*i-(resizeWidth/6)/2, (resizeHeight)*8, g.planetSize);
+  g.circle((g.displayWidth*legendModifierH/6)*i-(g.displayWidth*legendModifierH/6)/2, (g.displayHeight*legendModifierH/3.5)*8, g.planetSize);
     } else {
-      g.circle((resizeWidth/6)*i-(resizeWidth/6)/2-(resizeWidth/200), (resizeHeight)*8, g.planetSize);
+      g.circle((g.displayWidth*legendModifierH/6)*i-(g.displayWidth*legendModifierH/6)/2-(g.displayWidth*legendModifierH/200), (g.displayHeight*legendModifierH/3.5)*8, g.planetSize);
     }
     
     if(i==1){
       g.fill("#EBD300");
     g.noStroke();
-    g.circle((resizeWidth/6)*i-(resizeWidth/6)/2, (resizeHeight)*8, g.sunWidth);
+    g.circle((g.displayWidth*legendModifierH/6)*i-(g.displayWidth*legendModifierH/6)/2, (g.displayHeight*legendModifierH/3.5)*8, g.sunWidth);
     }
     
     if(i==6){
@@ -120,8 +120,8 @@ g.setup = function() {
       g.noFill();
      g.stroke(255);
       g.strokeWeight(strokeModifier*1);
-      g.circle((resizeWidth/6)*i-(resizeWidth/6)/2-(resizeWidth/200),
-        (resizeHeight)*8,
+      g.circle((g.displayWidth*legendModifierH/6)*i-(g.displayWidth*legendModifierH/6)/2-(g.displayWidth*legendModifierH/200),
+        (g.displayHeight*legendModifierH/3.5)*8,
         g.planetSize + g.planetSize
       );
       g.noStroke();
@@ -133,11 +133,11 @@ g.setup = function() {
   
   g.fill(255);
   g.noStroke();
-  g.text("Morning",(resizeWidth/6)*2-(resizeWidth/6)/2, (resizeHeight)*8+g.displayHeight*legendModifierH/14);
-  g.text("Afternoon",(resizeWidth/6)*3-(resizeWidth/6)/2, (resizeHeight)*8+g.displayHeight*legendModifierH/14);
-  g.text("Evening",(resizeWidth/6)*4-(resizeWidth/6)/2, (resizeHeight)*8+g.displayHeight*legendModifierH/14);
-  g.text("Night",(resizeWidth/6)*5-(resizeWidth/6)/2, (resizeHeight)*8+g.displayHeight*legendModifierH/14);
-  g.text("Throughout\nthe Day",(resizeWidth/6)*6-(resizeWidth/6)/2-resizeWidth/100, (resizeHeight)*8+g.displayHeight*legendModifierH/14);
+  g.text("Morning",(g.displayWidth*legendModifierH/6)*2-(g.displayWidth*legendModifierH/6)/2, (g.displayHeight*legendModifierH/3.5)*8+g.displayHeight*legendModifierH/14);
+  g.text("Afternoon",(g.displayWidth*legendModifierH/6)*3-(g.displayWidth*legendModifierH/6)/2, (g.displayHeight*legendModifierH/3.5)*8+g.displayHeight*legendModifierH/14);
+  g.text("Evening",(g.displayWidth*legendModifierH/6)*4-(g.displayWidth*legendModifierH/6)/2, (g.displayHeight*legendModifierH/3.5)*8+g.displayHeight*legendModifierH/14);
+  g.text("Night",(g.displayWidth*legendModifierH/6)*5-(g.displayWidth*legendModifierH/6)/2, (g.displayHeight*legendModifierH/3.5)*8+g.displayHeight*legendModifierH/14);
+  g.text("Throughout\nthe Day",(g.displayWidth*legendModifierH/6)*6-(g.displayWidth*legendModifierH/6)/2-g.displayWidth*legendModifierH/100, (g.displayHeight*legendModifierH/3.5)*8+g.displayHeight*legendModifierH/14);
   
   /////////////////////////////////////////////////////////////////
              
@@ -145,79 +145,79 @@ g.setup = function() {
   g.fill(255);
   g.textSize(g.displayHeight*legendModifierH / 36);
   g.textAlign(g.CENTER,g.CENTER);
-  g.text("How are you today?",resizeWidth/2, (resizeHeight)-g.displayHeight*legendModifierH/11-g.displayHeight*legendModifierH/45.4);
+  g.text("How are you today?",g.displayWidth*legendModifierH/2, (g.displayHeight*legendModifierH/3.5)-g.displayHeight*legendModifierH/11-g.displayHeight*legendModifierH/45.4);
   
   //dif suns
   //drawing sun
   g.textSize(g.displayHeight*legendModifierH / 50);
   g.textAlign(g.CENTER,g.TOP);
   g.fill(255);
-  g.text("Very Good",(resizeWidth/5)*1-(resizeWidth/5)/2, (resizeHeight)+g.displayHeight*legendModifierH/13-g.displayHeight*legendModifierH/45.4);
+  g.text("Very Good",(g.displayWidth*legendModifierH/5)*1-(g.displayWidth*legendModifierH/5)/2, (g.displayHeight*legendModifierH/3.5)+g.displayHeight*legendModifierH/13-g.displayHeight*legendModifierH/45.4);
     g.fill("#FFF6A3");
     g.noStroke();
-    g.circle((resizeWidth/5)*1-(resizeWidth/5)/2, (resizeHeight)-g.displayHeight*legendModifierH/45.4, g.sunWidth);
+    g.circle((g.displayWidth*legendModifierH/5)*1-(g.displayWidth*legendModifierH/5)/2, (g.displayHeight*legendModifierH/3.5)-g.displayHeight*legendModifierH/45.4, g.sunWidth);
   
   g.fill(255);
-  g.text("Good",(resizeWidth/5)*2-(resizeWidth/5)/2, (resizeHeight)+g.displayHeight*legendModifierH/13-g.displayHeight*legendModifierH/45.4);
+  g.text("Good",(g.displayWidth*legendModifierH/5)*2-(g.displayWidth*legendModifierH/5)/2, (g.displayHeight*legendModifierH/3.5)+g.displayHeight*legendModifierH/13-g.displayHeight*legendModifierH/45.4);
   g.fill("#FFEB44");
     g.noStroke();
-    g.circle((resizeWidth/5)*2-(resizeWidth/5)/2, (resizeHeight)-g.displayHeight*legendModifierH/45.4, g.sunWidth);
+    g.circle((g.displayWidth*legendModifierH/5)*2-(g.displayWidth*legendModifierH/5)/2, (g.displayHeight*legendModifierH/3.5)-g.displayHeight*legendModifierH/45.4, g.sunWidth);
   
   g.fill(255);
-  g.text("Neutral",(resizeWidth/5)*3-(resizeWidth/5)/2, (resizeHeight)+g.displayHeight*legendModifierH/13-g.displayHeight*legendModifierH/45.4);
+  g.text("Neutral",(g.displayWidth*legendModifierH/5)*3-(g.displayWidth*legendModifierH/5)/2, (g.displayHeight*legendModifierH/3.5)+g.displayHeight*legendModifierH/13-g.displayHeight*legendModifierH/45.4);
   g.fill("#EBD300");
     g.noStroke();
-    g.circle((resizeWidth/5)*3-(resizeWidth/5)/2, (resizeHeight)-g.displayHeight*legendModifierH/45.4, g.sunWidth);
+    g.circle((g.displayWidth*legendModifierH/5)*3-(g.displayWidth*legendModifierH/5)/2, (g.displayHeight*legendModifierH/3.5)-g.displayHeight*legendModifierH/45.4, g.sunWidth);
   
   g.fill(255);
-  g.text("Bad",(resizeWidth/5)*4-(resizeWidth/5)/2, (resizeHeight)+g.displayHeight*legendModifierH/13-g.displayHeight*legendModifierH/45.4);
+  g.text("Bad",(g.displayWidth*legendModifierH/5)*4-(g.displayWidth*legendModifierH/5)/2, (g.displayHeight*legendModifierH/3.5)+g.displayHeight*legendModifierH/13-g.displayHeight*legendModifierH/45.4);
   g.fill("#BFAC00");
     g.noStroke();
-    g.circle((resizeWidth/5)*4-(resizeWidth/5)/2, (resizeHeight)-g.displayHeight*legendModifierH/45.4, g.sunWidth);
+    g.circle((g.displayWidth*legendModifierH/5)*4-(g.displayWidth*legendModifierH/5)/2, (g.displayHeight*legendModifierH/3.5)-g.displayHeight*legendModifierH/45.4, g.sunWidth);
   
   g.fill(255);
-  g.text("Very Bad",(resizeWidth/5)*5-(resizeWidth/5)/2, (resizeHeight)+g.displayHeight*legendModifierH/13-g.displayHeight*legendModifierH/45.4);
+  g.text("Very Bad",(g.displayWidth*legendModifierH/5)*5-(g.displayWidth*legendModifierH/5)/2, (g.displayHeight*legendModifierH/3.5)+g.displayHeight*legendModifierH/13-g.displayHeight*legendModifierH/45.4);
   g.fill("#857701");
     g.noStroke();
-    g.circle((resizeWidth/5)*5-(resizeWidth/5)/2, (resizeHeight)-g.displayHeight*legendModifierH/45.4, g.sunWidth);
+    g.circle((g.displayWidth*legendModifierH/5)*5-(g.displayWidth*legendModifierH/5)/2, (g.displayHeight*legendModifierH/3.5)-g.displayHeight*legendModifierH/45.4, g.sunWidth);
 
   //sun decorations
   //How did you feel about today's social interactions?/////////////////////////////////////////////
   g.fill(255);
   g.textSize(g.displayHeight*legendModifierH / 36);
   g.textAlign(g.CENTER,g.CENTER);
-  g.text("How did you feel about \ntoday's social interactions?",resizeWidth/2, (resizeHeight)*2-g.displayHeight*legendModifierH/8.25-g.displayHeight*legendModifierH/208);
+  g.text("How did you feel about \ntoday's social interactions?",g.displayWidth*legendModifierH/2, (g.displayHeight*legendModifierH/3.5)*2-g.displayHeight*legendModifierH/8.25-g.displayHeight*legendModifierH/208);
   
   g.textSize(g.displayHeight*legendModifierH / 50);
   g.textAlign(g.CENTER,g.TOP);
   
   g.fill(255);
-  g.text("Very Good",(resizeWidth/5)*1-(resizeWidth/5)/2, (resizeHeight)*2+g.displayHeight*legendModifierH/13-g.displayHeight*legendModifierH/208);
+  g.text("Very Good",(g.displayWidth*legendModifierH/5)*1-(g.displayWidth*legendModifierH/5)/2, (g.displayHeight*legendModifierH/3.5)*2+g.displayHeight*legendModifierH/13-g.displayHeight*legendModifierH/208);
   g.fill("#DCDCDC");
     g.noStroke();
-    g.circle((resizeWidth/5)*1-(resizeWidth/5)/2, (resizeHeight)*2-g.displayHeight*legendModifierH/208, g.sunWidth);
+    g.circle((g.displayWidth*legendModifierH/5)*1-(g.displayWidth*legendModifierH/5)/2, (g.displayHeight*legendModifierH/3.5)*2-g.displayHeight*legendModifierH/208, g.sunWidth);
 
-  g.x2 = (resizeWidth/5)*1-(resizeWidth/5)/2;
-  g.y2 = (resizeHeight)*2-g.displayHeight*legendModifierH/208;
-  g.sWidth = resizeWidth/10;
-  // g.sunWidth = resizeWidth / 7.5;
+  g.x2 = (g.displayWidth*legendModifierH/5)*1-(g.displayWidth*legendModifierH/5)/2;
+  g.y2 = (g.displayHeight*legendModifierH/3.5)*2-g.displayHeight*legendModifierH/208;
+  g.sWidth = g.displayWidth*legendModifierH/10;
+  // g.sunWidth = g.displayWidth*legendModifierH / 7.5;
   // if (this.si_feeling == 1) {
       
      g.stroke("#E49300");
       g.strokeWeight(strokeModifier*3);
-      g.circle(g.x2, g.y2, resizeWidth / 11);
+      g.circle(g.x2, g.y2, g.displayWidth*legendModifierH / 11);
       
      g.stroke(255);
       g.strokeWeight(strokeModifier*1);
-      g.circle(g.x2, g.y2, resizeWidth / 11);
+      g.circle(g.x2, g.y2, g.displayWidth*legendModifierH / 11);
       
      g.stroke("#E49300");
       g.strokeWeight(strokeModifier*3);
-      g.circle(g.x2, g.y2, resizeWidth / 18);
+      g.circle(g.x2, g.y2, g.displayWidth*legendModifierH / 18);
       
      g.stroke(255);
       g.strokeWeight(strokeModifier*1);
-      g.circle(g.x2, g.y2, resizeWidth / 18);
+      g.circle(g.x2, g.y2, g.displayWidth*legendModifierH / 18);
       
       g.noFill();
 
@@ -226,7 +226,7 @@ g.setup = function() {
       g.circle(
        g.x2 + g.sWidth / 4,
        g.y2 + g.sWidth / 4,
-        resizeWidth / 15
+        g.displayWidth*legendModifierH / 15
       );
       
      g.stroke(255);
@@ -234,7 +234,7 @@ g.setup = function() {
       g.circle(
        g.x2 + g.sWidth / 4,
        g.y2 + g.sWidth / 4,
-        resizeWidth / 15
+        g.displayWidth*legendModifierH / 15
       );
         
      g.stroke("#E49300");
@@ -242,7 +242,7 @@ g.setup = function() {
       g.circle(
        g.x2 - g.sWidth / 4,
        g.y2 - g.sWidth / 3,
-        resizeWidth / 20
+        g.displayWidth*legendModifierH / 20
       );
       
      g.stroke(255);
@@ -250,106 +250,106 @@ g.setup = function() {
       g.circle(
        g.x2 - g.sWidth / 4,
        g.y2 - g.sWidth / 3,
-        resizeWidth / 20
+        g.displayWidth*legendModifierH / 20
       );
   
   g.fill(255);
   g.noStroke();
-  g.text("Good",(resizeWidth/5)*2-(resizeWidth/5)/2, (resizeHeight)*2+g.displayHeight*legendModifierH/13-g.displayHeight*legendModifierH/208);
+  g.text("Good",(g.displayWidth*legendModifierH/5)*2-(g.displayWidth*legendModifierH/5)/2, (g.displayHeight*legendModifierH/3.5)*2+g.displayHeight*legendModifierH/13-g.displayHeight*legendModifierH/208);
   g.fill("#DCDCDC");
-    g.circle((resizeWidth/5)*2-(resizeWidth/5)/2, (resizeHeight)*2-g.displayHeight*legendModifierH/208, g.sunWidth);
+    g.circle((g.displayWidth*legendModifierH/5)*2-(g.displayWidth*legendModifierH/5)/2, (g.displayHeight*legendModifierH/3.5)*2-g.displayHeight*legendModifierH/208, g.sunWidth);
       
       g.noFill();
      g.stroke("#E49300");
       g.strokeWeight(strokeModifier*4.5);
       g.circle(
-        (resizeWidth/5)*2-(resizeWidth/5)/2 + g.sWidth / 4,
+        (g.displayWidth*legendModifierH/5)*2-(g.displayWidth*legendModifierH/5)/2 + g.sWidth / 4,
        g.y2 + g.sWidth / 4,
-        resizeWidth / 15
+        g.displayWidth*legendModifierH / 15
       );
       g.strokeWeight(strokeModifier*3.5);
       g.circle(
-        (resizeWidth/5)*2-(resizeWidth/5)/2 - g.sWidth / 4,
+        (g.displayWidth*legendModifierH/5)*2-(g.displayWidth*legendModifierH/5)/2 - g.sWidth / 4,
        g.y2 - g.sWidth / 3,
-        resizeWidth / 20
+        g.displayWidth*legendModifierH / 20
       );
       
      g.stroke(255);
       g.strokeWeight(strokeModifier*2.5);
       g.circle(
-        (resizeWidth/5)*2-(resizeWidth/5)/2 + g.sWidth / 4,
+        (g.displayWidth*legendModifierH/5)*2-(g.displayWidth*legendModifierH/5)/2 + g.sWidth / 4,
        g.y2 + g.sWidth / 4,
-        resizeWidth / 15
+        g.displayWidth*legendModifierH / 15
       );
       g.strokeWeight(strokeModifier*1.5);
       g.circle(
-        (resizeWidth/5)*2-(resizeWidth/5)/2 - g.sWidth / 4,
+        (g.displayWidth*legendModifierH/5)*2-(g.displayWidth*legendModifierH/5)/2 - g.sWidth / 4,
        g.y2 - g.sWidth / 3,
-        resizeWidth / 20
+        g.displayWidth*legendModifierH / 20
       );
   
    g.fill(255);
   g.noStroke();
-  g.text("Neutral",(resizeWidth/5)*3-(resizeWidth/5)/2, (resizeHeight)*2+g.displayHeight*legendModifierH/13-g.displayHeight*legendModifierH/208);
+  g.text("Neutral",(g.displayWidth*legendModifierH/5)*3-(g.displayWidth*legendModifierH/5)/2, (g.displayHeight*legendModifierH/3.5)*2+g.displayHeight*legendModifierH/13-g.displayHeight*legendModifierH/208);
   g.fill("#DCDCDC");
-    g.circle((resizeWidth/5)*3-(resizeWidth/5)/2, (resizeHeight)*2-g.displayHeight*legendModifierH/208, g.sunWidth);
+    g.circle((g.displayWidth*legendModifierH/5)*3-(g.displayWidth*legendModifierH/5)/2, (g.displayHeight*legendModifierH/3.5)*2-g.displayHeight*legendModifierH/208, g.sunWidth);
 
       g.noStroke();
       g.fill(150, 150, 150, 150);
-      g.circle((resizeWidth/5)*3-(resizeWidth/5)/2 + g.sWidth / 4, g.y2, resizeWidth / 27.5);
+      g.circle((g.displayWidth*legendModifierH/5)*3-(g.displayWidth*legendModifierH/5)/2 + g.sWidth / 4, g.y2, g.displayWidth*legendModifierH / 27.5);
   
   g.fill(255);
   g.noStroke();
-  g.text("Bad",(resizeWidth/5)*4-(resizeWidth/5)/2, (resizeHeight)*2+g.displayHeight*legendModifierH/13-g.displayHeight*legendModifierH/208);
+  g.text("Bad",(g.displayWidth*legendModifierH/5)*4-(g.displayWidth*legendModifierH/5)/2, (g.displayHeight*legendModifierH/3.5)*2+g.displayHeight*legendModifierH/13-g.displayHeight*legendModifierH/208);
   g.fill("#DCDCDC");
-    g.circle((resizeWidth/5)*4-(resizeWidth/5)/2, (resizeHeight)*2-g.displayHeight*legendModifierH/208, g.sunWidth);
+    g.circle((g.displayWidth*legendModifierH/5)*4-(g.displayWidth*legendModifierH/5)/2, (g.displayHeight*legendModifierH/3.5)*2-g.displayHeight*legendModifierH/208, g.sunWidth);
   
      g.stroke(0);
       g.strokeWeight(strokeModifier*2);
       g.line(
-        (resizeWidth/5)*4-(resizeWidth/5)/2 - resizeWidth / 20,
-       g.y2 - resizeWidth / 20,
-        (resizeWidth/5)*4-(resizeWidth/5)/2 + resizeWidth / 20,
-       g.y2 + resizeWidth / 20
+        (g.displayWidth*legendModifierH/5)*4-(g.displayWidth*legendModifierH/5)/2 - g.displayWidth*legendModifierH / 20,
+       g.y2 - g.displayWidth*legendModifierH / 20,
+        (g.displayWidth*legendModifierH/5)*4-(g.displayWidth*legendModifierH/5)/2 + g.displayWidth*legendModifierH / 20,
+       g.y2 + g.displayWidth*legendModifierH / 20
       );
   
     g.fill(255);
   g.noStroke();
-  g.text("Very Bad",(resizeWidth/5)*5-(resizeWidth/5)/2, (resizeHeight)*2+g.displayHeight*legendModifierH/13-g.displayHeight*legendModifierH/208);
+  g.text("Very Bad",(g.displayWidth*legendModifierH/5)*5-(g.displayWidth*legendModifierH/5)/2, (g.displayHeight*legendModifierH/3.5)*2+g.displayHeight*legendModifierH/13-g.displayHeight*legendModifierH/208);
   g.fill("#DCDCDC");
-    g.circle((resizeWidth/5)*5-(resizeWidth/5)/2, (resizeHeight)*2-g.displayHeight*legendModifierH/208, g.sunWidth);
+    g.circle((g.displayWidth*legendModifierH/5)*5-(g.displayWidth*legendModifierH/5)/2, (g.displayHeight*legendModifierH/3.5)*2-g.displayHeight*legendModifierH/208, g.sunWidth);
   
      g.stroke(0);
       g.strokeWeight(strokeModifier*2);
       g.line(
-        (resizeWidth/5)*5-(resizeWidth/5)/2 - resizeWidth / 20,
-       g.y2 - resizeWidth / 20,
-        (resizeWidth/5)*5-(resizeWidth/5)/2 + resizeWidth / 20,
-       g.y2 + resizeWidth / 20
+        (g.displayWidth*legendModifierH/5)*5-(g.displayWidth*legendModifierH/5)/2 - g.displayWidth*legendModifierH / 20,
+       g.y2 - g.displayWidth*legendModifierH / 20,
+        (g.displayWidth*legendModifierH/5)*5-(g.displayWidth*legendModifierH/5)/2 + g.displayWidth*legendModifierH / 20,
+       g.y2 + g.displayWidth*legendModifierH / 20
       );
 
       g.strokeWeight(strokeModifier*4);
       g.line(
-        (resizeWidth/5)*5-(resizeWidth/5)/2 + resizeWidth / 40 - g.sWidth / 5,
-       g.y2 - resizeWidth / 40 - g.sWidth / 5,
-        (resizeWidth/5)*5-(resizeWidth/5)/2 - resizeWidth / 40 - g.sWidth / 5,
-       g.y2 + resizeWidth / 40 - g.sWidth / 5
+        (g.displayWidth*legendModifierH/5)*5-(g.displayWidth*legendModifierH/5)/2 + g.displayWidth*legendModifierH / 40 - g.sWidth / 5,
+       g.y2 - g.displayWidth*legendModifierH / 40 - g.sWidth / 5,
+        (g.displayWidth*legendModifierH/5)*5-(g.displayWidth*legendModifierH/5)/2 - g.displayWidth*legendModifierH / 40 - g.sWidth / 5,
+       g.y2 + g.displayWidth*legendModifierH / 40 - g.sWidth / 5
       );
 
       g.strokeWeight(strokeModifier*6);
       g.line(
-        (resizeWidth/5)*5-(resizeWidth/5)/2 + resizeWidth / 30,
-       g.y2 - resizeWidth / 30,
-        (resizeWidth/5)*5-(resizeWidth/5)/2 - resizeWidth / 30,
-       g.y2 + resizeWidth / 30
+        (g.displayWidth*legendModifierH/5)*5-(g.displayWidth*legendModifierH/5)/2 + g.displayWidth*legendModifierH / 30,
+       g.y2 - g.displayWidth*legendModifierH / 30,
+        (g.displayWidth*legendModifierH/5)*5-(g.displayWidth*legendModifierH/5)/2 - g.displayWidth*legendModifierH / 30,
+       g.y2 + g.displayWidth*legendModifierH / 30
       );
 
       g.strokeWeight(strokeModifier*4);
       g.line(
-        (resizeWidth/5)*5-(resizeWidth/5)/2 + resizeWidth / 40 + g.sWidth / 5,
-       g.y2 - resizeWidth / 40 + g.sWidth / 5,
-        (resizeWidth/5)*5-(resizeWidth/5)/2 - resizeWidth / 40 + g.sWidth / 5,
-       g.y2 + resizeWidth / 40 + g.sWidth / 5
+        (g.displayWidth*legendModifierH/5)*5-(g.displayWidth*legendModifierH/5)/2 + g.displayWidth*legendModifierH / 40 + g.sWidth / 5,
+       g.y2 - g.displayWidth*legendModifierH / 40 + g.sWidth / 5,
+        (g.displayWidth*legendModifierH/5)*5-(g.displayWidth*legendModifierH/5)/2 - g.displayWidth*legendModifierH / 40 + g.sWidth / 5,
+       g.y2 + g.displayWidth*legendModifierH / 40 + g.sWidth / 5
       );
   
   //stars
@@ -357,308 +357,308 @@ g.setup = function() {
   g.fill(255);
   g.textSize(g.displayHeight*legendModifierH / 36);
   g.textAlign(g.CENTER,g.CENTER);
-  g.text("How satisfied are you with \ntoday's social interactions?",resizeWidth/2, (resizeHeight)*3-g.displayHeight*legendModifierH/8.3+g.displayHeight*legendModifierH/33);  
+  g.text("How satisfied are you with \ntoday's social interactions?",g.displayWidth*legendModifierH/2, (g.displayHeight*legendModifierH/3.5)*3-g.displayHeight*legendModifierH/8.3+g.displayHeight*legendModifierH/33);  
   
   g.textSize(g.displayHeight*legendModifierH / 50);
   g.textAlign(g.CENTER,g.TOP);
   
   g.fill(255);
   g.noStroke();
-  g.text("Very\nSatisfied",(resizeWidth/5)*1-(resizeWidth/5)/2, (resizeHeight)*3+g.displayHeight*legendModifierH/13+g.displayHeight*legendModifierH/33);
+  g.text("Very\nSatisfied",(g.displayWidth*legendModifierH/5)*1-(g.displayWidth*legendModifierH/5)/2, (g.displayHeight*legendModifierH/3.5)*3+g.displayHeight*legendModifierH/13+g.displayHeight*legendModifierH/33);
 
   g.fill(255, 255, 255, 50);
-  g.circle((resizeWidth/5)*1-(resizeWidth/5)/2+resizeWidth/20,(
-          resizeHeight)*3+g.displayHeight*legendModifierH/22.15+g.displayHeight*legendModifierH/33, 
-         (resizeWidth/50)* 3.5 + 3);
+  g.circle((g.displayWidth*legendModifierH/5)*1-(g.displayWidth*legendModifierH/5)/2+g.displayWidth*legendModifierH/20,(
+          g.displayHeight*legendModifierH/3.5)*3+g.displayHeight*legendModifierH/22.15+g.displayHeight*legendModifierH/33, 
+         (g.displayWidth*legendModifierH/50)* 3.5 + 3);
   
   g.fill(255, 255, 255, 90);
-  g.circle((resizeWidth/5)*1-(resizeWidth/5)/2+resizeWidth/20,(
-          resizeHeight)*3+g.displayHeight*legendModifierH/22.15+g.displayHeight*legendModifierH/33, 
-         (resizeWidth/50)* 2.2 + 3);
+  g.circle((g.displayWidth*legendModifierH/5)*1-(g.displayWidth*legendModifierH/5)/2+g.displayWidth*legendModifierH/20,(
+          g.displayHeight*legendModifierH/3.5)*3+g.displayHeight*legendModifierH/22.15+g.displayHeight*legendModifierH/33, 
+         (g.displayWidth*legendModifierH/50)* 2.2 + 3);
   
   g.fill(255, 255, 255);
-  g.circle((resizeWidth/5)*1-(resizeWidth/5)/2+resizeWidth/20,(
-          resizeHeight)*3+g.displayHeight*legendModifierH/22.15+g.displayHeight*legendModifierH/33, 
-         (resizeWidth/50)+ 3);
+  g.circle((g.displayWidth*legendModifierH/5)*1-(g.displayWidth*legendModifierH/5)/2+g.displayWidth*legendModifierH/20,(
+          g.displayHeight*legendModifierH/3.5)*3+g.displayHeight*legendModifierH/22.15+g.displayHeight*legendModifierH/33, 
+         (g.displayWidth*legendModifierH/50)+ 3);
   
   g.fill(255, 255, 255, 50);
-  g.circle((resizeWidth/5)*1-(resizeWidth/5)/2, (resizeHeight)*3+g.displayHeight*legendModifierH/33, (resizeWidth/75)* 3.5 + 3);
+  g.circle((g.displayWidth*legendModifierH/5)*1-(g.displayWidth*legendModifierH/5)/2, (g.displayHeight*legendModifierH/3.5)*3+g.displayHeight*legendModifierH/33, (g.displayWidth*legendModifierH/75)* 3.5 + 3);
   
   g.fill(255, 255, 255, 90);
-  g.circle((resizeWidth/5)*1-(resizeWidth/5)/2, (resizeHeight)*3+g.displayHeight*legendModifierH/33, (resizeWidth/75)* 2.2 + 3);
+  g.circle((g.displayWidth*legendModifierH/5)*1-(g.displayWidth*legendModifierH/5)/2, (g.displayHeight*legendModifierH/3.5)*3+g.displayHeight*legendModifierH/33, (g.displayWidth*legendModifierH/75)* 2.2 + 3);
   
   g.fill(255, 255, 255);
-  g.circle((resizeWidth/5)*1-(resizeWidth/5)/2, (resizeHeight)*3+g.displayHeight*legendModifierH/33, (resizeWidth/75)+ 3);
+  g.circle((g.displayWidth*legendModifierH/5)*1-(g.displayWidth*legendModifierH/5)/2, (g.displayHeight*legendModifierH/3.5)*3+g.displayHeight*legendModifierH/33, (g.displayWidth*legendModifierH/75)+ 3);
   
   g.fill(255, 255, 255, 50);
-  g.circle((resizeWidth/5)*1-(resizeWidth/5)/2-resizeWidth/20, 
-        (resizeHeight)*3-g.displayHeight*legendModifierH/45+g.displayHeight*legendModifierH/33, 
-         (resizeWidth/120)* 3.5 + 3);
+  g.circle((g.displayWidth*legendModifierH/5)*1-(g.displayWidth*legendModifierH/5)/2-g.displayWidth*legendModifierH/20, 
+        (g.displayHeight*legendModifierH/3.5)*3-g.displayHeight*legendModifierH/45+g.displayHeight*legendModifierH/33, 
+         (g.displayWidth*legendModifierH/120)* 3.5 + 3);
   
   g.fill(255, 255, 255, 90);
-  g.circle((resizeWidth/5)*1-(resizeWidth/5)/2-resizeWidth/20, 
-        (resizeHeight)*3-g.displayHeight*legendModifierH/45+g.displayHeight*legendModifierH/33, 
-         (resizeWidth/120)* 2.2 + 3);
+  g.circle((g.displayWidth*legendModifierH/5)*1-(g.displayWidth*legendModifierH/5)/2-g.displayWidth*legendModifierH/20, 
+        (g.displayHeight*legendModifierH/3.5)*3-g.displayHeight*legendModifierH/45+g.displayHeight*legendModifierH/33, 
+         (g.displayWidth*legendModifierH/120)* 2.2 + 3);
   
   g.fill(255, 255, 255);
-  g.circle((resizeWidth/5)*1-(resizeWidth/5)/2-resizeWidth/20, 
-        (resizeHeight)*3-g.displayHeight*legendModifierH/45+g.displayHeight*legendModifierH/33, 
-         (resizeWidth/120)+ 3);
+  g.circle((g.displayWidth*legendModifierH/5)*1-(g.displayWidth*legendModifierH/5)/2-g.displayWidth*legendModifierH/20, 
+        (g.displayHeight*legendModifierH/3.5)*3-g.displayHeight*legendModifierH/45+g.displayHeight*legendModifierH/33, 
+         (g.displayWidth*legendModifierH/120)+ 3);
   
   g.fill(255, 255, 255, 50);
-  g.circle((resizeWidth/5)*1-(resizeWidth/5)/2-resizeWidth/32, 
-         (resizeHeight)*3+g.displayHeight*legendModifierH/45+g.displayHeight*legendModifierH/33, 
-         (resizeWidth/220)* 3.5 + 3);
+  g.circle((g.displayWidth*legendModifierH/5)*1-(g.displayWidth*legendModifierH/5)/2-g.displayWidth*legendModifierH/32, 
+         (g.displayHeight*legendModifierH/3.5)*3+g.displayHeight*legendModifierH/45+g.displayHeight*legendModifierH/33, 
+         (g.displayWidth*legendModifierH/220)* 3.5 + 3);
   
   g.fill(255, 255, 255, 90);
-  g.circle((resizeWidth/5)*1-(resizeWidth/5)/2-resizeWidth/32, 
-         (resizeHeight)*3+g.displayHeight*legendModifierH/45+g.displayHeight*legendModifierH/33, 
-         (resizeWidth/220)* 2.2 + 3);
+  g.circle((g.displayWidth*legendModifierH/5)*1-(g.displayWidth*legendModifierH/5)/2-g.displayWidth*legendModifierH/32, 
+         (g.displayHeight*legendModifierH/3.5)*3+g.displayHeight*legendModifierH/45+g.displayHeight*legendModifierH/33, 
+         (g.displayWidth*legendModifierH/220)* 2.2 + 3);
   
   g.fill(255, 255, 255);
-  g.circle((resizeWidth/5)*1-(resizeWidth/5)/2-resizeWidth/32, 
-         (resizeHeight)*3+g.displayHeight*legendModifierH/45+g.displayHeight*legendModifierH/33, 
-         (resizeWidth/220)+ 3);
+  g.circle((g.displayWidth*legendModifierH/5)*1-(g.displayWidth*legendModifierH/5)/2-g.displayWidth*legendModifierH/32, 
+         (g.displayHeight*legendModifierH/3.5)*3+g.displayHeight*legendModifierH/45+g.displayHeight*legendModifierH/33, 
+         (g.displayWidth*legendModifierH/220)+ 3);
   
   g.fill(255, 255, 255, 50);
-  g.circle((resizeWidth/5)*1-(resizeWidth/5)/2+resizeWidth/70, 
-         (resizeHeight)*3-g.displayHeight*legendModifierH/25+g.displayHeight*legendModifierH/33, 
-         (resizeWidth/90)* 3.5 + 3);
+  g.circle((g.displayWidth*legendModifierH/5)*1-(g.displayWidth*legendModifierH/5)/2+g.displayWidth*legendModifierH/70, 
+         (g.displayHeight*legendModifierH/3.5)*3-g.displayHeight*legendModifierH/25+g.displayHeight*legendModifierH/33, 
+         (g.displayWidth*legendModifierH/90)* 3.5 + 3);
   
   g.fill(255, 255, 255, 90);
-  g.circle((resizeWidth/5)*1-(resizeWidth/5)/2+resizeWidth/70, 
-         (resizeHeight)*3-g.displayHeight*legendModifierH/25+g.displayHeight*legendModifierH/33, 
-         (resizeWidth/90)* 2.2 + 3);
+  g.circle((g.displayWidth*legendModifierH/5)*1-(g.displayWidth*legendModifierH/5)/2+g.displayWidth*legendModifierH/70, 
+         (g.displayHeight*legendModifierH/3.5)*3-g.displayHeight*legendModifierH/25+g.displayHeight*legendModifierH/33, 
+         (g.displayWidth*legendModifierH/90)* 2.2 + 3);
   
   g.fill(255, 255, 255);
-  g.circle((resizeWidth/5)*1-(resizeWidth/5)/2+resizeWidth/70, 
-         (resizeHeight)*3-g.displayHeight*legendModifierH/25+g.displayHeight*legendModifierH/33, 
-         (resizeWidth/90)+ 3);
+  g.circle((g.displayWidth*legendModifierH/5)*1-(g.displayWidth*legendModifierH/5)/2+g.displayWidth*legendModifierH/70, 
+         (g.displayHeight*legendModifierH/3.5)*3-g.displayHeight*legendModifierH/25+g.displayHeight*legendModifierH/33, 
+         (g.displayWidth*legendModifierH/90)+ 3);
   
   g.fill(255, 255, 255, 50);
-  g.circle((resizeWidth/5)*1-(resizeWidth/5)/2+resizeWidth/20, 
-         (resizeHeight)*3-g.displayHeight*legendModifierH/50+g.displayHeight*legendModifierH/33, 
-         (resizeWidth/90)* 3.5 + 3);
+  g.circle((g.displayWidth*legendModifierH/5)*1-(g.displayWidth*legendModifierH/5)/2+g.displayWidth*legendModifierH/20, 
+         (g.displayHeight*legendModifierH/3.5)*3-g.displayHeight*legendModifierH/50+g.displayHeight*legendModifierH/33, 
+         (g.displayWidth*legendModifierH/90)* 3.5 + 3);
   
   g.fill(255, 255, 255, 90);
-  g.circle((resizeWidth/5)*1-(resizeWidth/5)/2+resizeWidth/20, 
-         (resizeHeight)*3-g.displayHeight*legendModifierH/50+g.displayHeight*legendModifierH/33, 
-         (resizeWidth/90)* 2.2 + 3);
+  g.circle((g.displayWidth*legendModifierH/5)*1-(g.displayWidth*legendModifierH/5)/2+g.displayWidth*legendModifierH/20, 
+         (g.displayHeight*legendModifierH/3.5)*3-g.displayHeight*legendModifierH/50+g.displayHeight*legendModifierH/33, 
+         (g.displayWidth*legendModifierH/90)* 2.2 + 3);
   
   g.fill(255, 255, 255);
-  g.circle((resizeWidth/5)*1-(resizeWidth/5)/2+resizeWidth/20, 
-         (resizeHeight)*3-g.displayHeight*legendModifierH/50+g.displayHeight*legendModifierH/33, 
-         (resizeWidth/90)+ 3);
+  g.circle((g.displayWidth*legendModifierH/5)*1-(g.displayWidth*legendModifierH/5)/2+g.displayWidth*legendModifierH/20, 
+         (g.displayHeight*legendModifierH/3.5)*3-g.displayHeight*legendModifierH/50+g.displayHeight*legendModifierH/33, 
+         (g.displayWidth*legendModifierH/90)+ 3);
   
   g.fill(255, 255, 255, 50);
-  g.circle((resizeWidth/5)*1-(resizeWidth/5)/2-resizeWidth/18, 
-         (resizeHeight)*3+g.displayHeight*legendModifierH/24+g.displayHeight*legendModifierH/33, 
-         (resizeWidth/80)* 3.5 + 3);
+  g.circle((g.displayWidth*legendModifierH/5)*1-(g.displayWidth*legendModifierH/5)/2-g.displayWidth*legendModifierH/18, 
+         (g.displayHeight*legendModifierH/3.5)*3+g.displayHeight*legendModifierH/24+g.displayHeight*legendModifierH/33, 
+         (g.displayWidth*legendModifierH/80)* 3.5 + 3);
   
   g.fill(255, 255, 255, 90);
-  g.circle((resizeWidth/5)*1-(resizeWidth/5)/2-resizeWidth/18, 
-         (resizeHeight)*3+g.displayHeight*legendModifierH/24+g.displayHeight*legendModifierH/33, 
-         (resizeWidth/80)* 2.2 + 3);
+  g.circle((g.displayWidth*legendModifierH/5)*1-(g.displayWidth*legendModifierH/5)/2-g.displayWidth*legendModifierH/18, 
+         (g.displayHeight*legendModifierH/3.5)*3+g.displayHeight*legendModifierH/24+g.displayHeight*legendModifierH/33, 
+         (g.displayWidth*legendModifierH/80)* 2.2 + 3);
   
   g.fill(255, 255, 255);
-  g.circle((resizeWidth/5)*1-(resizeWidth/5)/2-resizeWidth/18, 
-         (resizeHeight)*3+g.displayHeight*legendModifierH/24+g.displayHeight*legendModifierH/33, 
-         (resizeWidth/80)+ 3);
+  g.circle((g.displayWidth*legendModifierH/5)*1-(g.displayWidth*legendModifierH/5)/2-g.displayWidth*legendModifierH/18, 
+         (g.displayHeight*legendModifierH/3.5)*3+g.displayHeight*legendModifierH/24+g.displayHeight*legendModifierH/33, 
+         (g.displayWidth*legendModifierH/80)+ 3);
     
   g.fill(255);
   g.noStroke();
-  g.text("Satisfied",(resizeWidth/5)*2-(resizeWidth/5)/2, (resizeHeight)*3+g.displayHeight*legendModifierH/13+g.displayHeight*legendModifierH/33); 
+  g.text("Satisfied",(g.displayWidth*legendModifierH/5)*2-(g.displayWidth*legendModifierH/5)/2, (g.displayHeight*legendModifierH/3.5)*3+g.displayHeight*legendModifierH/13+g.displayHeight*legendModifierH/33); 
 
-  g.circle((resizeWidth/5)*2-(resizeWidth/5)/2+resizeWidth/20,(
-          resizeHeight)*3+g.displayHeight*legendModifierH/22.15+g.displayHeight*legendModifierH/33, 
-         (resizeWidth/50)+ 3);
+  g.circle((g.displayWidth*legendModifierH/5)*2-(g.displayWidth*legendModifierH/5)/2+g.displayWidth*legendModifierH/20,(
+          g.displayHeight*legendModifierH/3.5)*3+g.displayHeight*legendModifierH/22.15+g.displayHeight*legendModifierH/33, 
+         (g.displayWidth*legendModifierH/50)+ 3);
 
-  g.circle((resizeWidth/5)*2-(resizeWidth/5)/2, (resizeHeight)*3, (resizeWidth/75)+ 3);  
+  g.circle((g.displayWidth*legendModifierH/5)*2-(g.displayWidth*legendModifierH/5)/2, (g.displayHeight*legendModifierH/3.5)*3, (g.displayWidth*legendModifierH/75)+ 3);  
 
-  g.circle((resizeWidth/5)*2-(resizeWidth/5)/2-resizeWidth/20, 
-        (resizeHeight)*3-g.displayHeight*legendModifierH/45+g.displayHeight*legendModifierH/33, 
-         (resizeWidth/120)+ 3);
+  g.circle((g.displayWidth*legendModifierH/5)*2-(g.displayWidth*legendModifierH/5)/2-g.displayWidth*legendModifierH/20, 
+        (g.displayHeight*legendModifierH/3.5)*3-g.displayHeight*legendModifierH/45+g.displayHeight*legendModifierH/33, 
+         (g.displayWidth*legendModifierH/120)+ 3);
 
-  g.circle((resizeWidth/5)*2-(resizeWidth/5)/2-resizeWidth/32, 
-         (resizeHeight)*3+g.displayHeight*legendModifierH/45+g.displayHeight*legendModifierH/33, 
-         (resizeWidth/220)+ 3);
+  g.circle((g.displayWidth*legendModifierH/5)*2-(g.displayWidth*legendModifierH/5)/2-g.displayWidth*legendModifierH/32, 
+         (g.displayHeight*legendModifierH/3.5)*3+g.displayHeight*legendModifierH/45+g.displayHeight*legendModifierH/33, 
+         (g.displayWidth*legendModifierH/220)+ 3);
   
-  g.circle((resizeWidth/5)*2-(resizeWidth/5)/2+resizeWidth/70, 
-         (resizeHeight)*3-g.displayHeight*legendModifierH/25+g.displayHeight*legendModifierH/33, 
-         (resizeWidth/90)+ 3);
+  g.circle((g.displayWidth*legendModifierH/5)*2-(g.displayWidth*legendModifierH/5)/2+g.displayWidth*legendModifierH/70, 
+         (g.displayHeight*legendModifierH/3.5)*3-g.displayHeight*legendModifierH/25+g.displayHeight*legendModifierH/33, 
+         (g.displayWidth*legendModifierH/90)+ 3);
 
-  g.circle((resizeWidth/5)*2-(resizeWidth/5)/2+resizeWidth/20, 
-         (resizeHeight)*3-g.displayHeight*legendModifierH/50+g.displayHeight*legendModifierH/33, 
-         (resizeWidth/90)+ 3);
+  g.circle((g.displayWidth*legendModifierH/5)*2-(g.displayWidth*legendModifierH/5)/2+g.displayWidth*legendModifierH/20, 
+         (g.displayHeight*legendModifierH/3.5)*3-g.displayHeight*legendModifierH/50+g.displayHeight*legendModifierH/33, 
+         (g.displayWidth*legendModifierH/90)+ 3);
 
-  g.circle((resizeWidth/5)*2-(resizeWidth/5)/2-resizeWidth/18, 
-         (resizeHeight)*3+g.displayHeight*legendModifierH/24+g.displayHeight*legendModifierH/33, 
-         (resizeWidth/80)+ 3);
+  g.circle((g.displayWidth*legendModifierH/5)*2-(g.displayWidth*legendModifierH/5)/2-g.displayWidth*legendModifierH/18, 
+         (g.displayHeight*legendModifierH/3.5)*3+g.displayHeight*legendModifierH/24+g.displayHeight*legendModifierH/33, 
+         (g.displayWidth*legendModifierH/80)+ 3);
   
   g.fill(255);
   g.noStroke();
-  g.text("Neutral",(resizeWidth/5)*3-(resizeWidth/5)/2, (resizeHeight)*3+g.displayHeight*legendModifierH/13+g.displayHeight*legendModifierH/33);
+  g.text("Neutral",(g.displayWidth*legendModifierH/5)*3-(g.displayWidth*legendModifierH/5)/2, (g.displayHeight*legendModifierH/3.5)*3+g.displayHeight*legendModifierH/13+g.displayHeight*legendModifierH/33);
   
   g.fill(255);
        g.stroke(255);
         g.strokeWeight(strokeModifier*3.5);
   
-  g.point((resizeWidth/5)*3-(resizeWidth/5)/2+resizeWidth/20,(
-          resizeHeight)*3+g.displayHeight*legendModifierH/22.15+g.displayHeight*legendModifierH/33);
+  g.point((g.displayWidth*legendModifierH/5)*3-(g.displayWidth*legendModifierH/5)/2+g.displayWidth*legendModifierH/20,(
+          g.displayHeight*legendModifierH/3.5)*3+g.displayHeight*legendModifierH/22.15+g.displayHeight*legendModifierH/33);
 
-  g.point((resizeWidth/5)*3-(resizeWidth/5)/2, (resizeHeight)*3+g.displayHeight*legendModifierH/33);
+  g.point((g.displayWidth*legendModifierH/5)*3-(g.displayWidth*legendModifierH/5)/2, (g.displayHeight*legendModifierH/3.5)*3+g.displayHeight*legendModifierH/33);
   
-  g.point((resizeWidth/5)*3-(resizeWidth/5)/2-resizeWidth/20, 
-        (resizeHeight)*3-g.displayHeight*legendModifierH/45+g.displayHeight*legendModifierH/33);
+  g.point((g.displayWidth*legendModifierH/5)*3-(g.displayWidth*legendModifierH/5)/2-g.displayWidth*legendModifierH/20, 
+        (g.displayHeight*legendModifierH/3.5)*3-g.displayHeight*legendModifierH/45+g.displayHeight*legendModifierH/33);
 
-  g.point((resizeWidth/5)*3-(resizeWidth/5)/2-resizeWidth/32, 
-         (resizeHeight)*3+g.displayHeight*legendModifierH/45+g.displayHeight*legendModifierH/33);
+  g.point((g.displayWidth*legendModifierH/5)*3-(g.displayWidth*legendModifierH/5)/2-g.displayWidth*legendModifierH/32, 
+         (g.displayHeight*legendModifierH/3.5)*3+g.displayHeight*legendModifierH/45+g.displayHeight*legendModifierH/33);
   
-  g.point((resizeWidth/5)*3-(resizeWidth/5)/2+resizeWidth/70, 
-         (resizeHeight)*3-g.displayHeight*legendModifierH/25+g.displayHeight*legendModifierH/33);
+  g.point((g.displayWidth*legendModifierH/5)*3-(g.displayWidth*legendModifierH/5)/2+g.displayWidth*legendModifierH/70, 
+         (g.displayHeight*legendModifierH/3.5)*3-g.displayHeight*legendModifierH/25+g.displayHeight*legendModifierH/33);
   
-  g.point((resizeWidth/5)*3-(resizeWidth/5)/2+resizeWidth/20, 
-         (resizeHeight)*3-g.displayHeight*legendModifierH/50+g.displayHeight*legendModifierH/33);
+  g.point((g.displayWidth*legendModifierH/5)*3-(g.displayWidth*legendModifierH/5)/2+g.displayWidth*legendModifierH/20, 
+         (g.displayHeight*legendModifierH/3.5)*3-g.displayHeight*legendModifierH/50+g.displayHeight*legendModifierH/33);
 
-  g.point((resizeWidth/5)*3-(resizeWidth/5)/2-resizeWidth/18, 
-         (resizeHeight)*3+g.displayHeight*legendModifierH/24+g.displayHeight*legendModifierH/33);
-  
-  g.fill(255);
-  g.noStroke();
-  g.text("Dissatisfied",(resizeWidth/5)*4-(resizeWidth/5)/2, (resizeHeight)*3+g.displayHeight*legendModifierH/13+g.displayHeight*legendModifierH/33);
-  
-   g.square((resizeWidth/5)*4-(resizeWidth/5)/2+resizeWidth/20,(
-          resizeHeight)*3+g.displayHeight*legendModifierH/22.15+g.displayHeight*legendModifierH/33, 
-         (resizeWidth/50)+ 3);
-
-  g.square((resizeWidth/5)*4-(resizeWidth/5)/2, (resizeHeight)*3+g.displayHeight*legendModifierH/33, (resizeWidth/75)+ 3);
-  
-
-  g.square((resizeWidth/5)*4-(resizeWidth/5)/2-resizeWidth/20, 
-        (resizeHeight)*3-g.displayHeight*legendModifierH/45+g.displayHeight*legendModifierH/33, 
-         (resizeWidth/120)+ 3);
-
-
-  g.square((resizeWidth/5)*4-(resizeWidth/5)/2-resizeWidth/32, 
-         (resizeHeight)*3+g.displayHeight*legendModifierH/45+g.displayHeight*legendModifierH/33, 
-         (resizeWidth/220)+ 3);
-  
-
-  g.square((resizeWidth/5)*4-(resizeWidth/5)/2+resizeWidth/70, 
-         (resizeHeight)*3-g.displayHeight*legendModifierH/25+g.displayHeight*legendModifierH/33, 
-         (resizeWidth/90)+ 3);
-  
-
-  g.square((resizeWidth/5)*4-(resizeWidth/5)/2+resizeWidth/20, 
-         (resizeHeight)*3-g.displayHeight*legendModifierH/50+g.displayHeight*legendModifierH/33, 
-         (resizeWidth/90)+ 3);
-
-  g.square((resizeWidth/5)*4-(resizeWidth/5)/2-resizeWidth/18, 
-         (resizeHeight)*3+g.displayHeight*legendModifierH/24+g.displayHeight*legendModifierH/33, 
-         (resizeWidth/80)+ 3);
+  g.point((g.displayWidth*legendModifierH/5)*3-(g.displayWidth*legendModifierH/5)/2-g.displayWidth*legendModifierH/18, 
+         (g.displayHeight*legendModifierH/3.5)*3+g.displayHeight*legendModifierH/24+g.displayHeight*legendModifierH/33);
   
   g.fill(255);
   g.noStroke();
-  g.text("Very\nDissatisfied",(resizeWidth/5)*5-(resizeWidth/5)/2, (resizeHeight)*3+g.displayHeight*legendModifierH/13+g.displayHeight*legendModifierH/33);
+  g.text("Dissatisfied",(g.displayWidth*legendModifierH/5)*4-(g.displayWidth*legendModifierH/5)/2, (g.displayHeight*legendModifierH/3.5)*3+g.displayHeight*legendModifierH/13+g.displayHeight*legendModifierH/33);
+  
+   g.square((g.displayWidth*legendModifierH/5)*4-(g.displayWidth*legendModifierH/5)/2+g.displayWidth*legendModifierH/20,(
+          g.displayHeight*legendModifierH/3.5)*3+g.displayHeight*legendModifierH/22.15+g.displayHeight*legendModifierH/33, 
+         (g.displayWidth*legendModifierH/50)+ 3);
+
+  g.square((g.displayWidth*legendModifierH/5)*4-(g.displayWidth*legendModifierH/5)/2, (g.displayHeight*legendModifierH/3.5)*3+g.displayHeight*legendModifierH/33, (g.displayWidth*legendModifierH/75)+ 3);
+  
+
+  g.square((g.displayWidth*legendModifierH/5)*4-(g.displayWidth*legendModifierH/5)/2-g.displayWidth*legendModifierH/20, 
+        (g.displayHeight*legendModifierH/3.5)*3-g.displayHeight*legendModifierH/45+g.displayHeight*legendModifierH/33, 
+         (g.displayWidth*legendModifierH/120)+ 3);
+
+
+  g.square((g.displayWidth*legendModifierH/5)*4-(g.displayWidth*legendModifierH/5)/2-g.displayWidth*legendModifierH/32, 
+         (g.displayHeight*legendModifierH/3.5)*3+g.displayHeight*legendModifierH/45+g.displayHeight*legendModifierH/33, 
+         (g.displayWidth*legendModifierH/220)+ 3);
+  
+
+  g.square((g.displayWidth*legendModifierH/5)*4-(g.displayWidth*legendModifierH/5)/2+g.displayWidth*legendModifierH/70, 
+         (g.displayHeight*legendModifierH/3.5)*3-g.displayHeight*legendModifierH/25+g.displayHeight*legendModifierH/33, 
+         (g.displayWidth*legendModifierH/90)+ 3);
+  
+
+  g.square((g.displayWidth*legendModifierH/5)*4-(g.displayWidth*legendModifierH/5)/2+g.displayWidth*legendModifierH/20, 
+         (g.displayHeight*legendModifierH/3.5)*3-g.displayHeight*legendModifierH/50+g.displayHeight*legendModifierH/33, 
+         (g.displayWidth*legendModifierH/90)+ 3);
+
+  g.square((g.displayWidth*legendModifierH/5)*4-(g.displayWidth*legendModifierH/5)/2-g.displayWidth*legendModifierH/18, 
+         (g.displayHeight*legendModifierH/3.5)*3+g.displayHeight*legendModifierH/24+g.displayHeight*legendModifierH/33, 
+         (g.displayWidth*legendModifierH/80)+ 3);
+  
+  g.fill(255);
+  g.noStroke();
+  g.text("Very\nDissatisfied",(g.displayWidth*legendModifierH/5)*5-(g.displayWidth*legendModifierH/5)/2, (g.displayHeight*legendModifierH/3.5)*3+g.displayHeight*legendModifierH/13+g.displayHeight*legendModifierH/33);
   
    g.fill(255, 255, 255, 50);
-  g.square((resizeWidth/5)*5-(resizeWidth/5)/2+resizeWidth/20,(
-          resizeHeight)*3+g.displayHeight*legendModifierH/22.15+g.displayHeight*legendModifierH/33, 
-         (resizeWidth/50)* 3.5 + 3);
+  g.square((g.displayWidth*legendModifierH/5)*5-(g.displayWidth*legendModifierH/5)/2+g.displayWidth*legendModifierH/20,(
+          g.displayHeight*legendModifierH/3.5)*3+g.displayHeight*legendModifierH/22.15+g.displayHeight*legendModifierH/33, 
+         (g.displayWidth*legendModifierH/50)* 3.5 + 3);
   
   g.fill(255, 255, 255, 90);
-  g.square((resizeWidth/5)*5-(resizeWidth/5)/2+resizeWidth/20,(
-          resizeHeight)*3+g.displayHeight*legendModifierH/22.15+g.displayHeight*legendModifierH/33, 
-         (resizeWidth/50)* 2.2 + 3);
+  g.square((g.displayWidth*legendModifierH/5)*5-(g.displayWidth*legendModifierH/5)/2+g.displayWidth*legendModifierH/20,(
+          g.displayHeight*legendModifierH/3.5)*3+g.displayHeight*legendModifierH/22.15+g.displayHeight*legendModifierH/33, 
+         (g.displayWidth*legendModifierH/50)* 2.2 + 3);
   
   g.fill(255, 255, 255);
-  g.square((resizeWidth/5)*5-(resizeWidth/5)/2+resizeWidth/20,(
-          resizeHeight)*3+g.displayHeight*legendModifierH/22.15+g.displayHeight*legendModifierH/33, 
-         (resizeWidth/50)+ 3);
+  g.square((g.displayWidth*legendModifierH/5)*5-(g.displayWidth*legendModifierH/5)/2+g.displayWidth*legendModifierH/20,(
+          g.displayHeight*legendModifierH/3.5)*3+g.displayHeight*legendModifierH/22.15+g.displayHeight*legendModifierH/33, 
+         (g.displayWidth*legendModifierH/50)+ 3);
   
   g.fill(255, 255, 255, 50);
-  g.square((resizeWidth/5)*5-(resizeWidth/5)/2, (resizeHeight)*3+g.displayHeight*legendModifierH/33, (resizeWidth/75)* 3.5 + 3);
+  g.square((g.displayWidth*legendModifierH/5)*5-(g.displayWidth*legendModifierH/5)/2, (g.displayHeight*legendModifierH/3.5)*3+g.displayHeight*legendModifierH/33, (g.displayWidth*legendModifierH/75)* 3.5 + 3);
   
   g.fill(255, 255, 255, 90);
-  g.square((resizeWidth/5)*5-(resizeWidth/5)/2, (resizeHeight)*3+g.displayHeight*legendModifierH/33, (resizeWidth/75)* 2.2 + 3);
+  g.square((g.displayWidth*legendModifierH/5)*5-(g.displayWidth*legendModifierH/5)/2, (g.displayHeight*legendModifierH/3.5)*3+g.displayHeight*legendModifierH/33, (g.displayWidth*legendModifierH/75)* 2.2 + 3);
   
   g.fill(255, 255, 255);
-  g.square((resizeWidth/5)*5-(resizeWidth/5)/2, (resizeHeight)*3+g.displayHeight*legendModifierH/33, (resizeWidth/75)+ 3);
+  g.square((g.displayWidth*legendModifierH/5)*5-(g.displayWidth*legendModifierH/5)/2, (g.displayHeight*legendModifierH/3.5)*3+g.displayHeight*legendModifierH/33, (g.displayWidth*legendModifierH/75)+ 3);
   
   g.fill(255, 255, 255, 50);
-  g.square((resizeWidth/5)*5-(resizeWidth/5)/2-resizeWidth/20, 
-        (resizeHeight)*3-g.displayHeight*legendModifierH/45+g.displayHeight*legendModifierH/33, 
-         (resizeWidth/120)* 3.5 + 3);
+  g.square((g.displayWidth*legendModifierH/5)*5-(g.displayWidth*legendModifierH/5)/2-g.displayWidth*legendModifierH/20, 
+        (g.displayHeight*legendModifierH/3.5)*3-g.displayHeight*legendModifierH/45+g.displayHeight*legendModifierH/33, 
+         (g.displayWidth*legendModifierH/120)* 3.5 + 3);
   
   g.fill(255, 255, 255, 90);
-  g.square((resizeWidth/5)*5-(resizeWidth/5)/2-resizeWidth/20, 
-        (resizeHeight)*3-g.displayHeight*legendModifierH/45+g.displayHeight*legendModifierH/33, 
-         (resizeWidth/120)* 2.2 + 3);
+  g.square((g.displayWidth*legendModifierH/5)*5-(g.displayWidth*legendModifierH/5)/2-g.displayWidth*legendModifierH/20, 
+        (g.displayHeight*legendModifierH/3.5)*3-g.displayHeight*legendModifierH/45+g.displayHeight*legendModifierH/33, 
+         (g.displayWidth*legendModifierH/120)* 2.2 + 3);
   
   g.fill(255, 255, 255);
-  g.square((resizeWidth/5)*5-(resizeWidth/5)/2-resizeWidth/20, 
-        (resizeHeight)*3-g.displayHeight*legendModifierH/45+g.displayHeight*legendModifierH/33, 
-         (resizeWidth/120)+ 3);
+  g.square((g.displayWidth*legendModifierH/5)*5-(g.displayWidth*legendModifierH/5)/2-g.displayWidth*legendModifierH/20, 
+        (g.displayHeight*legendModifierH/3.5)*3-g.displayHeight*legendModifierH/45+g.displayHeight*legendModifierH/33, 
+         (g.displayWidth*legendModifierH/120)+ 3);
   
   g.fill(255, 255, 255, 50);
-  g.square((resizeWidth/5)*5-(resizeWidth/5)/2-resizeWidth/32, 
-         (resizeHeight)*3+g.displayHeight*legendModifierH/45+g.displayHeight*legendModifierH/33, 
-         (resizeWidth/220)* 3.5 + 3);
+  g.square((g.displayWidth*legendModifierH/5)*5-(g.displayWidth*legendModifierH/5)/2-g.displayWidth*legendModifierH/32, 
+         (g.displayHeight*legendModifierH/3.5)*3+g.displayHeight*legendModifierH/45+g.displayHeight*legendModifierH/33, 
+         (g.displayWidth*legendModifierH/220)* 3.5 + 3);
   
   g.fill(255, 255, 255, 90);
-  g.square((resizeWidth/5)*5-(resizeWidth/5)/2-resizeWidth/32, 
-         (resizeHeight)*3+g.displayHeight*legendModifierH/45+g.displayHeight*legendModifierH/33, 
-         (resizeWidth/220)* 2.2 + 3);
+  g.square((g.displayWidth*legendModifierH/5)*5-(g.displayWidth*legendModifierH/5)/2-g.displayWidth*legendModifierH/32, 
+         (g.displayHeight*legendModifierH/3.5)*3+g.displayHeight*legendModifierH/45+g.displayHeight*legendModifierH/33, 
+         (g.displayWidth*legendModifierH/220)* 2.2 + 3);
   
   g.fill(255, 255, 255);
-  g.square((resizeWidth/5)*5-(resizeWidth/5)/2-resizeWidth/32, 
-         (resizeHeight)*3+g.displayHeight*legendModifierH/45+g.displayHeight*legendModifierH/33, 
-         (resizeWidth/220)+ 3);
+  g.square((g.displayWidth*legendModifierH/5)*5-(g.displayWidth*legendModifierH/5)/2-g.displayWidth*legendModifierH/32, 
+         (g.displayHeight*legendModifierH/3.5)*3+g.displayHeight*legendModifierH/45+g.displayHeight*legendModifierH/33, 
+         (g.displayWidth*legendModifierH/220)+ 3);
   
   g.fill(255, 255, 255, 50);
-  g.square((resizeWidth/5)*5-(resizeWidth/5)/2+resizeWidth/70, 
-         (resizeHeight)*3-g.displayHeight*legendModifierH/25+g.displayHeight*legendModifierH/33, 
-         (resizeWidth/90)* 3.5 + 3);
+  g.square((g.displayWidth*legendModifierH/5)*5-(g.displayWidth*legendModifierH/5)/2+g.displayWidth*legendModifierH/70, 
+         (g.displayHeight*legendModifierH/3.5)*3-g.displayHeight*legendModifierH/25+g.displayHeight*legendModifierH/33, 
+         (g.displayWidth*legendModifierH/90)* 3.5 + 3);
   
   g.fill(255, 255, 255, 90);
-  g.square((resizeWidth/5)*5-(resizeWidth/5)/2+resizeWidth/70, 
-         (resizeHeight)*3-g.displayHeight*legendModifierH/25+g.displayHeight*legendModifierH/33, 
-         (resizeWidth/90)* 2.2 + 3);
+  g.square((g.displayWidth*legendModifierH/5)*5-(g.displayWidth*legendModifierH/5)/2+g.displayWidth*legendModifierH/70, 
+         (g.displayHeight*legendModifierH/3.5)*3-g.displayHeight*legendModifierH/25+g.displayHeight*legendModifierH/33, 
+         (g.displayWidth*legendModifierH/90)* 2.2 + 3);
   
   g.fill(255, 255, 255);
-  g.square((resizeWidth/5)*5-(resizeWidth/5)/2+resizeWidth/70, 
-         (resizeHeight)*3-g.displayHeight*legendModifierH/25+g.displayHeight*legendModifierH/33, 
-         (resizeWidth/90)+ 3);
+  g.square((g.displayWidth*legendModifierH/5)*5-(g.displayWidth*legendModifierH/5)/2+g.displayWidth*legendModifierH/70, 
+         (g.displayHeight*legendModifierH/3.5)*3-g.displayHeight*legendModifierH/25+g.displayHeight*legendModifierH/33, 
+         (g.displayWidth*legendModifierH/90)+ 3);
   
   g.fill(255, 255, 255, 50);
-  g.square((resizeWidth/5)*5-(resizeWidth/5)/2+resizeWidth/20, 
-         (resizeHeight)*3-g.displayHeight*legendModifierH/50+g.displayHeight*legendModifierH/33, 
-         (resizeWidth/90)* 3.5 + 3);
+  g.square((g.displayWidth*legendModifierH/5)*5-(g.displayWidth*legendModifierH/5)/2+g.displayWidth*legendModifierH/20, 
+         (g.displayHeight*legendModifierH/3.5)*3-g.displayHeight*legendModifierH/50+g.displayHeight*legendModifierH/33, 
+         (g.displayWidth*legendModifierH/90)* 3.5 + 3);
   
   g.fill(255, 255, 255, 90);
-  g.square((resizeWidth/5)*5-(resizeWidth/5)/2+resizeWidth/20, 
-         (resizeHeight)*3-g.displayHeight*legendModifierH/50+g.displayHeight*legendModifierH/33, 
-         (resizeWidth/90)* 2.2 + 3);
+  g.square((g.displayWidth*legendModifierH/5)*5-(g.displayWidth*legendModifierH/5)/2+g.displayWidth*legendModifierH/20, 
+         (g.displayHeight*legendModifierH/3.5)*3-g.displayHeight*legendModifierH/50+g.displayHeight*legendModifierH/33, 
+         (g.displayWidth*legendModifierH/90)* 2.2 + 3);
   
   g.fill(255, 255, 255);
-  g.square((resizeWidth/5)*5-(resizeWidth/5)/2+resizeWidth/20, 
-         (resizeHeight)*3-g.displayHeight*legendModifierH/50+g.displayHeight*legendModifierH/33, 
-         (resizeWidth/90)+ 3);
+  g.square((g.displayWidth*legendModifierH/5)*5-(g.displayWidth*legendModifierH/5)/2+g.displayWidth*legendModifierH/20, 
+         (g.displayHeight*legendModifierH/3.5)*3-g.displayHeight*legendModifierH/50+g.displayHeight*legendModifierH/33, 
+         (g.displayWidth*legendModifierH/90)+ 3);
   
   g.fill(255, 255, 255, 50);
-  g.square((resizeWidth/5)*5-(resizeWidth/5)/2-resizeWidth/18, 
-         (resizeHeight)*3+g.displayHeight*legendModifierH/24+g.displayHeight*legendModifierH/33, 
-         (resizeWidth/80)* 3.5 + 3);
+  g.square((g.displayWidth*legendModifierH/5)*5-(g.displayWidth*legendModifierH/5)/2-g.displayWidth*legendModifierH/18, 
+         (g.displayHeight*legendModifierH/3.5)*3+g.displayHeight*legendModifierH/24+g.displayHeight*legendModifierH/33, 
+         (g.displayWidth*legendModifierH/80)* 3.5 + 3);
   
   g.fill(255, 255, 255, 90);
-  g.square((resizeWidth/5)*5-(resizeWidth/5)/2-resizeWidth/18, 
-         (resizeHeight)*3+g.displayHeight*legendModifierH/24+g.displayHeight*legendModifierH/33, 
-         (resizeWidth/80)* 2.2 + 3);
+  g.square((g.displayWidth*legendModifierH/5)*5-(g.displayWidth*legendModifierH/5)/2-g.displayWidth*legendModifierH/18, 
+         (g.displayHeight*legendModifierH/3.5)*3+g.displayHeight*legendModifierH/24+g.displayHeight*legendModifierH/33, 
+         (g.displayWidth*legendModifierH/80)* 2.2 + 3);
   
   g.fill(255, 255, 255);
-  g.square((resizeWidth/5)*5-(resizeWidth/5)/2-resizeWidth/18, 
-         (resizeHeight)*3+g.displayHeight*legendModifierH/24+g.displayHeight*legendModifierH/33, 
-         (resizeWidth/80)+ 3);
+  g.square((g.displayWidth*legendModifierH/5)*5-(g.displayWidth*legendModifierH/5)/2-g.displayWidth*legendModifierH/18, 
+         (g.displayHeight*legendModifierH/3.5)*3+g.displayHeight*legendModifierH/24+g.displayHeight*legendModifierH/33, 
+         (g.displayWidth*legendModifierH/80)+ 3);
   
   //planet stuff
   //relationship 
@@ -666,154 +666,154 @@ g.setup = function() {
   g.fill(255);
   g.textSize(g.displayHeight*legendModifierH / 36);
   g.textAlign(g.CENTER,g.CENTER);
-  g.text("What kind of relationship do you have?",resizeWidth/2, (resizeHeight)*4-g.displayHeight*legendModifierH/12+g.displayHeight*legendModifierH/22.15);  
+  g.text("What kind of relationship do you have?",g.displayWidth*legendModifierH/2, (g.displayHeight*legendModifierH/3.5)*4-g.displayHeight*legendModifierH/12+g.displayHeight*legendModifierH/22.15);  
   
   g.textSize(g.displayHeight*legendModifierH / 50);
   g.textAlign(g.CENTER,g.TOP);
 
   g.fill(255);
   g.noStroke();
-  g.text("Friends",(resizeWidth/6)*1-(resizeWidth/6)/2, (resizeHeight)*4+g.displayHeight*legendModifierH/17+g.displayHeight*legendModifierH/22.15);
+  g.text("Friends",(g.displayWidth*legendModifierH/6)*1-(g.displayWidth*legendModifierH/6)/2, (g.displayHeight*legendModifierH/3.5)*4+g.displayHeight*legendModifierH/17+g.displayHeight*legendModifierH/22.15);
   g.noStroke();
   g.fill("rgb(150,150,150)");
   
   for(i=1;i<7;i++){
-  g.circle((resizeWidth/6)*i-(resizeWidth/6)/2, (resizeHeight)*4+g.displayHeight*legendModifierH/22.15, g.planetSize);
+  g.circle((g.displayWidth*legendModifierH/6)*i-(g.displayWidth*legendModifierH/6)/2, (g.displayHeight*legendModifierH/3.5)*4+g.displayHeight*legendModifierH/22.15, g.planetSize);
   }
     
   g.noFill();
      g.stroke(255);
       g.strokeWeight(strokeModifier*1);
-      g.circle(((resizeWidth/6)*1-(resizeWidth/6)/2) - g.planetSize / 6, (resizeHeight)*4+g.displayHeight*legendModifierH/22.15, g.planetSize / 2);
-      g.circle(((resizeWidth/6)*1-(resizeWidth/6)/2) + g.planetSize / 6, (resizeHeight)*4+g.displayHeight*legendModifierH/22.15, g.planetSize / 2);
+      g.circle(((g.displayWidth*legendModifierH/6)*1-(g.displayWidth*legendModifierH/6)/2) - g.planetSize / 6, (g.displayHeight*legendModifierH/3.5)*4+g.displayHeight*legendModifierH/22.15, g.planetSize / 2);
+      g.circle(((g.displayWidth*legendModifierH/6)*1-(g.displayWidth*legendModifierH/6)/2) + g.planetSize / 6, (g.displayHeight*legendModifierH/3.5)*4+g.displayHeight*legendModifierH/22.15, g.planetSize / 2);
   
   g.fill(255);
   g.noStroke();
-  g.text("Family",(resizeWidth/6)*2-(resizeWidth/6)/2, (resizeHeight)*4+g.displayHeight*legendModifierH/17+g.displayHeight*legendModifierH/22.15);
+  g.text("Family",(g.displayWidth*legendModifierH/6)*2-(g.displayWidth*legendModifierH/6)/2, (g.displayHeight*legendModifierH/3.5)*4+g.displayHeight*legendModifierH/17+g.displayHeight*legendModifierH/22.15);
   
   g.fill(255);
      g.stroke(255);
       g.strokeWeight(strokeModifier*3);
-      g.line((((resizeWidth/6)*2-(resizeWidth/6)/2)) - g.planetSize / 2.3,
-        (resizeHeight)*4+g.displayHeight*legendModifierH/22.15,
-        (((resizeWidth/6)*2-(resizeWidth/6)/2)) + g.planetSize / 2.3,
-        (resizeHeight)*4+g.displayHeight*legendModifierH/22.15);
+      g.line((((g.displayWidth*legendModifierH/6)*2-(g.displayWidth*legendModifierH/6)/2)) - g.planetSize / 2.3,
+        (g.displayHeight*legendModifierH/3.5)*4+g.displayHeight*legendModifierH/22.15,
+        (((g.displayWidth*legendModifierH/6)*2-(g.displayWidth*legendModifierH/6)/2)) + g.planetSize / 2.3,
+        (g.displayHeight*legendModifierH/3.5)*4+g.displayHeight*legendModifierH/22.15);
   
   g.strokeWeight(strokeModifier*2 );
       g.line(
-        ((resizeWidth/6)*2-(resizeWidth/6)/2) - g.planetSize / 2.7,
-        (resizeHeight)*4 + g.planetSize / 4+g.displayHeight*legendModifierH/22.15,
-        ((resizeWidth/6)*2-(resizeWidth/6)/2) + g.planetSize / 2.7,
-        (resizeHeight)*4 + g.planetSize / 4+g.displayHeight*legendModifierH/22.15
+        ((g.displayWidth*legendModifierH/6)*2-(g.displayWidth*legendModifierH/6)/2) - g.planetSize / 2.7,
+        (g.displayHeight*legendModifierH/3.5)*4 + g.planetSize / 4+g.displayHeight*legendModifierH/22.15,
+        ((g.displayWidth*legendModifierH/6)*2-(g.displayWidth*legendModifierH/6)/2) + g.planetSize / 2.7,
+        (g.displayHeight*legendModifierH/3.5)*4 + g.planetSize / 4+g.displayHeight*legendModifierH/22.15
       );
       g.line(
-        ((resizeWidth/6)*2-(resizeWidth/6)/2) - g.planetSize / 2.7,
-        (resizeHeight)*4 - g.planetSize / 4+g.displayHeight*legendModifierH/22.15,
-        ((resizeWidth/6)*2-(resizeWidth/6)/2) + g.planetSize / 2.7,
-        (resizeHeight)*4 - g.planetSize / 4+g.displayHeight*legendModifierH/22.15
+        ((g.displayWidth*legendModifierH/6)*2-(g.displayWidth*legendModifierH/6)/2) - g.planetSize / 2.7,
+        (g.displayHeight*legendModifierH/3.5)*4 - g.planetSize / 4+g.displayHeight*legendModifierH/22.15,
+        ((g.displayWidth*legendModifierH/6)*2-(g.displayWidth*legendModifierH/6)/2) + g.planetSize / 2.7,
+        (g.displayHeight*legendModifierH/3.5)*4 - g.planetSize / 4+g.displayHeight*legendModifierH/22.15
       );
       g.strokeWeight(strokeModifier*1 );
       g.line(
-        ((resizeWidth/6)*2-(resizeWidth/6)/2) - g.planetSize / 3.8,
-        (resizeHeight)*4 + g.planetSize / 2.5+g.displayHeight*legendModifierH/22.15,
-        ((resizeWidth/6)*2-(resizeWidth/6)/2) + g.planetSize / 3.8,
-        (resizeHeight)*4 + g.planetSize / 2.5+g.displayHeight*legendModifierH/22.15
+        ((g.displayWidth*legendModifierH/6)*2-(g.displayWidth*legendModifierH/6)/2) - g.planetSize / 3.8,
+        (g.displayHeight*legendModifierH/3.5)*4 + g.planetSize / 2.5+g.displayHeight*legendModifierH/22.15,
+        ((g.displayWidth*legendModifierH/6)*2-(g.displayWidth*legendModifierH/6)/2) + g.planetSize / 3.8,
+        (g.displayHeight*legendModifierH/3.5)*4 + g.planetSize / 2.5+g.displayHeight*legendModifierH/22.15
       );
       g.line(
-        ((resizeWidth/6)*2-(resizeWidth/6)/2) - g.planetSize / 3.8,
-        (resizeHeight)*4 - g.planetSize / 2.5+g.displayHeight*legendModifierH/22.15,
-        ((resizeWidth/6)*2-(resizeWidth/6)/2) + g.planetSize / 3.8,
-        (resizeHeight)*4 - g.planetSize / 2.5+g.displayHeight*legendModifierH/22.15
+        ((g.displayWidth*legendModifierH/6)*2-(g.displayWidth*legendModifierH/6)/2) - g.planetSize / 3.8,
+        (g.displayHeight*legendModifierH/3.5)*4 - g.planetSize / 2.5+g.displayHeight*legendModifierH/22.15,
+        ((g.displayWidth*legendModifierH/6)*2-(g.displayWidth*legendModifierH/6)/2) + g.planetSize / 3.8,
+        (g.displayHeight*legendModifierH/3.5)*4 - g.planetSize / 2.5+g.displayHeight*legendModifierH/22.15
       );
   
   g.fill(255);
   g.noStroke();
-  g.text("Romantic /\nDating",(resizeWidth/6)*3-(resizeWidth/6)/2, (resizeHeight)*4+g.displayHeight*legendModifierH/17+g.displayHeight*legendModifierH/22.15);
+  g.text("Romantic /\nDating",(g.displayWidth*legendModifierH/6)*3-(g.displayWidth*legendModifierH/6)/2, (g.displayHeight*legendModifierH/3.5)*4+g.displayHeight*legendModifierH/17+g.displayHeight*legendModifierH/22.15);
   
   g.noFill();
      g.stroke(255);
 
       g.strokeWeight(strokeModifier*2);
       g.bezier(
-        (resizeWidth/6)*3-(resizeWidth/6)/2 - g.planetSize / 2,
-        (resizeHeight)*4+g.displayHeight*legendModifierH/22.15,
-        (resizeWidth/6)*3-(resizeWidth/6)/2 - g.planetSize / 8,
-        (resizeHeight)*4 - g.planetSize / 0.75+g.displayHeight*legendModifierH/22.15,
-        (resizeWidth/6)*3-(resizeWidth/6)/2 + g.planetSize / 8,
-        (resizeHeight)*4 + g.planetSize / 0.75+g.displayHeight*legendModifierH/22.15,
-        (resizeWidth/6)*3-(resizeWidth/6)/2 + g.planetSize / 2,
-        (resizeHeight)*4+g.displayHeight*legendModifierH/22.15
+        (g.displayWidth*legendModifierH/6)*3-(g.displayWidth*legendModifierH/6)/2 - g.planetSize / 2,
+        (g.displayHeight*legendModifierH/3.5)*4+g.displayHeight*legendModifierH/22.15,
+        (g.displayWidth*legendModifierH/6)*3-(g.displayWidth*legendModifierH/6)/2 - g.planetSize / 8,
+        (g.displayHeight*legendModifierH/3.5)*4 - g.planetSize / 0.75+g.displayHeight*legendModifierH/22.15,
+        (g.displayWidth*legendModifierH/6)*3-(g.displayWidth*legendModifierH/6)/2 + g.planetSize / 8,
+        (g.displayHeight*legendModifierH/3.5)*4 + g.planetSize / 0.75+g.displayHeight*legendModifierH/22.15,
+        (g.displayWidth*legendModifierH/6)*3-(g.displayWidth*legendModifierH/6)/2 + g.planetSize / 2,
+        (g.displayHeight*legendModifierH/3.5)*4+g.displayHeight*legendModifierH/22.15
       );
 
       g.strokeWeight(strokeModifier*1);
       g.bezier(
-        (resizeWidth/6)*3-(resizeWidth/6)/2 - g.planetSize / 2,
-        (resizeHeight)*4+g.displayHeight*legendModifierH/22.15,
-        (resizeWidth/6)*3-(resizeWidth/6)/2 - g.planetSize / 4,
-        (resizeHeight)*4 - g.planetSize / 1+g.displayHeight*legendModifierH/22.15,
-        (resizeWidth/6)*3-(resizeWidth/6)/2 + g.planetSize / 4,
-        (resizeHeight)*4 + g.planetSize / 1+g.displayHeight*legendModifierH/22.15,
-        (resizeWidth/6)*3-(resizeWidth/6)/2 + g.planetSize / 2,
-        (resizeHeight)*4+g.displayHeight*legendModifierH/22.15
+        (g.displayWidth*legendModifierH/6)*3-(g.displayWidth*legendModifierH/6)/2 - g.planetSize / 2,
+        (g.displayHeight*legendModifierH/3.5)*4+g.displayHeight*legendModifierH/22.15,
+        (g.displayWidth*legendModifierH/6)*3-(g.displayWidth*legendModifierH/6)/2 - g.planetSize / 4,
+        (g.displayHeight*legendModifierH/3.5)*4 - g.planetSize / 1+g.displayHeight*legendModifierH/22.15,
+        (g.displayWidth*legendModifierH/6)*3-(g.displayWidth*legendModifierH/6)/2 + g.planetSize / 4,
+        (g.displayHeight*legendModifierH/3.5)*4 + g.planetSize / 1+g.displayHeight*legendModifierH/22.15,
+        (g.displayWidth*legendModifierH/6)*3-(g.displayWidth*legendModifierH/6)/2 + g.planetSize / 2,
+        (g.displayHeight*legendModifierH/3.5)*4+g.displayHeight*legendModifierH/22.15
       );
 
       g.bezier(
-        (resizeWidth/6)*3-(resizeWidth/6)/2 - g.planetSize / 2,
-        (resizeHeight)*4+g.displayHeight*legendModifierH/22.15,
-        (resizeWidth/6)*3-(resizeWidth/6)/2 - g.planetSize / 4,
-        (resizeHeight)*4 - g.planetSize / 2+g.displayHeight*legendModifierH/22.15,
-        (resizeWidth/6)*3-(resizeWidth/6)/2 + g.planetSize / 4,
-        (resizeHeight)*4 + g.planetSize / 2+g.displayHeight*legendModifierH/22.15,
-        (resizeWidth/6)*3-(resizeWidth/6)/2 + g.planetSize / 2,
-        (resizeHeight)*4+g.displayHeight*legendModifierH/22.15
+        (g.displayWidth*legendModifierH/6)*3-(g.displayWidth*legendModifierH/6)/2 - g.planetSize / 2,
+        (g.displayHeight*legendModifierH/3.5)*4+g.displayHeight*legendModifierH/22.15,
+        (g.displayWidth*legendModifierH/6)*3-(g.displayWidth*legendModifierH/6)/2 - g.planetSize / 4,
+        (g.displayHeight*legendModifierH/3.5)*4 - g.planetSize / 2+g.displayHeight*legendModifierH/22.15,
+        (g.displayWidth*legendModifierH/6)*3-(g.displayWidth*legendModifierH/6)/2 + g.planetSize / 4,
+        (g.displayHeight*legendModifierH/3.5)*4 + g.planetSize / 2+g.displayHeight*legendModifierH/22.15,
+        (g.displayWidth*legendModifierH/6)*3-(g.displayWidth*legendModifierH/6)/2 + g.planetSize / 2,
+        (g.displayHeight*legendModifierH/3.5)*4+g.displayHeight*legendModifierH/22.15
       );
   
   g.fill(255);
   g.noStroke();
-  g.text("Work",(resizeWidth/6)*4-(resizeWidth/6)/2, (resizeHeight)*4+g.displayHeight*legendModifierH/17+g.displayHeight*legendModifierH/22.15);
+  g.text("Work",(g.displayWidth*legendModifierH/6)*4-(g.displayWidth*legendModifierH/6)/2, (g.displayHeight*legendModifierH/3.5)*4+g.displayHeight*legendModifierH/17+g.displayHeight*legendModifierH/22.15);
   
  g.stroke(255);
   g.noFill();
       g.strokeWeight(strokeModifier*0.5);
       // g.fill(this.planetColour-30);
-      g.circle((resizeWidth/6)*4-(resizeWidth/6)/2, (resizeHeight)*4+g.displayHeight*legendModifierH/22.15, g.planetSize / 1.25);
+      g.circle((g.displayWidth*legendModifierH/6)*4-(g.displayWidth*legendModifierH/6)/2, (g.displayHeight*legendModifierH/3.5)*4+g.displayHeight*legendModifierH/22.15, g.planetSize / 1.25);
 
       // g.fill(this.planetColour-60);
       g.strokeWeight(strokeModifier*1);
-      g.circle((resizeWidth/6)*4-(resizeWidth/6)/2, (resizeHeight)*4+g.displayHeight*legendModifierH/22.15, g.planetSize / 1.8);
+      g.circle((g.displayWidth*legendModifierH/6)*4-(g.displayWidth*legendModifierH/6)/2, (g.displayHeight*legendModifierH/3.5)*4+g.displayHeight*legendModifierH/22.15, g.planetSize / 1.8);
       // g.fill(this.planetColour-90);
       g.strokeWeight(strokeModifier*1.75);
-      g.circle((resizeWidth/6)*4-(resizeWidth/6)/2, (resizeHeight)*4+g.displayHeight*legendModifierH/22.15, g.planetSize / 4);
+      g.circle((g.displayWidth*legendModifierH/6)*4-(g.displayWidth*legendModifierH/6)/2, (g.displayHeight*legendModifierH/3.5)*4+g.displayHeight*legendModifierH/22.15, g.planetSize / 4);
   
   g.fill(255);
   g.noStroke();
-  g.text("Acquaint-\nances",(resizeWidth/6)*5-(resizeWidth/6)/2, (resizeHeight)*4+g.displayHeight*legendModifierH/17+g.displayHeight*legendModifierH/22.15);
+  g.text("Acquaint-\nances",(g.displayWidth*legendModifierH/6)*5-(g.displayWidth*legendModifierH/6)/2, (g.displayHeight*legendModifierH/3.5)*4+g.displayHeight*legendModifierH/17+g.displayHeight*legendModifierH/22.15);
   
   g.noFill();
      g.stroke(255);
       g.strokeWeight(strokeModifier*1.75);
 
-      g.circle((resizeWidth/6)*5-(resizeWidth/6)/2 - g.planetSize / 2.75, (resizeHeight)*4+g.displayHeight*legendModifierH/22.15, g.planetSize / 4);
-      g.circle((resizeWidth/6)*5-(resizeWidth/6)/2, (resizeHeight)*4+g.displayHeight*legendModifierH/22.15, g.planetSize / 4);
-      g.circle((resizeWidth/6)*5-(resizeWidth/6)/2 + g.planetSize / 2.75, (resizeHeight)*4+g.displayHeight*legendModifierH/22.15, g.planetSize / 4);
-      g.circle((resizeWidth/6)*5-(resizeWidth/6)/2, (resizeHeight)*4 + g.planetSize / 2.75+g.displayHeight*legendModifierH/22.15, g.planetSize / 4);
-      g.circle((resizeWidth/6)*5-(resizeWidth/6)/2, (resizeHeight)*4 - g.planetSize / 2.75+g.displayHeight*legendModifierH/22.15, g.planetSize / 4);
+      g.circle((g.displayWidth*legendModifierH/6)*5-(g.displayWidth*legendModifierH/6)/2 - g.planetSize / 2.75, (g.displayHeight*legendModifierH/3.5)*4+g.displayHeight*legendModifierH/22.15, g.planetSize / 4);
+      g.circle((g.displayWidth*legendModifierH/6)*5-(g.displayWidth*legendModifierH/6)/2, (g.displayHeight*legendModifierH/3.5)*4+g.displayHeight*legendModifierH/22.15, g.planetSize / 4);
+      g.circle((g.displayWidth*legendModifierH/6)*5-(g.displayWidth*legendModifierH/6)/2 + g.planetSize / 2.75, (g.displayHeight*legendModifierH/3.5)*4+g.displayHeight*legendModifierH/22.15, g.planetSize / 4);
+      g.circle((g.displayWidth*legendModifierH/6)*5-(g.displayWidth*legendModifierH/6)/2, (g.displayHeight*legendModifierH/3.5)*4 + g.planetSize / 2.75+g.displayHeight*legendModifierH/22.15, g.planetSize / 4);
+      g.circle((g.displayWidth*legendModifierH/6)*5-(g.displayWidth*legendModifierH/6)/2, (g.displayHeight*legendModifierH/3.5)*4 - g.planetSize / 2.75+g.displayHeight*legendModifierH/22.15, g.planetSize / 4);
   
   g.fill(255);
   g.noStroke();
-  g.text("Other",(resizeWidth/6)*6-(resizeWidth/6)/2, (resizeHeight)*4+g.displayHeight*legendModifierH/17+g.displayHeight*legendModifierH/22.15);
+  g.text("Other",(g.displayWidth*legendModifierH/6)*6-(g.displayWidth*legendModifierH/6)/2, (g.displayHeight*legendModifierH/3.5)*4+g.displayHeight*legendModifierH/17+g.displayHeight*legendModifierH/22.15);
   
   //communication method
   //How did you communicate?//////////////////////////////////////////////////////////////////
       g.fill(255);
   g.textSize(g.displayHeight*legendModifierH / 36);
   g.textAlign(g.CENTER,g.CENTER);
-  g.text("How did you communicate?",resizeWidth/2, (resizeHeight)*5-g.displayHeight*legendModifierH/11+g.displayHeight*legendModifierH/21.9);  
+  g.text("How did you communicate?",g.displayWidth*legendModifierH/2, (g.displayHeight*legendModifierH/3.5)*5-g.displayHeight*legendModifierH/11+g.displayHeight*legendModifierH/21.9);  
   
   g.noStroke();
   g.fill("rgb(150,150,150)");
   for(i=1;i<5;i++){
-  g.circle((resizeWidth/4)*i-(resizeWidth/4)/2, (resizeHeight)*5+g.displayHeight*legendModifierH/21.9, g.planetSize);
+  g.circle((g.displayWidth*legendModifierH/4)*i-(g.displayWidth*legendModifierH/4)/2, (g.displayHeight*legendModifierH/3.5)*5+g.displayHeight*legendModifierH/21.9, g.planetSize);
   }
   
   g.textSize(g.displayHeight*legendModifierH / 50);
@@ -822,82 +822,82 @@ g.setup = function() {
   //have not adjusted text up CUZ not sure if will keep the stuff on the second g.line 
   g.fill(255);
   g.noStroke();
-  g.text("Written",(resizeWidth/4)*1-(resizeWidth/4)/2, (resizeHeight)*5+g.displayHeight*legendModifierH/17+g.displayHeight*legendModifierH/21.9);
+  g.text("Written",(g.displayWidth*legendModifierH/4)*1-(g.displayWidth*legendModifierH/4)/2, (g.displayHeight*legendModifierH/3.5)*5+g.displayHeight*legendModifierH/17+g.displayHeight*legendModifierH/21.9);
   
  g.stroke(255);
       g.strokeWeight(strokeModifier*1.5);
       g.line(
-        (resizeWidth/4)*1-(resizeWidth/4)/2 + g.planetSize / 3.5,
-        (resizeHeight)*5 - g.planetSize / 4+g.displayHeight*legendModifierH/21.9,
-        (resizeWidth/4)*1-(resizeWidth/4)/2 + g.planetSize / 1.4,
-        (resizeHeight)*5 - g.planetSize / 1.6+g.displayHeight*legendModifierH/21.9
+        (g.displayWidth*legendModifierH/4)*1-(g.displayWidth*legendModifierH/4)/2 + g.planetSize / 3.5,
+        (g.displayHeight*legendModifierH/3.5)*5 - g.planetSize / 4+g.displayHeight*legendModifierH/21.9,
+        (g.displayWidth*legendModifierH/4)*1-(g.displayWidth*legendModifierH/4)/2 + g.planetSize / 1.4,
+        (g.displayHeight*legendModifierH/3.5)*5 - g.planetSize / 1.6+g.displayHeight*legendModifierH/21.9
       );
 
       g.line(
-        (resizeWidth/4)*1-(resizeWidth/4)/2 + g.planetSize / 3.5,
-        (resizeHeight)*5 - g.planetSize / 4 + g.planetSize / 4+g.displayHeight*legendModifierH/21.9,
-        (resizeWidth/4)*1-(resizeWidth/4)/2 + g.planetSize / 1.4,
-        (resizeHeight)*5 - g.planetSize / 1.6 + g.planetSize / 4+g.displayHeight*legendModifierH/21.9
+        (g.displayWidth*legendModifierH/4)*1-(g.displayWidth*legendModifierH/4)/2 + g.planetSize / 3.5,
+        (g.displayHeight*legendModifierH/3.5)*5 - g.planetSize / 4 + g.planetSize / 4+g.displayHeight*legendModifierH/21.9,
+        (g.displayWidth*legendModifierH/4)*1-(g.displayWidth*legendModifierH/4)/2 + g.planetSize / 1.4,
+        (g.displayHeight*legendModifierH/3.5)*5 - g.planetSize / 1.6 + g.planetSize / 4+g.displayHeight*legendModifierH/21.9
       );
 
       g.line(
-        (resizeWidth/4)*1-(resizeWidth/4)/2 + g.planetSize / 3.5,
-        (resizeHeight)*5 - g.planetSize / 4 + (g.planetSize / 4) * 2+g.displayHeight*legendModifierH/21.9,
-        (resizeWidth/4)*1-(resizeWidth/4)/2 + g.planetSize / 1.4,
-        (resizeHeight)*5 - g.planetSize / 1.6 + (g.planetSize / 4) * 2+g.displayHeight*legendModifierH/21.9
+        (g.displayWidth*legendModifierH/4)*1-(g.displayWidth*legendModifierH/4)/2 + g.planetSize / 3.5,
+        (g.displayHeight*legendModifierH/3.5)*5 - g.planetSize / 4 + (g.planetSize / 4) * 2+g.displayHeight*legendModifierH/21.9,
+        (g.displayWidth*legendModifierH/4)*1-(g.displayWidth*legendModifierH/4)/2 + g.planetSize / 1.4,
+        (g.displayHeight*legendModifierH/3.5)*5 - g.planetSize / 1.6 + (g.planetSize / 4) * 2+g.displayHeight*legendModifierH/21.9
       );
   
   g.fill(255);
   g.noStroke();
-  g.text("Spoken",(resizeWidth/4)*2-(resizeWidth/4)/2, (resizeHeight)*5+g.displayHeight*legendModifierH/17+g.displayHeight*legendModifierH/21.9);
+  g.text("Spoken",(g.displayWidth*legendModifierH/4)*2-(g.displayWidth*legendModifierH/4)/2, (g.displayHeight*legendModifierH/3.5)*5+g.displayHeight*legendModifierH/17+g.displayHeight*legendModifierH/21.9);
   
   g.fill(255);
       g.noStroke();
       g.triangle(
-        (resizeWidth/4)*2-(resizeWidth/4)/2 + g.planetSize / 1 - g.planetSize / 3,
-        (resizeHeight)*5 - g.planetSize / 1.2 + g.planetSize / 3+g.displayHeight*legendModifierH/21.9,
-        (resizeWidth/4)*2-(resizeWidth/4)/2 + g.planetSize / 2 - g.planetSize / 3,
-        (resizeHeight)*5 - g.planetSize / 2 + g.planetSize / 3+g.displayHeight*legendModifierH/21.9,
-        (resizeWidth/4)*2-(resizeWidth/4)/2 + g.planetSize / 2 - g.planetSize / 3,
-        (resizeHeight)*5 - g.planetSize / 0.9 + g.planetSize / 3+g.displayHeight*legendModifierH/21.9
+        (g.displayWidth*legendModifierH/4)*2-(g.displayWidth*legendModifierH/4)/2 + g.planetSize / 1 - g.planetSize / 3,
+        (g.displayHeight*legendModifierH/3.5)*5 - g.planetSize / 1.2 + g.planetSize / 3+g.displayHeight*legendModifierH/21.9,
+        (g.displayWidth*legendModifierH/4)*2-(g.displayWidth*legendModifierH/4)/2 + g.planetSize / 2 - g.planetSize / 3,
+        (g.displayHeight*legendModifierH/3.5)*5 - g.planetSize / 2 + g.planetSize / 3+g.displayHeight*legendModifierH/21.9,
+        (g.displayWidth*legendModifierH/4)*2-(g.displayWidth*legendModifierH/4)/2 + g.planetSize / 2 - g.planetSize / 3,
+        (g.displayHeight*legendModifierH/3.5)*5 - g.planetSize / 0.9 + g.planetSize / 3+g.displayHeight*legendModifierH/21.9
       );
   
   g.fill(255);
   g.noStroke();
-  g.text("Video",(resizeWidth/4)*3-(resizeWidth/4)/2, (resizeHeight)*5+g.displayHeight*legendModifierH/17+g.displayHeight*legendModifierH/21.9);
+  g.text("Video",(g.displayWidth*legendModifierH/4)*3-(g.displayWidth*legendModifierH/4)/2, (g.displayHeight*legendModifierH/3.5)*5+g.displayHeight*legendModifierH/17+g.displayHeight*legendModifierH/21.9);
   
   g.noStroke();
 
       g.fill(255);
 
       g.ellipse(
-        (resizeWidth/4)*3-(resizeWidth/4)/2 + g.planetSize / 1 - g.planetSize / 2,
-        (resizeHeight)*5+g.displayHeight*legendModifierH/21.9,
+        (g.displayWidth*legendModifierH/4)*3-(g.displayWidth*legendModifierH/4)/2 + g.planetSize / 1 - g.planetSize / 2,
+        (g.displayHeight*legendModifierH/3.5)*5+g.displayHeight*legendModifierH/21.9,
         g.planetSize / 4
       );
 
       g.bezier(
-        (resizeWidth/4)*3-(resizeWidth/4)/2 - g.planetSize / 1 + g.planetSize / 4,
-        (resizeHeight)*5+g.displayHeight*legendModifierH/21.9,
-        (resizeWidth/4)*3-(resizeWidth/4)/2 - g.planetSize / 6 + g.planetSize / 4,
-        (resizeHeight)*5 - g.planetSize / 1.3+g.displayHeight*legendModifierH/21.9,
-        (resizeWidth/4)*3-(resizeWidth/4)/2 - g.planetSize / 6 + g.planetSize / 4,
-        (resizeHeight)*5 + g.planetSize / 1.3+g.displayHeight*legendModifierH/21.9,
-        (resizeWidth/4)*3-(resizeWidth/4)/2 - g.planetSize / 1 + g.planetSize / 4,
-        (resizeHeight)*5+g.displayHeight*legendModifierH/21.9
+        (g.displayWidth*legendModifierH/4)*3-(g.displayWidth*legendModifierH/4)/2 - g.planetSize / 1 + g.planetSize / 4,
+        (g.displayHeight*legendModifierH/3.5)*5+g.displayHeight*legendModifierH/21.9,
+        (g.displayWidth*legendModifierH/4)*3-(g.displayWidth*legendModifierH/4)/2 - g.planetSize / 6 + g.planetSize / 4,
+        (g.displayHeight*legendModifierH/3.5)*5 - g.planetSize / 1.3+g.displayHeight*legendModifierH/21.9,
+        (g.displayWidth*legendModifierH/4)*3-(g.displayWidth*legendModifierH/4)/2 - g.planetSize / 6 + g.planetSize / 4,
+        (g.displayHeight*legendModifierH/3.5)*5 + g.planetSize / 1.3+g.displayHeight*legendModifierH/21.9,
+        (g.displayWidth*legendModifierH/4)*3-(g.displayWidth*legendModifierH/4)/2 - g.planetSize / 1 + g.planetSize / 4,
+        (g.displayHeight*legendModifierH/3.5)*5+g.displayHeight*legendModifierH/21.9
       );
   
   g.fill(255);
   g.noStroke();
   
-  g.text("In-Person",(resizeWidth/4)*4-(resizeWidth/4)/2, (resizeHeight)*5+g.displayHeight*legendModifierH/17+g.displayHeight*legendModifierH/21.9);
+  g.text("In-Person",(g.displayWidth*legendModifierH/4)*4-(g.displayWidth*legendModifierH/4)/2, (g.displayHeight*legendModifierH/3.5)*5+g.displayHeight*legendModifierH/17+g.displayHeight*legendModifierH/21.9);
   
   g.fill(255);
       g.noStroke();
 //       for (g.i = 0; i < g.radians(360 + 0); i += g.radians(360 / g.pointCount)) {
 //         g.diameter = g.planetSize * 1.8 - g.planetSize / 3;
-//         g.x = (g.diameter / 2) * Math.cos(i) + (resizeWidth/4)*4-(resizeWidth/4)/2;
-//         g.y = (g.diameter / 2) * Math.sin(i) + (resizeHeight)*5+g.displayHeight*legendModifierH/21.9;
+//         g.x = (g.diameter / 2) * Math.cos(i) + (g.displayWidth*legendModifierH/4)*4-(g.displayWidth*legendModifierH/4)/2;
+//         g.y = (g.diameter / 2) * Math.sin(i) + (g.displayHeight*legendModifierH/3.5)*5+g.displayHeight*legendModifierH/21.9;
 
 //         g.ellipse(g.x, g.y, g.planetSize / 4.5);
 //         g.angle = 0;
@@ -907,52 +907,52 @@ g.setup = function() {
       g.fill(255);
   g.textSize(g.displayHeight*legendModifierH / 36);
   g.textAlign(g.CENTER,g.CENTER);
-  g.text("Around how long was your interaction?",resizeWidth/2, (resizeHeight)*6-g.displayHeight*legendModifierH/12.5+g.displayHeight*legendModifierH/80);  
+  g.text("Around how long was your interaction?",g.displayWidth*legendModifierH/2, (g.displayHeight*legendModifierH/3.5)*6-g.displayHeight*legendModifierH/12.5+g.displayHeight*legendModifierH/80);  
   
   g.textSize(g.displayHeight*legendModifierH / 50);
   g.textAlign(g.CENTER,g.TOP);
   
   g.fill(255);
   g.noStroke();
-  g.text("3 h+",(resizeWidth/6)*1-(resizeWidth/6)/2, (resizeHeight)*6+g.displayHeight*legendModifierH/17+g.displayHeight*legendModifierH/80);
+  g.text("3 h+",(g.displayWidth*legendModifierH/6)*1-(g.displayWidth*legendModifierH/6)/2, (g.displayHeight*legendModifierH/3.5)*6+g.displayHeight*legendModifierH/17+g.displayHeight*legendModifierH/80);
   g.fill("rgb(150,150,150)");
-  g.circle((resizeWidth/6)*1-(resizeWidth/6)/2, (resizeHeight)*6+g.displayHeight*legendModifierH/80, resizeWidth / 10.5);
+  g.circle((g.displayWidth*legendModifierH/6)*1-(g.displayWidth*legendModifierH/6)/2, (g.displayHeight*legendModifierH/3.5)*6+g.displayHeight*legendModifierH/80, g.displayWidth*legendModifierH / 10.5);
   
   g.fill(255);
   g.noStroke();
-  g.text("1 - 3 h",(resizeWidth/6)*2-(resizeWidth/6)/2, (resizeHeight)*6+g.displayHeight*legendModifierH/17+g.displayHeight*legendModifierH/80);
+  g.text("1 - 3 h",(g.displayWidth*legendModifierH/6)*2-(g.displayWidth*legendModifierH/6)/2, (g.displayHeight*legendModifierH/3.5)*6+g.displayHeight*legendModifierH/17+g.displayHeight*legendModifierH/80);
   g.fill("rgb(150,150,150)");
-  g.circle((resizeWidth/6)*2-(resizeWidth/6)/2, (resizeHeight)*6+g.displayHeight*legendModifierH/80, resizeWidth / 14);
+  g.circle((g.displayWidth*legendModifierH/6)*2-(g.displayWidth*legendModifierH/6)/2, (g.displayHeight*legendModifierH/3.5)*6+g.displayHeight*legendModifierH/80, g.displayWidth*legendModifierH / 14);
   
   g.fill(255);
   g.noStroke();
-  g.text("30 min\n- 1 h",(resizeWidth/6)*3-(resizeWidth/6)/2, (resizeHeight)*6+g.displayHeight*legendModifierH/17+g.displayHeight*legendModifierH/80);
+  g.text("30 min\n- 1 h",(g.displayWidth*legendModifierH/6)*3-(g.displayWidth*legendModifierH/6)/2, (g.displayHeight*legendModifierH/3.5)*6+g.displayHeight*legendModifierH/17+g.displayHeight*legendModifierH/80);
   g.fill("rgb(150,150,150)");
-  g.circle((resizeWidth/6)*3-(resizeWidth/6)/2, (resizeHeight)*6+g.displayHeight*legendModifierH/80, resizeWidth / 18);
+  g.circle((g.displayWidth*legendModifierH/6)*3-(g.displayWidth*legendModifierH/6)/2, (g.displayHeight*legendModifierH/3.5)*6+g.displayHeight*legendModifierH/80, g.displayWidth*legendModifierH / 18);
   
   g.fill(255);
   g.noStroke();
-  g.text("10 min\n- 30 min",(resizeWidth/6)*4-(resizeWidth/6)/2, (resizeHeight)*6+g.displayHeight*legendModifierH/17+g.displayHeight*legendModifierH/80);
+  g.text("10 min\n- 30 min",(g.displayWidth*legendModifierH/6)*4-(g.displayWidth*legendModifierH/6)/2, (g.displayHeight*legendModifierH/3.5)*6+g.displayHeight*legendModifierH/17+g.displayHeight*legendModifierH/80);
   g.fill("rgb(150,150,150)");
-  g.circle((resizeWidth/6)*4-(resizeWidth/6)/2, (resizeHeight)*6+g.displayHeight*legendModifierH/80, resizeWidth / 23);
+  g.circle((g.displayWidth*legendModifierH/6)*4-(g.displayWidth*legendModifierH/6)/2, (g.displayHeight*legendModifierH/3.5)*6+g.displayHeight*legendModifierH/80, g.displayWidth*legendModifierH / 23);
   
   g.fill(255);
   g.noStroke();
-  g.text("5 min\n- 10 min",(resizeWidth/6)*5-(resizeWidth/6)/2, (resizeHeight)*6+g.displayHeight*legendModifierH/17+g.displayHeight*legendModifierH/80);
+  g.text("5 min\n- 10 min",(g.displayWidth*legendModifierH/6)*5-(g.displayWidth*legendModifierH/6)/2, (g.displayHeight*legendModifierH/3.5)*6+g.displayHeight*legendModifierH/17+g.displayHeight*legendModifierH/80);
   g.fill("rgb(150,150,150)");
-  g.circle((resizeWidth/6)*5-(resizeWidth/6)/2, (resizeHeight)*6+g.displayHeight*legendModifierH/80, resizeWidth / 32);
+  g.circle((g.displayWidth*legendModifierH/6)*5-(g.displayWidth*legendModifierH/6)/2, (g.displayHeight*legendModifierH/3.5)*6+g.displayHeight*legendModifierH/80, g.displayWidth*legendModifierH / 32);
   
   g.fill(255);
   g.noStroke();
-  g.text("few min\nor sec",(resizeWidth/6)*6-(resizeWidth/6)/2, (resizeHeight)*6+g.displayHeight*legendModifierH/17+g.displayHeight*legendModifierH/80);
+  g.text("few min\nor sec",(g.displayWidth*legendModifierH/6)*6-(g.displayWidth*legendModifierH/6)/2, (g.displayHeight*legendModifierH/3.5)*6+g.displayHeight*legendModifierH/17+g.displayHeight*legendModifierH/80);
   g.fill("rgb(150,150,150)");
-  g.circle((resizeWidth/6)*6-(resizeWidth/6)/2, (resizeHeight)*6+g.displayHeight*legendModifierH/80, resizeWidth / 44);
+  g.circle((g.displayWidth*legendModifierH/6)*6-(g.displayWidth*legendModifierH/6)/2, (g.displayHeight*legendModifierH/3.5)*6+g.displayHeight*legendModifierH/80, g.displayWidth*legendModifierH / 44);
   
   //How did you feel about the interaction?//////////////////////////////////////////////////////////
   g.fill(255);
   g.textSize(g.displayHeight*legendModifierH / 36);
   g.textAlign(g.CENTER,g.CENTER);
-  g.text("How did you feel about the interaction?",resizeWidth/2, (resizeHeight)*7-g.displayHeight*legendModifierH/12+g.displayHeight*legendModifierH/120);  
+  g.text("How did you feel about the interaction?",g.displayWidth*legendModifierH/2, (g.displayHeight*legendModifierH/3.5)*7-g.displayHeight*legendModifierH/12+g.displayHeight*legendModifierH/120);  
   
   g.noStroke();
 
@@ -969,36 +969,36 @@ g.setup = function() {
     } else if (i == 5) {
       g.fill("#990202");
     }
-  g.circle((resizeWidth/5)*i-(resizeWidth/5)/2, (resizeHeight)*7+g.displayHeight*legendModifierH/120, g.planetSize);
+  g.circle((g.displayWidth*legendModifierH/5)*i-(g.displayWidth*legendModifierH/5)/2, (g.displayHeight*legendModifierH/3.5)*7+g.displayHeight*legendModifierH/120, g.planetSize);
   }
   
   g.textSize(g.displayHeight*legendModifierH / 50);
   g.textAlign(g.CENTER,g.TOP);
   
   g.fill(255);
-  g.text("Very Good",(resizeWidth/5)*1-(resizeWidth/5)/2,
-       (resizeHeight)*7+g.displayHeight*legendModifierH/13+g.displayHeight*legendModifierH/120);
+  g.text("Very Good",(g.displayWidth*legendModifierH/5)*1-(g.displayWidth*legendModifierH/5)/2,
+       (g.displayHeight*legendModifierH/3.5)*7+g.displayHeight*legendModifierH/13+g.displayHeight*legendModifierH/120);
   
   g.fill(255);
-  g.text("Good",(resizeWidth/5)*2-(resizeWidth/5)/2,
-       (resizeHeight)*7+g.displayHeight*legendModifierH/13+g.displayHeight*legendModifierH/120);
+  g.text("Good",(g.displayWidth*legendModifierH/5)*2-(g.displayWidth*legendModifierH/5)/2,
+       (g.displayHeight*legendModifierH/3.5)*7+g.displayHeight*legendModifierH/13+g.displayHeight*legendModifierH/120);
 
   g.fill(255);
-  g.text("Neutral",(resizeWidth/5)*3-(resizeWidth/5)/2,
-       (resizeHeight)*7+g.displayHeight*legendModifierH/13+g.displayHeight*legendModifierH/120);
+  g.text("Neutral",(g.displayWidth*legendModifierH/5)*3-(g.displayWidth*legendModifierH/5)/2,
+       (g.displayHeight*legendModifierH/3.5)*7+g.displayHeight*legendModifierH/13+g.displayHeight*legendModifierH/120);
 
   g.fill(255);
-  g.text("Bad",(resizeWidth/5)*4-(resizeWidth/5)/2, (resizeHeight)*7+g.displayHeight*legendModifierH/13+g.displayHeight*legendModifierH/120);
+  g.text("Bad",(g.displayWidth*legendModifierH/5)*4-(g.displayWidth*legendModifierH/5)/2, (g.displayHeight*legendModifierH/3.5)*7+g.displayHeight*legendModifierH/13+g.displayHeight*legendModifierH/120);
 
   g.fill(255);
-  g.text("Very Bad",(resizeWidth/5)*5-(resizeWidth/5)/2,
-       (resizeHeight)*7+g.displayHeight*legendModifierH/13+g.displayHeight*legendModifierH/120);
+  g.text("Very Bad",(g.displayWidth*legendModifierH/5)*5-(g.displayWidth*legendModifierH/5)/2,
+       (g.displayHeight*legendModifierH/3.5)*7+g.displayHeight*legendModifierH/13+g.displayHeight*legendModifierH/120);
   
   ////for seeing the top of the legend canvas
   //   g.stroke(255);
   // g.strokeWeight(strokeModifier*10);
   // g.fill(255);
-  // g.line(0,0,resizeWidth,0);
+  // g.line(0,0,g.displayWidth*legendModifierH,0);
 }
 }
 
