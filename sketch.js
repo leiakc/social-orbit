@@ -64,7 +64,9 @@ function setup() {
 
   if (windowWidth < 1000){
     strokeModifier = 2.5;
-  } 
+  } else {
+    strokeModifier = 1;
+  }
 
   legendModifierW = windowWidth / displayWidth;
   legendModifierH = windowHeight / displayHeight;
