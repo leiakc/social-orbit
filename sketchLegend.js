@@ -45,7 +45,7 @@ g.setup = function() {
   
   g.noFill();
   g.stroke(255)
-  g.strokeWeight(strokeModifier+1);
+  g.strokeWeight(strokeModifier*1);
 
   //rings
   
@@ -119,7 +119,7 @@ g.setup = function() {
       //draws a ring around the planet if the social interaction happens throughout the day
       g.noFill();
      g.stroke(255);
-      g.strokeWeight(strokeModifier+1);
+      g.strokeWeight(strokeModifier*1);
       g.circle((g.windowWidth/6)*i-(g.windowWidth/6)/2-(g.windowWidth/200),
         (g.windowHeight/3.5)*8,
         g.planetSize + g.planetSize
@@ -204,25 +204,25 @@ g.setup = function() {
   // if (this.si_feeling == 1) {
       
      g.stroke("#E49300");
-      g.strokeWeight(strokeModifier+3);
+      g.strokeWeight(strokeModifier*3);
       g.circle(g.x2, g.y2, g.windowWidth / 11);
       
      g.stroke(255);
-      g.strokeWeight(strokeModifier+1);
+      g.strokeWeight(strokeModifier*1);
       g.circle(g.x2, g.y2, g.windowWidth / 11);
       
      g.stroke("#E49300");
-      g.strokeWeight(strokeModifier+3);
+      g.strokeWeight(strokeModifier*3);
       g.circle(g.x2, g.y2, g.windowWidth / 18);
       
      g.stroke(255);
-      g.strokeWeight(strokeModifier+1);
+      g.strokeWeight(strokeModifier*1);
       g.circle(g.x2, g.y2, g.windowWidth / 18);
       
       g.noFill();
 
      g.stroke("#E49300");
-      g.strokeWeight(strokeModifier+4.5);
+      g.strokeWeight(strokeModifier*4.5);
       g.circle(
        g.x2 + g.sWidth / 4,
        g.y2 + g.sWidth / 4,
@@ -230,7 +230,7 @@ g.setup = function() {
       );
       
      g.stroke(255);
-      g.strokeWeight(strokeModifier+2.5);
+      g.strokeWeight(strokeModifier*2.5);
       g.circle(
        g.x2 + g.sWidth / 4,
        g.y2 + g.sWidth / 4,
@@ -238,7 +238,7 @@ g.setup = function() {
       );
         
      g.stroke("#E49300");
-      g.strokeWeight(strokeModifier+3.5);
+      g.strokeWeight(strokeModifier*3.5);
       g.circle(
        g.x2 - g.sWidth / 4,
        g.y2 - g.sWidth / 3,
@@ -246,7 +246,7 @@ g.setup = function() {
       );
       
      g.stroke(255);
-      g.strokeWeight(strokeModifier+1.5);
+      g.strokeWeight(strokeModifier*1.5);
       g.circle(
        g.x2 - g.sWidth / 4,
        g.y2 - g.sWidth / 3,
@@ -261,13 +261,13 @@ g.setup = function() {
       
       g.noFill();
      g.stroke("#E49300");
-      g.strokeWeight(strokeModifier+4.5);
+      g.strokeWeight(strokeModifier*4.5);
       g.circle(
         (g.windowWidth/5)*2-(g.windowWidth/5)/2 + g.sWidth / 4,
        g.y2 + g.sWidth / 4,
         g.windowWidth / 15
       );
-      g.strokeWeight(strokeModifier+3.5);
+      g.strokeWeight(strokeModifier*3.5);
       g.circle(
         (g.windowWidth/5)*2-(g.windowWidth/5)/2 - g.sWidth / 4,
        g.y2 - g.sWidth / 3,
@@ -275,13 +275,13 @@ g.setup = function() {
       );
       
      g.stroke(255);
-      g.strokeWeight(strokeModifier+2.5);
+      g.strokeWeight(strokeModifier*2.5);
       g.circle(
         (g.windowWidth/5)*2-(g.windowWidth/5)/2 + g.sWidth / 4,
        g.y2 + g.sWidth / 4,
         g.windowWidth / 15
       );
-      g.strokeWeight(strokeModifier+1.5);
+      g.strokeWeight(strokeModifier*1.5);
       g.circle(
         (g.windowWidth/5)*2-(g.windowWidth/5)/2 - g.sWidth / 4,
        g.y2 - g.sWidth / 3,
@@ -305,7 +305,7 @@ g.setup = function() {
     g.circle((g.windowWidth/5)*4-(g.windowWidth/5)/2, (g.windowHeight/3.5)*2-g.windowHeight/208, g.sunWidth);
   
      g.stroke(0);
-      g.strokeWeight(strokeModifier+2);
+      g.strokeWeight(strokeModifier*2);
       g.line(
         (g.windowWidth/5)*4-(g.windowWidth/5)/2 - g.windowWidth / 20,
        g.y2 - g.windowWidth / 20,
@@ -320,7 +320,7 @@ g.setup = function() {
     g.circle((g.windowWidth/5)*5-(g.windowWidth/5)/2, (g.windowHeight/3.5)*2-g.windowHeight/208, g.sunWidth);
   
      g.stroke(0);
-      g.strokeWeight(strokeModifier+2);
+      g.strokeWeight(strokeModifier*2);
       g.line(
         (g.windowWidth/5)*5-(g.windowWidth/5)/2 - g.windowWidth / 20,
        g.y2 - g.windowWidth / 20,
@@ -328,7 +328,7 @@ g.setup = function() {
        g.y2 + g.windowWidth / 20
       );
 
-      g.strokeWeight(strokeModifier+4);
+      g.strokeWeight(strokeModifier*4);
       g.line(
         (g.windowWidth/5)*5-(g.windowWidth/5)/2 + g.windowWidth / 40 - g.sWidth / 5,
        g.y2 - g.windowWidth / 40 - g.sWidth / 5,
@@ -336,7 +336,7 @@ g.setup = function() {
        g.y2 + g.windowWidth / 40 - g.sWidth / 5
       );
 
-      g.strokeWeight(strokeModifier+6);
+      g.strokeWeight(strokeModifier*6);
       g.line(
         (g.windowWidth/5)*5-(g.windowWidth/5)/2 + g.windowWidth / 30,
        g.y2 - g.windowWidth / 30,
@@ -344,7 +344,7 @@ g.setup = function() {
        g.y2 + g.windowWidth / 30
       );
 
-      g.strokeWeight(strokeModifier+4);
+      g.strokeWeight(strokeModifier*4);
       g.line(
         (g.windowWidth/5)*5-(g.windowWidth/5)/2 + g.windowWidth / 40 + g.sWidth / 5,
        g.y2 - g.windowWidth / 40 + g.sWidth / 5,
@@ -501,7 +501,7 @@ g.setup = function() {
   
   g.fill(255);
        g.stroke(255);
-        g.strokeWeight(strokeModifier+3.5);
+        g.strokeWeight(strokeModifier*3.5);
   
   g.point((g.windowWidth/5)*3-(g.windowWidth/5)/2+g.windowWidth/20,(
           g.windowHeight/3.5)*3+g.windowHeight/22.15+g.windowHeight/33);
@@ -683,7 +683,7 @@ g.setup = function() {
     
   g.noFill();
      g.stroke(255);
-      g.strokeWeight(strokeModifier+1);
+      g.strokeWeight(strokeModifier*1);
       g.circle(((g.windowWidth/6)*1-(g.windowWidth/6)/2) - g.planetSize / 6, (g.windowHeight/3.5)*4+g.windowHeight/22.15, g.planetSize / 2);
       g.circle(((g.windowWidth/6)*1-(g.windowWidth/6)/2) + g.planetSize / 6, (g.windowHeight/3.5)*4+g.windowHeight/22.15, g.planetSize / 2);
   
@@ -693,13 +693,13 @@ g.setup = function() {
   
   g.fill(255);
      g.stroke(255);
-      g.strokeWeight(strokeModifier+3);
+      g.strokeWeight(strokeModifier*3);
       g.line((((g.windowWidth/6)*2-(g.windowWidth/6)/2)) - g.planetSize / 2.3,
         (g.windowHeight/3.5)*4+g.windowHeight/22.15,
         (((g.windowWidth/6)*2-(g.windowWidth/6)/2)) + g.planetSize / 2.3,
         (g.windowHeight/3.5)*4+g.windowHeight/22.15);
   
-  g.strokeWeight(strokeModifier+2 );
+  g.strokeWeight(strokeModifier*2 );
       g.line(
         ((g.windowWidth/6)*2-(g.windowWidth/6)/2) - g.planetSize / 2.7,
         (g.windowHeight/3.5)*4 + g.planetSize / 4+g.windowHeight/22.15,
@@ -712,7 +712,7 @@ g.setup = function() {
         ((g.windowWidth/6)*2-(g.windowWidth/6)/2) + g.planetSize / 2.7,
         (g.windowHeight/3.5)*4 - g.planetSize / 4+g.windowHeight/22.15
       );
-      g.strokeWeight(strokeModifier+1 );
+      g.strokeWeight(strokeModifier*1 );
       g.line(
         ((g.windowWidth/6)*2-(g.windowWidth/6)/2) - g.planetSize / 3.8,
         (g.windowHeight/3.5)*4 + g.planetSize / 2.5+g.windowHeight/22.15,
@@ -733,7 +733,7 @@ g.setup = function() {
   g.noFill();
      g.stroke(255);
 
-      g.strokeWeight(strokeModifier+2);
+      g.strokeWeight(strokeModifier*2);
       g.bezier(
         (g.windowWidth/6)*3-(g.windowWidth/6)/2 - g.planetSize / 2,
         (g.windowHeight/3.5)*4+g.windowHeight/22.15,
@@ -745,7 +745,7 @@ g.setup = function() {
         (g.windowHeight/3.5)*4+g.windowHeight/22.15
       );
 
-      g.strokeWeight(strokeModifier+1);
+      g.strokeWeight(strokeModifier*1);
       g.bezier(
         (g.windowWidth/6)*3-(g.windowWidth/6)/2 - g.planetSize / 2,
         (g.windowHeight/3.5)*4+g.windowHeight/22.15,
@@ -774,15 +774,15 @@ g.setup = function() {
   
  g.stroke(255);
   g.noFill();
-      g.strokeWeight(strokeModifier+0.5);
+      g.strokeWeight(strokeModifier*0.5);
       // g.fill(this.planetColour-30);
       g.circle((g.windowWidth/6)*4-(g.windowWidth/6)/2, (g.windowHeight/3.5)*4+g.windowHeight/22.15, g.planetSize / 1.25);
 
       // g.fill(this.planetColour-60);
-      g.strokeWeight(strokeModifier+1);
+      g.strokeWeight(strokeModifier*1);
       g.circle((g.windowWidth/6)*4-(g.windowWidth/6)/2, (g.windowHeight/3.5)*4+g.windowHeight/22.15, g.planetSize / 1.8);
       // g.fill(this.planetColour-90);
-      g.strokeWeight(strokeModifier+1.75);
+      g.strokeWeight(strokeModifier*1.75);
       g.circle((g.windowWidth/6)*4-(g.windowWidth/6)/2, (g.windowHeight/3.5)*4+g.windowHeight/22.15, g.planetSize / 4);
   
   g.fill(255);
@@ -791,7 +791,7 @@ g.setup = function() {
   
   g.noFill();
      g.stroke(255);
-      g.strokeWeight(strokeModifier+1.75);
+      g.strokeWeight(strokeModifier*1.75);
 
       g.circle((g.windowWidth/6)*5-(g.windowWidth/6)/2 - g.planetSize / 2.75, (g.windowHeight/3.5)*4+g.windowHeight/22.15, g.planetSize / 4);
       g.circle((g.windowWidth/6)*5-(g.windowWidth/6)/2, (g.windowHeight/3.5)*4+g.windowHeight/22.15, g.planetSize / 4);
@@ -825,7 +825,7 @@ g.setup = function() {
   g.text("Written",(g.windowWidth/4)*1-(g.windowWidth/4)/2, (g.windowHeight/3.5)*5+g.windowHeight/17+g.windowHeight/21.9);
   
  g.stroke(255);
-      g.strokeWeight(strokeModifier+1.5);
+      g.strokeWeight(strokeModifier*1.5);
       g.line(
         (g.windowWidth/4)*1-(g.windowWidth/4)/2 + g.planetSize / 3.5,
         (g.windowHeight/3.5)*5 - g.planetSize / 4+g.windowHeight/21.9,
@@ -996,7 +996,7 @@ g.setup = function() {
   
   ////for seeing the top of the legend canvas
   //   g.stroke(255);
-  // g.strokeWeight(strokeModifier+10);
+  // g.strokeWeight(strokeModifier*10);
   // g.fill(255);
   // g.line(0,0,g.windowWidth,0);
 }

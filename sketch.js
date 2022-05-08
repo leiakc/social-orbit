@@ -97,7 +97,7 @@ function draw() {
 
   //drawing planet rings
   noFill();
-  strokeWeight(strokeModifier+1);
+  strokeWeight(strokeModifier*1);
   stroke(255);
   ellipse(centerWidth, thirdHeight, sunWidth + ringSpacer * 1);
   ellipse(centerWidth, thirdHeight, sunWidth + ringSpacer * 2);
@@ -553,7 +553,7 @@ class SolarSystem {
       } else if (this.satisfaction_day == 3) {
         fill(255);
         stroke(255);
-        strokeWeight(strokeModifier+3.5);
+        strokeWeight(strokeModifier*3.5);
         point(x1[i], y1[i]);
         noStroke();
       } else if (this.satisfaction_day == 4) {
@@ -581,25 +581,25 @@ class SolarSystem {
     if (this.si_feeling == 1) {
       
       stroke("#E49300");
-      strokeWeight(strokeModifier+3);
+      strokeWeight(strokeModifier*3);
       circle(centerWidth, thirdHeight, windowWidth / 11);
       
       stroke(255);
-      strokeWeight(strokeModifier+1);
+      strokeWeight(strokeModifier*1);
       circle(centerWidth, thirdHeight, windowWidth / 11);
       
       stroke("#E49300");
-      strokeWeight(strokeModifier+3);
+      strokeWeight(strokeModifier*3);
       circle(centerWidth, thirdHeight, windowWidth / 18);
       
       stroke(255);
-      strokeWeight(strokeModifier+1);
+      strokeWeight(strokeModifier*1);
       circle(centerWidth, thirdHeight, windowWidth / 18);
       
       noFill();
 
       stroke("#E49300");
-      strokeWeight(strokeModifier+4.5);
+      strokeWeight(strokeModifier*4.5);
       circle(
         centerWidth + sunWidth / 4,
         thirdHeight + sunWidth / 4,
@@ -607,7 +607,7 @@ class SolarSystem {
       );
       
       stroke(255);
-      strokeWeight(strokeModifier+2.5);
+      strokeWeight(strokeModifier*2.5);
       circle(
         centerWidth + sunWidth / 4,
         thirdHeight + sunWidth / 4,
@@ -615,7 +615,7 @@ class SolarSystem {
       );
         
       stroke("#E49300");
-      strokeWeight(strokeModifier+3.5);
+      strokeWeight(strokeModifier*3.5);
       circle(
         centerWidth - sunWidth / 4,
         thirdHeight - sunWidth / 3,
@@ -623,7 +623,7 @@ class SolarSystem {
       );
       
       stroke(255);
-      strokeWeight(strokeModifier+1.5);
+      strokeWeight(strokeModifier*1.5);
       circle(
         centerWidth - sunWidth / 4,
         thirdHeight - sunWidth / 3,
@@ -633,13 +633,13 @@ class SolarSystem {
     } else if (this.si_feeling == 2) {
       noFill();
       stroke("#E49300");
-      strokeWeight(strokeModifier+4.5);
+      strokeWeight(strokeModifier*4.5);
       circle(
         centerWidth + sunWidth / 4,
         thirdHeight + sunWidth / 4,
         windowWidth / 15
       );
-      strokeWeight(strokeModifier+3.5);
+      strokeWeight(strokeModifier*3.5);
       circle(
         centerWidth - sunWidth / 4,
         thirdHeight - sunWidth / 3,
@@ -647,13 +647,13 @@ class SolarSystem {
       );
       
       stroke(255);
-      strokeWeight(strokeModifier+2.5);
+      strokeWeight(strokeModifier*2.5);
       circle(
         centerWidth + sunWidth / 4,
         thirdHeight + sunWidth / 4,
         windowWidth / 15
       );
-      strokeWeight(strokeModifier+1.5);
+      strokeWeight(strokeModifier*1.5);
       circle(
         centerWidth - sunWidth / 4,
         thirdHeight - sunWidth / 3,
@@ -665,7 +665,7 @@ class SolarSystem {
       circle(centerWidth + sunWidth / 4, thirdHeight, windowWidth / 27.5);
     } else if (this.si_feeling == 4) {
       stroke(0);
-      strokeWeight(strokeModifier+2);
+      strokeWeight(strokeModifier*2);
       line(
         centerWidth - windowWidth / 20,
         thirdHeight - windowWidth / 20,
@@ -674,7 +674,7 @@ class SolarSystem {
       );
     } else if (this.si_feeling == 5) {
       stroke(0);
-      strokeWeight(strokeModifier+2);
+      strokeWeight(strokeModifier*2);
       line(
         centerWidth - windowWidth / 20,
         thirdHeight - windowWidth / 20,
@@ -682,7 +682,7 @@ class SolarSystem {
         thirdHeight + windowWidth / 20
       );
 
-      strokeWeight(strokeModifier+4);
+      strokeWeight(strokeModifier*4);
       line(
         centerWidth + windowWidth / 40 - sunWidth / 5,
         thirdHeight - windowWidth / 40 - sunWidth / 5,
@@ -690,7 +690,7 @@ class SolarSystem {
         thirdHeight + windowWidth / 40 - sunWidth / 5
       );
 
-      strokeWeight(strokeModifier+6);
+      strokeWeight(strokeModifier*6);
       line(
         centerWidth + windowWidth / 30,
         thirdHeight - windowWidth / 30,
@@ -698,7 +698,7 @@ class SolarSystem {
         thirdHeight + windowWidth / 30
       );
 
-      strokeWeight(strokeModifier+4);
+      strokeWeight(strokeModifier*4);
       line(
         centerWidth + windowWidth / 40 + sunWidth / 5,
         thirdHeight - windowWidth / 40 + sunWidth / 5,
@@ -826,7 +826,7 @@ class Planet {
       //draws a ring around the planet if the social interaction happens throughout the day
       noFill();
       stroke(255);
-      strokeWeight(strokeModifier+1 * this.strokeMultiplier);
+      strokeWeight(strokeModifier*1 * this.strokeMultiplier);
       ellipse(
         centerWidth -
           ((sunWidth + ringSpacer * this.time_of_day) / 2) *
@@ -844,7 +844,7 @@ class Planet {
 
       noFill();
       stroke(255);
-      strokeWeight(strokeModifier+1 * this.strokeMultiplier);
+      strokeWeight(strokeModifier*1 * this.strokeMultiplier);
       circle(planetX - this.planetSize / 6, planetY, this.planetSize / 2);
       circle(planetX + this.planetSize / 6, planetY, this.planetSize / 2);
     } else if (this.relationship_type == 2) {
@@ -852,14 +852,14 @@ class Planet {
 
       fill(255);
       stroke(255);
-      strokeWeight(strokeModifier+3 * this.strokeMultiplier);
+      strokeWeight(strokeModifier*3 * this.strokeMultiplier);
       line(
         planetX - this.planetSize / 2.3,
         planetY,
         planetX + this.planetSize / 2.3,
         planetY
       );
-      strokeWeight(strokeModifier+2 * this.strokeMultiplier);
+      strokeWeight(strokeModifier*2 * this.strokeMultiplier);
       line(
         planetX - this.planetSize / 2.7,
         planetY + this.planetSize / 4,
@@ -872,7 +872,7 @@ class Planet {
         planetX + this.planetSize / 2.7,
         planetY - this.planetSize / 4
       );
-      strokeWeight(strokeModifier+1 * this.strokeMultiplier);
+      strokeWeight(strokeModifier*1 * this.strokeMultiplier);
       line(
         planetX - this.planetSize / 3.8,
         planetY + this.planetSize / 2.5,
@@ -891,7 +891,7 @@ class Planet {
       noFill();
       stroke(255);
 
-      strokeWeight(strokeModifier+2 * this.strokeMultiplier);
+      strokeWeight(strokeModifier*2 * this.strokeMultiplier);
       bezier(
         planetX - this.planetSize / 2,
         planetY,
@@ -903,7 +903,7 @@ class Planet {
         planetY
       );
 
-      strokeWeight(strokeModifier+1 * this.strokeMultiplier);
+      strokeWeight(strokeModifier*1 * this.strokeMultiplier);
       bezier(
         planetX - this.planetSize / 2,
         planetY,
@@ -929,22 +929,22 @@ class Planet {
       //work/professional
 
       stroke(255);
-      strokeWeight(strokeModifier+0.5 * this.strokeMultiplier);
+      strokeWeight(strokeModifier*0.5 * this.strokeMultiplier);
       // fill(this.planetColour-30);
       circle(planetX, planetY, this.planetSize / 1.25);
 
       // fill(this.planetColour-60);
-      strokeWeight(strokeModifier+1 * this.strokeMultiplier);
+      strokeWeight(strokeModifier*1 * this.strokeMultiplier);
       circle(planetX, planetY, this.planetSize / 1.8);
       // fill(this.planetColour-90);
-      strokeWeight(strokeModifier+1.75 * this.strokeMultiplier);
+      strokeWeight(strokeModifier*1.75 * this.strokeMultiplier);
       circle(planetX, planetY, this.planetSize / 4);
     } else if (this.relationship_type == 5) {
       //aquaintances
 
       noFill();
       stroke(255);
-      strokeWeight(strokeModifier+1.75 * this.strokeMultiplier);
+      strokeWeight(strokeModifier*1.75 * this.strokeMultiplier);
 
       circle(planetX - this.planetSize / 2.75, planetY, this.planetSize / 4);
       circle(planetX, planetY, this.planetSize / 4);
@@ -958,7 +958,7 @@ class Planet {
       //written - text
 
       stroke(255);
-      strokeWeight(strokeModifier+1.5 * this.strokeMultiplier);
+      strokeWeight(strokeModifier*1.5 * this.strokeMultiplier);
       line(
         planetX + this.planetSize / 3.5,
         planetY - this.planetSize / 4,
