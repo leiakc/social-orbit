@@ -74,8 +74,8 @@ function setup() {
   legendModifierW = windowWidth / displayWidth;
   legendModifierH = windowHeight / displayHeight;
 
-  resizeWidth = document.documentElement.clientWidth;
-  resizeHeight = document.documentElement.clientHeight;
+  resizeWidth = screen.width;
+  resizeHeight = screen.height;
 
   //creating the solar system
   overall.push(new SolarSystem(0, 0));
